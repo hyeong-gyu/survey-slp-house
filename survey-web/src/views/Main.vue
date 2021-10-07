@@ -42,12 +42,23 @@
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Please enter the ICB code</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Please enter the code.</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <label for="survey-code" class="form-label">{{ type }} Code</label>
-                <input type="password" class="form-control" id="survey-code" @input="codeValidation($event.target.value)">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="inputPassword6" class="col-form-label">{{ type.toUpperCase() }} CODE</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline" @input="codeValidation($event.target.value)">
+                    </div>
+                    <div class="col-auto">
+                        <span id="passwordHelpInline" class="form-text">
+                        Must be 8-20 characters long.
+                        </span>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -1,9 +1,4 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-md">
-            <a class="navbar-brand" href="#">SURVEY</a>
-        </div>
-    </nav>
     <div class="container-md">
         <div class="row mt-5">
             <div class="col">
@@ -41,29 +36,32 @@
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Please enter the code.</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row g-3 align-items-center">
-                    <div class="col-auto">
-                        <label for="survey-code" class="col-form-label">{{ type.toUpperCase() }} CODE</label>
-                    </div>
-                    <div class="col-auto">
-                        <input type="password" id="survey-code" class="form-control" aria-describedby="passwordHelpInline" @input="codeValidation($event.target.value)">
-                    </div>
-                    <div class="col-auto">
-                        <span id="passwordHelpInline" class="form-text">
-                        Must be 8-20 characters long.
-                        </span>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Please enter the code.</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" v-if="surveyType">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="survey-code" class="col-form-label">{{ surveyType.toUpperCase() }} CODE</label>
+                        </div>
+                        <div class="col-auto position-relative">
+                            <input type="password" maxlength="9" id="survey-code" class="form-control" aria-describedby="passwordHelpInline" @input="codeInput($event.target.value)" required>
+                            <div class="invalid-tooltip" :class="{'on': !validCheck}">
+                                Please provide a {{ surveyType.toUpperCase() }} Code.
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <span id="passwordHelpInline" class="form-text">
+                                Must be 9 characters long.
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Sign In</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" @click="codeValidation">Sign In</button>
+                </div>
             </div>
         </div>
     </div>
@@ -80,30 +78,15 @@
             }
         },
         computed: {
-            ...mapState(['icbCode']),
+            ...mapState(['surveyType', 'icbCode', 'validCheck']),
         },
         methods: {
-            ...mapMutations(['codeValidation']),
-            codeType(_type) {
-                this.type = _type;
-            }
+            ...mapMutations(['codeType', 'codeInput', 'codeValidation'])
         },
     }
 </script>
 
 <style>
-    .navbar {
-        box-shadow: 0px -36px 40px 0px #000;
-    }
-
-    .navbar .container-md {
-        flex-flow: column;
-    }
-
-    .navbar-brand {
-        margin-right: 0;
-    }
-
     .col .card {
         margin: auto;
     }
@@ -112,5 +95,9 @@
         padding: 0;
         background-color: transparent;
         border: none;
+    }
+
+    .on {
+        display: block;
     }
 </style>

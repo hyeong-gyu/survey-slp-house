@@ -1,0 +1,69 @@
+{
+    "icb": [
+        {
+            "matrix": 1,
+            "title": "우리아이 의사소통 ‘사전사후설문지’ 1단계<br>- 비의도적 행동 단계 -",
+            "table": [
+                {
+                    "title": "저항∙거부하기",
+                    "name": "denial",
+                    "score": {
+                        "name": [
+                            "move",
+                            "sight",
+                            "expression",
+                            "total"
+                        ],
+                        "rule": {
+                            "move": 1,
+                            "sight": 1,
+                            "expression": 1
+                        }
+                    },
+                    "thead": [
+                        "예시 질문",
+                        "몸 움직임",
+                        "시선",
+                        "얼굴 표정"
+                    ],
+                    "q": [
+                        ["아이가 대소변으로 불편할 때, 어떻게 표현하나요?", "checkbox", "checkbox", "checkbox"],
+                        ["아이가 음식을 먹고 싶지 않을 때, 어떻게 표현하나요?", "checkbox", "checkbox", "checkbox"],
+                        ["아이가 신체적인 불편함을 어떻게 표현하나요? <br><em>- 상황 예: 누워 있기 싫을 때, 아플 때 등</em>", "checkbox", "checkbox", "checkbox"],
+                        ["아이가 소음을 들었을 때, 듣기 싫다는 것을 어떻게 표현하나요? <br><em>- 상황 예: 시끄러운 소리, 무서운 소리 등</em>", "checkbox", "checkbox", "checkbox"]
+                    ]
+                },
+                {
+                    "title": "반응하기",
+                    "name": "reaction",
+                    "score": {
+                        "name": [
+                            "move",
+                            "sight",
+                            "expression",
+                            "total"
+                        ],
+                        "rule": {
+                            "move": 1,
+                            "sight": 1,
+                            "expression": 1
+                        }
+                    },
+                    "thead": [
+                        "예시 질문",
+                        "몸 움직임",
+                        "시선",
+                        "얼굴 표정"
+                    ],
+                    "q": [
+                        ["아이가 좋아하는 음식을 먹은 후, 어떻게 반응하나요?", "checkbox", "checkbox", "checkbox"],
+                        ["아이가 좋아하는 장난감 소리를 들려주었을 때, 어떻게 반응하나요?", "checkbox", "checkbox", "checkbox"],
+                        ["평상시, 부모가 아이에게 말을 하면 아이는 어떻게 반응하나요?", "checkbox", "checkbox", "checkbox"],
+                        ["아이가 안정감을 느꼈을 때, 어떻게 반응하나요? <br><em>- 상황 예: 부모의 목소리를 들었을 때, 안아주기, 달래주기, 바라보며 웃어주기 등</em>", "checkbox", "checkbox", "checkbox"],
+                        ["아이가 울고 있을 때, 부모가 안거나 달래주면 어떻게 반응하나요?", "checkbox", "checkbox", "checkbox"]
+                    ]
+                }
+            ]
+        }
+    ]
+}

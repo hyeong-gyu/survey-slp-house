@@ -51,25 +51,130 @@ export default {
                 line: false,
                 doughnut: false,
                 bar: false
+            },
+            isChartTitle: {
+                mix: '',
+                line: '',
+                doughnut: '',
+                bar: ''
             }
         }
     },
     computed: {
         ...mapState(['icb'])
     },
-    mounted() {
-        //var ctx = document.getElementById('myChart');
-        console.log('chartSurveyData : ', this.chartSurveyData);
-        console.log('chartResultData : ', this.chartResultData);
+    beforeMount() {
         let _isChartType = this.isChartType;
+        let _isChartTitle = this.isChartTitle;
 
         //chart type setting
         for(let _key in this.chartSurveyData.chart) {
             let _chartType = this.chartSurveyData.chart[_key].type;
-            if (typeof _isChartType[_chartType] !== 'undefined') _isChartType[_chartType] = true;
+            if (typeof _isChartType[_chartType] !== 'undefined') {
+                _isChartType[_chartType] = true;
+                _isChartTitle[_chartType] = _key;
+            }
         }
+    },
+    mounted() {
+        //var ctx = document.getElementById('myChart');
+        console.log('chartSurveyData : ', this.chartSurveyData);
+        console.log('chartResultData : ', this.chartResultData);
+        console.log('_isChartTitle22 : ', this.isChartTitle);
 
-        console.log('_isChartType : ', _isChartType)
+        let _isChartType = this.isChartType;
+        let _isChartTitle = this.isChartTitle;
+
+        for(let _key in _isChartType) {
+
+            if (_isChartType[_key]) {
+                console.log('_isChartType : ', _key);
+
+                if (_key === "line") {
+                    let _ctx = document.getElementById('line-chart');
+                    let _labels = [];
+                    let _data = [];
+
+                    //line chart title
+                    this.chartSurveyData.table.forEach((_tableObj) => {
+                        _labels.push(_tableObj.title);
+                    });
+
+                    //line chart value
+                    for(let _key in this.chartResultData) {
+                        _data.push(this.chartResultData[_key].total);
+                    }
+
+                    let _lineChart = new Chart(_ctx, {
+                        type: 'line',
+                        data: {
+                            labels: _labels,
+                            datasets: [
+                                {
+                                    label: `${this.icb.name}`,
+                                    data: _data,
+                                    backgroundColor: [
+                                        '#247deb'
+                                    ],
+                                    borderColor: [
+                                        '#247deb'
+                                    ],
+                                    borderWidth: 3
+                                }
+                            ]
+                        },
+                        options: {
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    font: {
+                                        size: 30
+                                    },
+                                    color: '#2b2b2b',
+                                    text: _isChartTitle[_key],
+                                    padding: {
+                                        bottom: 30
+                                    }
+                                },
+                                legend: {
+                                    position: 'bottom'
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    max: 15,
+                                    ticks: {
+                                        // forces step size
+                                        stepSize: 1
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // switch(_key) {
+
+                //     case "mix":
+
+                //         break;
+
+                //     case "line":
+
+                //         break;
+
+                //     case "doughnut":
+
+                //         break;
+
+                //     case "bar":
+
+                //         break;
+                // }
+            }
+
+        }
 
         // let _labels = [];
         // let _data = [];
@@ -136,7 +241,7 @@ export default {
         background-color: #fff;
     }
 
-    .chart-list-wrap .chart-item {
-
+    .chart-list-wrap {
+        margin-top: 8rem;
     }
 </style>

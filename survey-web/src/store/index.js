@@ -53,6 +53,7 @@ const store = createStore({
             }
         },
         codeValidation(state) {
+            //0S8O0CMW2
             const _tokenData = state.surveyType === 'icb' ? state.icbTokenData.token : '';
             const _tokenValid = _tokenData.filter((_token) => {
                 let _bytes = CryptoJS.AES.decrypt(_token, 'SLP-HOUSE-LIVE');

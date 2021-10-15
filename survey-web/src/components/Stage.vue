@@ -1,7 +1,12 @@
 <template>
     <div class="stage-wrap" v-if="surveyTypeData">
         <h4 v-html="surveyTypeData.title"></h4>
-        <Step :surveyTable="surveyTypeData.table" />
+
+        <!-- step compontent -->
+        <Step :surveyTable="surveyTypeData.table" @scoreResultObject="chartData" />
+
+        <!-- step 결과에 따른 chart compontent -->
+        <Chart v-if="chartResultData" :chartResultData="chartResultData" :chartSurveyData="surveyTypeData" />
     </div>
 </template>
 
@@ -9,16 +14,19 @@
 import { mapState } from 'vuex';
 import surveyData from '../assets/surveyData.json';
 import Step from './Step';
+import Chart from './Chart';
 
 export default {
     name: 'Stage',
     components: {
-        Step
+        Step,
+        Chart
     },
     data() {
         return {
             surveyData: surveyData,
-            surveyTypeData: null
+            surveyTypeData: null,
+            chartResultData: null
         }
     },
     computed: {
@@ -35,6 +43,12 @@ export default {
 
         //filter 0번째 => 객체만 추출하기 위해서
         this.surveyTypeData = this.surveyTypeData[0];
+    },
+    methods: {
+        chartData(_data) {
+            console.log("chartData : ", _data);
+            this.chartResultData = _data;
+        }
     },
 }
 </script>

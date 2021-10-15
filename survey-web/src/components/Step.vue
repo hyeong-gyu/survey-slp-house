@@ -1,5 +1,10 @@
 <template>
     <div class="step-box">
+        <div class="btn-wrap">
+            <button type="button" class="btn btn-outline-success btn-sm"><i class="bi bi-fullscreen"></i></button>
+            <button type="button" class="btn btn-outline-danger btn-sm"><i class="bi bi-fullscreen-exit"></i></button>
+            <button type="button" class="btn btn-primary btn-sm" @click="inpResult">RESULT</button>
+        </div>
         <div class="accordion" id="accordionPanelsStayOpenExample">
             <div class="accordion-item" v-for="(table, i) in surveyTable" :key="i">
                 <h2 class="accordion-header" :id="`question-heading-${i}`">
@@ -118,8 +123,6 @@ export default {
             let _checkBodyName = this.parentNode[this.parentNode.length -1].getAttribute('data-role-name');
             let _checkName = e.target.getAttribute('data-role-name');
             
-            console.log(_surveyScoreObject);
-
             //rule 점수 계산
             if (_checked) {
                 _surveyScoreObject[_checkBodyName][_checkName] += _surveyScoreObject[_checkBodyName].rule[_checkName];
@@ -132,6 +135,9 @@ export default {
             for (let _key in _surveyScoreObject[_checkBodyName].rule) {
                 _surveyScoreObject[_checkBodyName].total = _surveyScoreObject[_checkBodyName].total + _surveyScoreObject[_checkBodyName][_key];
             }
+        },
+        inpResult() {
+            this.$emit('scoreResultObject', this.surveyScoreObject);
         }
     },
 }
@@ -140,6 +146,19 @@ export default {
 <style>
     .step-box {
         margin-top: 2rem;
+    }
+
+    .step-box .btn-wrap {
+        margin-bottom: 0.5rem;
+        text-align: right;
+    }
+
+    .step-box .btn-wrap button {
+        margin-left: 5px;
+    }
+
+    .step-box .btn-wrap button:first-child {
+        margin-left: 0;
     }
 
     .step-box .nav {

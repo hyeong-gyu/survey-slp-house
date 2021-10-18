@@ -247,6 +247,9 @@ export default {
                 _isChartLabels[_chartType] = _chartLabels;
             }
         }
+
+        //body class add
+        document.getElementsByTagName('body')[0].classList.add('chart-show')
     },
     mounted() {
         let _isChartType = this.isChartType;

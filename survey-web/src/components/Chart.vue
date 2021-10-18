@@ -20,13 +20,14 @@
                     <canvas id="mix-chart"></canvas>
                 </div>
                 <div class="chart-item row" v-if="isChartType.line">
-                    <canvas id="line-chart"></canvas>
+                    <highcharts :options="lineChartOptions" />
                 </div>
-                <div class="chart-item row" v-if="isChartType.doughnut">
-                    <canvas id="doughnut-chart"></canvas>
+                <div class="chart-item row" v-if="isChartType.pie">
+                    <!-- <canvas id="pie-chart"></canvas> -->
+                    <highcharts :options="pieChartOptions" />
                 </div>
                 <div class="chart-item row" v-if="isChartType.bar">
-                    <canvas id="bar-chart"></canvas>
+                    <highcharts :options="barChartOption" />
                 </div>
             </div>
         </div>
@@ -49,14 +50,182 @@ export default {
             isChartType: {
                 mix: false,
                 line: false,
-                doughnut: false,
+                pie: false,
                 bar: false
             },
             isChartTitle: {
                 mix: '',
                 line: '',
-                doughnut: '',
+                pie: '',
                 bar: ''
+            },
+            isChartLabels: {
+                mix: [],
+                line: [],
+                pie: [],
+                bar: []
+            },
+            lineChartOptions: {
+                title: {
+                    useHTML: true,
+                    text: ''
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle'
+                },
+                plotOptions: {
+                    series: {
+                        label: {
+                            connectorAllowed: false
+                        },
+                        pointStart: 2010
+                    }
+                },
+                xAxis: {
+                    categories: null,
+                    title: {
+                        text: null
+                    },
+                    labels: {
+                        style: {
+                            fontSize: '14px'
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    max: 15,
+                    tickPixelInterval: 20,
+                    title: {
+                        text: '점수',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                colors: ['#247deb', '#91bef5', '#d0e3fb', '#e73a40', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
+                tooltip: {
+                    valueSuffix: ' 점'
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                series: null,
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 500
+                        },
+                        chartOptions: {
+                            legend: {
+                                layout: 'horizontal',
+                                align: 'center',
+                                verticalAlign: 'bottom'
+                            }
+                        }
+                    }]
+                }
+            },
+            pieChartOptions: {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    useHTML: true,
+                    text: `<span style='display:inline-block; line-height:100%; vertical-align: middle;'>의사소통 수단</span>`
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                colors: ['#247deb', '#91bef5', '#d0e3fb', '#e73a40', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name: '비율',
+                        colorByPoint: true,
+                        data: [
+                            {
+                                name: "Chrome",
+                                y: 62.74
+                            },
+                            {
+                                name: "Firefox",
+                                y: 10.57
+                            },
+                            {
+                                name: "Internet Explorer",
+                                y: 7.23
+                            }
+                        ]
+                    }
+                ],
+            },
+            barChartOption: {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    useHTML: true,
+                    text: ''
+                },
+                xAxis: {
+                    categories: null,
+                    labels: {
+                        style: {
+                            fontSize: '14px'
+                        }
+                    },
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    max: null,
+                    tickInterval:1,
+                    labels: {
+                        overflow: 'justify',
+                        step: 1,
+                        style: {
+                            fontSize: '14px'
+                        }
+                    },
+                    title: {
+                        text: null
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' 점'
+                },
+                colors: ['#247deb', '#91bef5', '#d0e3fb', '#e73a40', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
+                plotOptions: {
+                    bar: {
+                        groupPadding:0.3,
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                series: null
             }
         }
     },
@@ -66,182 +235,150 @@ export default {
     beforeMount() {
         let _isChartType = this.isChartType;
         let _isChartTitle = this.isChartTitle;
+        let _isChartLabels = this.isChartLabels;
 
         //chart type setting
         for(let _key in this.chartSurveyData.chart) {
             let _chartType = this.chartSurveyData.chart[_key].type;
+            let _chartLabels = this.chartSurveyData.chart[_key].labels;
             if (typeof _isChartType[_chartType] !== 'undefined') {
                 _isChartType[_chartType] = true;
                 _isChartTitle[_chartType] = _key;
+                _isChartLabels[_chartType] = _chartLabels;
             }
         }
     },
     mounted() {
-        //var ctx = document.getElementById('myChart');
-        console.log('chartSurveyData : ', this.chartSurveyData);
-        console.log('chartResultData : ', this.chartResultData);
-        console.log('_isChartTitle22 : ', this.isChartTitle);
-
         let _isChartType = this.isChartType;
         let _isChartTitle = this.isChartTitle;
+        let _isChartLabels = this.isChartLabels;
 
         for(let _key in _isChartType) {
 
             if (_isChartType[_key]) {
-                console.log('_isChartType : ', _key);
 
+                //line
                 if (_key === "line") {
-                    let _ctx = document.getElementById('line-chart');
-                    let _labels = [];
-                    let _data = [];
-
-                    //line chart title
-                    this.chartSurveyData.table.forEach((_tableObj) => {
-                        _labels.push(_tableObj.title);
-                    });
+                    let _lineDataset = [
+                        {
+                            name: this.icb.name,
+                            data: []
+                        }
+                    ];
 
                     //line chart value
                     for(let _key in this.chartResultData) {
-                        _data.push(this.chartResultData[_key].total);
+                        _lineDataset[0].data.push(this.chartResultData[_key].total);
                     }
 
-                    let _lineChart = new Chart(_ctx, {
-                        type: 'line',
-                        data: {
-                            labels: _labels,
-                            datasets: [
-                                {
-                                    label: `${this.icb.name}`,
-                                    data: _data,
-                                    backgroundColor: [
-                                        '#247deb'
-                                    ],
-                                    borderColor: [
-                                        '#247deb'
-                                    ],
-                                    borderWidth: 3
-                                }
-                            ]
-                        },
-                        options: {
-                            plugins: {
-                                title: {
-                                    display: true,
-                                    font: {
-                                        size: 30
-                                    },
-                                    color: '#2b2b2b',
-                                    text: _isChartTitle[_key],
-                                    padding: {
-                                        bottom: 30
-                                    }
-                                },
-                                legend: {
-                                    position: 'bottom'
-                                }
-                            },
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    max: 15,
-                                    ticks: {
-                                        // forces step size
-                                        stepSize: 1
-                                    }
+                    this.lineChartOptions.title.text = `<div class="chart-title">${this.icb.name} : ${_isChartTitle[_key]}</div>`;
+                    this.lineChartOptions.xAxis.categories = _isChartLabels[_key];
+                    this.lineChartOptions.series = _lineDataset;
+                }
+
+                if (_key === "pie") {
+                    let _pieData = {};
+                    let _pieTotalData = 0;
+                    let _pieDataset = [];
+
+                    for (let _dataKey in this.chartResultData) {
+                        _pieTotalData += this.chartResultData[_dataKey].total;
+                    }
+                    
+                    for (let _pieKey in _isChartLabels[_key]) {
+                        if (typeof _pieData['labels'] === 'undefined') _pieData['labels'] = [];
+                        if (typeof _pieData['data'] === 'undefined') _pieData['data'] = [];
+                        _pieData['labels'].push(_isChartLabels[_key][_pieKey]);
+
+                        let _keyIndex = 0;
+                        let _singleDataSum = 0;
+
+                        for (let _dataKey in this.chartResultData) {
+                            
+                            let _typeData = this.chartResultData[_dataKey];
+                            let _typeSingleData = _typeData[_pieKey];
+
+                            _singleDataSum += _typeSingleData;
+
+                            if (_keyIndex === Object.keys(this.chartResultData).length -1) {
+                                _pieData['data'].push(
+                                    Math.round(((_singleDataSum / _pieTotalData) * 100) * 100) / 100
+                                );
+                            }
+
+                            _keyIndex++;
+                        }
+                    }
+
+                    _pieData.labels.forEach((_name, _i) => {
+                        if (typeof _pieDataset[_i] === 'undefined') _pieDataset.push({});
+                        _pieDataset[_i].name = _name;
+                        _pieDataset[_i].y = _pieData.data[_i];
+
+                    });
+
+                    this.pieChartOptions.title.text = `<div class="chart-title">${this.icb.name} : ${_isChartTitle[_key]}</div>`;
+                    this.pieChartOptions.series[0].data = _pieDataset;
+                }
+
+                if (_key === "bar") {
+                    let _barDataset = [];
+                    let _barIndex = 0;
+                    let _barLabels;
+                    let _barCategories = [];
+                    
+                    for (let _barLabelKey in this.chartSurveyData.chart) {
+                        _barLabels = this.chartSurveyData.chart[_barLabelKey].type === _key && this.chartSurveyData.chart[_barLabelKey];
+                    }
+
+                    //bar dataset setting
+                    _barDataset = _barLabels.datasetForm.set;
+                    _barDataset.forEach((_itemObj) => {
+                        _itemObj.data = [];
+                        for (let _resultKey in this.chartResultData) {
+                            for (let _subKey in this.chartResultData[_resultKey]) {
+                                if (_subKey === _itemObj.key) {
+                                    _itemObj.data.push(this.chartResultData[_resultKey][_subKey]);
                                 }
                             }
                         }
                     });
+
+                    this.barChartOption.title.text = `<div class="chart-title">${this.icb.name} : ${_isChartTitle[_key]}</div>`;
+                    this.barChartOption.xAxis.categories = _isChartLabels[_key];
+                    this.barChartOption.yAxis.max = _barLabels.datasetForm.max;
+                    this.barChartOption.series = _barDataset;
+
                 }
 
-                // switch(_key) {
-
-                //     case "mix":
-
-                //         break;
-
-                //     case "line":
-
-                //         break;
-
-                //     case "doughnut":
-
-                //         break;
-
-                //     case "bar":
-
-                //         break;
-                // }
             }
 
         }
-
-        // let _labels = [];
-        // let _data = [];
-
-        // this.chartSurveyData.table.forEach((_tableObj) => {
-        //     _labels.push(_tableObj.title);
-        // });
-        
-        // for(let _key in this.chartResultData) {
-        //     _data.push(this.chartResultData[_key].total);
-        // }
-
-        // console.log(_labels);
-        // console.log(_data);
-
-        // new Chart(ctx, {
-        //     type: 'line',
-        //     data: {
-        //         labels: _labels,
-        //         datasets: [
-        //             {
-        //                 label: `${this.icb.name}`,
-        //                 data: _data,
-        //                 backgroundColor: [
-        //                     'rgb(75, 192, 192)'
-        //                 ],
-        //                 borderColor: [
-        //                     'rgb(75, 192, 192)'
-        //                 ],
-        //                 borderWidth: 1
-        //             }
-        //         ]
-        //     },
-        //     options: {
-        //         plugins: {
-        //             title: {
-        //                 display: true,
-        //                 text: 'Chart Title',
-        //             }
-        //         },
-        //         scales: {
-        //             y: {
-        //                 beginAtZero: true,
-        //                 max: 15,
-        //                 ticks: {
-        //                     // forces step size
-        //                     stepSize: 1
-        //                 }
-        //             }
-        //         }
-        //     }
-        // });
     },
 }
 </script>
 
-<style scoped>
+<style>
     .chart-wrap {
+        overflow: auto;
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+        padding-top: 7rem;
         background-color: #fff;
     }
 
     .chart-list-wrap {
         margin-top: 8rem;
+    }
+
+    .chart-list-wrap .chart-item {
+        margin: 0 5rem 5rem;
+    }
+
+    .chart-title {
+        font-size: 1.75rem;
     }
 </style>

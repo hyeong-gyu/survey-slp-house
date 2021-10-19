@@ -26,7 +26,6 @@
                     <highcharts :options="lineChartOptions" />
                 </div>
                 <div class="chart-item row" v-if="isChartType.pie">
-                    <!-- <canvas id="pie-chart"></canvas> -->
                     <highcharts :options="pieChartOptions" />
                 </div>
                 <div class="chart-item row" v-if="isChartType.bar">
@@ -164,20 +163,7 @@ export default {
                     {
                         name: '비율',
                         colorByPoint: true,
-                        data: [
-                            {
-                                name: "Chrome",
-                                y: 62.74
-                            },
-                            {
-                                name: "Firefox",
-                                y: 10.57
-                            },
-                            {
-                                name: "Internet Explorer",
-                                y: 7.23
-                            }
-                        ]
+                        data: null
                     }
                 ],
             },
@@ -258,113 +244,116 @@ export default {
     },
     mounted() {
         // 핸들러 등록하기
-        document.getElementById('surveyChart').addEventListener('scroll', this.throttleUsingRaf(this.handleScroll));
+        // document.getElementById('surveyChart').addEventListener('scroll', this.throttleUsingRaf(this.handleScroll));
 
-        let _isChartType = this.isChartType;
-        let _isChartTitle = this.isChartTitle;
-        let _isChartLabels = this.isChartLabels;
+        setTimeout(() => {
+            let _isChartType = this.isChartType;
+            let _isChartTitle = this.isChartTitle;
+            let _isChartLabels = this.isChartLabels;
 
-        for(let _key in _isChartType) {
+            for(let _key in _isChartType) {
 
-            if (_isChartType[_key]) {
+                if (_isChartType[_key]) {
 
-                //line
-                if (_key === "line") {
-                    let _lineDataset = [
-                        {
-                            name: this.icb.name,
-                            data: []
+                    //line
+                    if (_key === "line") {
+                        let _lineDataset = [
+                            {
+                                name: this.icb.name,
+                                data: []
+                            }
+                        ];
+
+                        //line chart value
+                        for(let _key in this.chartResultData) {
+                            _lineDataset[0].data.push(this.chartResultData[_key].total);
                         }
-                    ];
 
-                    //line chart value
-                    for(let _key in this.chartResultData) {
-                        _lineDataset[0].data.push(this.chartResultData[_key].total);
+                        this.lineChartOptions.title.text = `<div class="chart-title">${this.icb.name} : ${_isChartTitle[_key]}</div>`;
+                        this.lineChartOptions.xAxis.categories = _isChartLabels[_key];
+                        this.lineChartOptions.series = _lineDataset;
                     }
 
-                    this.lineChartOptions.title.text = `<div class="chart-title">${this.icb.name} : ${_isChartTitle[_key]}</div>`;
-                    this.lineChartOptions.xAxis.categories = _isChartLabels[_key];
-                    this.lineChartOptions.series = _lineDataset;
-                }
-
-                if (_key === "pie") {
-                    let _pieData = {};
-                    let _pieTotalData = 0;
-                    let _pieDataset = [];
-
-                    for (let _dataKey in this.chartResultData) {
-                        _pieTotalData += this.chartResultData[_dataKey].total;
-                    }
-                    
-                    for (let _pieKey in _isChartLabels[_key]) {
-                        if (typeof _pieData['labels'] === 'undefined') _pieData['labels'] = [];
-                        if (typeof _pieData['data'] === 'undefined') _pieData['data'] = [];
-                        _pieData['labels'].push(_isChartLabels[_key][_pieKey]);
-
-                        let _keyIndex = 0;
-                        let _singleDataSum = 0;
+                    if (_key === "pie") {
+                        let _pieData = {};
+                        let _pieTotalData = 0;
+                        let _pieDataset = [];
 
                         for (let _dataKey in this.chartResultData) {
-                            
-                            let _typeData = this.chartResultData[_dataKey];
-                            let _typeSingleData = _typeData[_pieKey];
-
-                            _singleDataSum += _typeSingleData;
-
-                            if (_keyIndex === Object.keys(this.chartResultData).length -1) {
-                                _pieData['data'].push(
-                                    Math.round(((_singleDataSum / _pieTotalData) * 100) * 100) / 100
-                                );
-                            }
-
-                            _keyIndex++;
+                            _pieTotalData += this.chartResultData[_dataKey].total;
                         }
+                        
+                        for (let _pieKey in _isChartLabels[_key]) {
+                            if (typeof _pieData['labels'] === 'undefined') _pieData['labels'] = [];
+                            if (typeof _pieData['data'] === 'undefined') _pieData['data'] = [];
+                            _pieData['labels'].push(_isChartLabels[_key][_pieKey]);
+
+                            let _keyIndex = 0;
+                            let _singleDataSum = 0;
+
+                            for (let _dataKey in this.chartResultData) {
+                                
+                                let _typeData = this.chartResultData[_dataKey];
+                                let _typeSingleData = _typeData[_pieKey];
+
+                                _singleDataSum += _typeSingleData;
+
+                                if (_keyIndex === Object.keys(this.chartResultData).length -1) {
+                                    _pieData['data'].push(
+                                        Math.round(((_singleDataSum / _pieTotalData) * 100) * 100) / 100
+                                    );
+                                }
+
+                                _keyIndex++;
+                            }
+                        }
+
+                        _pieData.labels.forEach((_name, _i) => {
+                            if (typeof _pieDataset[_i] === 'undefined') _pieDataset.push({});
+                            _pieDataset[_i].name = _name;
+                            _pieDataset[_i].y = _pieData.data[_i];
+
+                        });
+
+                        this.pieChartOptions.title.text = `<div class="chart-title">${this.icb.name} : ${_isChartTitle[_key]}</div>`;
+                        this.pieChartOptions.series[0].data = _pieDataset;
                     }
 
-                    _pieData.labels.forEach((_name, _i) => {
-                        if (typeof _pieDataset[_i] === 'undefined') _pieDataset.push({});
-                        _pieDataset[_i].name = _name;
-                        _pieDataset[_i].y = _pieData.data[_i];
+                    if (_key === "bar") {
+                        let _barDataset = [];
+                        let _barIndex = 0;
+                        let _barLabels;
+                        let _barCategories = [];
+                        
+                        for (let _barLabelKey in this.chartSurveyData.chart) {
+                            _barLabels = this.chartSurveyData.chart[_barLabelKey].type === _key && this.chartSurveyData.chart[_barLabelKey];
+                        }
 
-                    });
-
-                    this.pieChartOptions.title.text = `<div class="chart-title">${this.icb.name} : ${_isChartTitle[_key]}</div>`;
-                    this.pieChartOptions.series[0].data = _pieDataset;
-                }
-
-                if (_key === "bar") {
-                    let _barDataset = [];
-                    let _barIndex = 0;
-                    let _barLabels;
-                    let _barCategories = [];
-                    
-                    for (let _barLabelKey in this.chartSurveyData.chart) {
-                        _barLabels = this.chartSurveyData.chart[_barLabelKey].type === _key && this.chartSurveyData.chart[_barLabelKey];
-                    }
-
-                    //bar dataset setting
-                    _barDataset = _barLabels.datasetForm.set;
-                    _barDataset.forEach((_itemObj) => {
-                        _itemObj.data = [];
-                        for (let _resultKey in this.chartResultData) {
-                            for (let _subKey in this.chartResultData[_resultKey]) {
-                                if (_subKey === _itemObj.key) {
-                                    _itemObj.data.push(this.chartResultData[_resultKey][_subKey]);
+                        //bar dataset setting
+                        _barDataset = _barLabels.datasetForm.set;
+                        _barDataset.forEach((_itemObj) => {
+                            _itemObj.data = [];
+                            for (let _resultKey in this.chartResultData) {
+                                for (let _subKey in this.chartResultData[_resultKey]) {
+                                    if (_subKey === _itemObj.key) {
+                                        _itemObj.data.push(this.chartResultData[_resultKey][_subKey]);
+                                    }
                                 }
                             }
-                        }
-                    });
+                        });
 
-                    this.barChartOption.title.text = `<div class="chart-title">${this.icb.name} : ${_isChartTitle[_key]}</div>`;
-                    this.barChartOption.xAxis.categories = _isChartLabels[_key];
-                    this.barChartOption.yAxis.max = _barLabels.datasetForm.max;
-                    this.barChartOption.series = _barDataset;
+                        this.barChartOption.title.text = `<div class="chart-title">${this.icb.name} : ${_isChartTitle[_key]}</div>`;
+                        this.barChartOption.xAxis.categories = _isChartLabels[_key];
+                        this.barChartOption.yAxis.max = _barLabels.datasetForm.max;
+                        this.barChartOption.series = _barDataset;
+
+                    }
 
                 }
 
             }
-
-        }
+        }, 500);
+        
     },
     beforeDestroy: function () {
         document.getElementById('surveyChart').removeEventListener('scroll', this.handleScroll)
@@ -462,12 +451,15 @@ export default {
     .btn-chart-close {
         z-index: 20;
         position: fixed;
-        top: 0.4rem;
+        top: 1.5rem;
         right: 2rem;
+        padding: 0;
         font-size: 2rem;
+        line-height: 0;
+        color: #818181;
     }
 
     .btn-chart-close:hover {
-        color: #4778c1;
+        color: #2b2b2b;
     }
 </style>

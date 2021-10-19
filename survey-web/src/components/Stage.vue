@@ -6,7 +6,9 @@
         <Step :surveyTable="surveyTypeData.table" @scoreResultObject="chartData" />
 
         <!-- step 결과에 따른 chart compontent -->
-        <Chart v-if="layerOpen" :chartResultData="chartResultData" :chartSurveyData="surveyTypeData" @chartClose="layerClose" />
+        <transition name="fade">
+            <Chart v-if="layerOpen" :chartResultData="chartResultData" :chartSurveyData="surveyTypeData" @chartClose="layerClose" />
+        </transition>
     </div>
 </template>
 
@@ -63,5 +65,29 @@ export default {
     .stage-wrap {
         margin-bottom: 10rem;
         text-align: center;
+    }
+
+    .fade-enter-from {
+        opacity: 0;
+    }
+
+    .fade-enter-active {
+        transition: all 0.5s;
+    }
+
+    .fade-enter-to {
+        opacity: 1;
+    }
+
+    .fade-leave-from {
+        opacity: 1;
+    }
+
+    .fade-leave-active {
+        transition: all 0.5s;
+    }
+
+    .fade-leave-to {
+        opacity: 0;
     }
 </style>

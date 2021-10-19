@@ -11,7 +11,7 @@
                 <div class="col">
                     <div class="p-3 border-bottom">
                         <i class="bi bi-heart-half"></i>
-                        <span>{{ icb.birth }}</span>
+                        <span>생년월일 : {{ icb.birth }}</span>
                     </div>
                 </div>
                 <div class="col">

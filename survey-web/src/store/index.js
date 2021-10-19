@@ -67,6 +67,8 @@ const store = createStore({
                 const _modalBack = document.querySelector('.modal-backdrop');
                 if (_modalBack) _modalBack.remove();
 
+                document.getElementsByTagName('body')[0].classList.remove('modal-open');
+
                 router.push('/icb/main');
             } else {
                 state.validCheck = false;

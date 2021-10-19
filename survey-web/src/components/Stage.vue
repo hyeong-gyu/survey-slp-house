@@ -6,7 +6,7 @@
         <Step :surveyTable="surveyTypeData.table" @scoreResultObject="chartData" />
 
         <!-- step 결과에 따른 chart compontent -->
-        <Chart v-if="chartResultData" :chartResultData="chartResultData" :chartSurveyData="surveyTypeData" />
+        <Chart v-if="layerOpen" :chartResultData="chartResultData" :chartSurveyData="surveyTypeData" @chartClose="layerClose" />
     </div>
 </template>
 
@@ -26,7 +26,8 @@ export default {
         return {
             surveyData: surveyData,
             surveyTypeData: null,
-            chartResultData: null
+            chartResultData: null,
+            layerOpen: false
         }
     },
     computed: {
@@ -47,7 +48,12 @@ export default {
     methods: {
         chartData(_data) {
             console.log("chartData : ", _data);
+            this.layerOpen = true;
             this.chartResultData = _data;
+        },
+        layerClose() {
+            this.layerOpen = false;
+            document.getElementsByTagName('body')[0].classList.remove('modal-open');
         }
     },
 }
@@ -55,6 +61,7 @@ export default {
 
 <style>
     .stage-wrap {
+        margin-bottom: 10rem;
         text-align: center;
     }
 </style>

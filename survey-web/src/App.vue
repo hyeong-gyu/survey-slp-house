@@ -17,6 +17,7 @@ export default {
 
 <style>
     .navbar {
+        background-color: #fff;
         box-shadow: 0px -36px 40px 0px #000;
     }
 

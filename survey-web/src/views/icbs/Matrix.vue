@@ -16,7 +16,7 @@
                 </div>
                 <div class="col">
                     <div class="p-3 border-bottom">
-                        <i class="bi bi-list-ol"></i>
+                        <i class="bi bi-file-earmark-bar-graph"></i>
                         <span>{{ icb.matrix }} 단계</span>
                     </div>
                 </div>

@@ -1,8 +1,8 @@
 <template>
     <div class="step-box">
         <div class="btn-wrap">
-            <button type="button" class="btn btn-outline-success btn-sm"><i class="bi bi-fullscreen"></i></button>
-            <button type="button" class="btn btn-outline-danger btn-sm"><i class="bi bi-fullscreen-exit"></i></button>
+            <button type="button" class="btn btn-outline-success btn-sm" title="전체 열림" @click="openAll"><i class="bi bi-fullscreen"></i></button>
+            <button type="button" class="btn btn-outline-danger btn-sm" title="전체 닫힘" @click="closeAll"><i class="bi bi-fullscreen-exit"></i></button>
             <button type="button" class="btn btn-primary btn-sm" @click="inpResult">RESULT</button>
         </div>
         <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -138,6 +138,32 @@ export default {
         },
         inpResult() {
             this.$emit('scoreResultObject', this.surveyScoreObject);
+        },
+        openAll() {
+            const _accordionButton = document.querySelectorAll('.accordion-button');
+            const _accordionContent = document.querySelectorAll('.accordion-collapse');
+
+            [].forEach.call(_accordionButton, (_el) => {
+                _el.classList.remove('collapsed');
+                _el.setAttribute('aria-expanded', true);
+            });
+
+            [].forEach.call(_accordionContent, (_el) => {
+                _el.classList.add('show');
+            });
+        },
+        closeAll() {
+            const _accordionButton = document.querySelectorAll('.accordion-button');
+            const _accordionContent = document.querySelectorAll('.accordion-collapse');
+
+            [].forEach.call(_accordionButton, (_el) => {
+                _el.classList.add('collapsed');
+                _el.setAttribute('aria-expanded', false);
+            });
+
+            [].forEach.call(_accordionContent, (_el) => {
+                _el.classList.remove('show');
+            });
         }
     },
 }

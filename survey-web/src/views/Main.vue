@@ -3,17 +3,17 @@
         <div class="row mt-5">
             <div class="col">
                 <div class="card" style="width: 18rem;">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" @click="codeType('icb')">
+                    <button type="button" class="btn-survey-enter" data-bs-toggle="modal" data-bs-target="#staticBackdrop" @click="codeType('icb')">
                         <img src="https://valetmag.com/gr/daily/living/features/how_to_make_better_conversation_080719/art-strangers_staring_at_their_phone.webp" class="card-img-top" alt="test">
                         <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="card-text">ICB 설문지 관련 설명 글....</p>
                         </div>
                     </button>
                 </div>
             </div>
             <div class="col">
                 <div class="card" style="width: 18rem;">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button type="button" class="btn-survey-enter" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         <img src="https://valetmag.com/gr/daily/living/features/how_to_make_better_conversation_080719/art-strangers_staring_at_their_phone.webp" class="card-img-top" alt="test">
                         <div class="card-body">
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -99,5 +99,17 @@
 
     .on {
         display: block;
+    }
+
+    .card-body {
+        height: 6.5rem;
+    }
+
+    .btn-survey-enter {
+        transition: box-shadow 0.5s;
+    }
+
+    .btn-survey-enter:hover {
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
     }
 </style>

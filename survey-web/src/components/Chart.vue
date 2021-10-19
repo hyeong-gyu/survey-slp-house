@@ -1,17 +1,20 @@
 <template>
-    <div class="chart-wrap">
+    <div id="surveyChart" class="chart-wrap">
         <div class="container-md">
-            <div class="chart-info-wrap mt-5 mb-4">
-                <div class="card text-center">
-                    <div class="card-header">
-                        CB-stage : {{ icb.matrix }} 단계
+            <button type="button" class="btn btn-chart-close" @click="chartClose"><i class="bi bi-x-square"></i></button>
+            <div class="chart-info-wrap mt-5 mb-2">
+                <div class="chart-info-list row">
+                    <div class="col">
+                        <i class="bi bi-person-circle"></i>
+                        <span>{{ icb.name }}</span>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ icb.name }}</h5>
-                        <p class="card-text">CB-stage 설명글이 입력되는 곳입니다.</p>
+                    <div class="col">
+                        <i class="bi bi-heart-half"></i>
+                        <span>생년월일 : {{ icb.birth }}</span>
                     </div>
-                    <div class="card-footer text-muted">
-                        생년월일 : {{ icb.birth }}
+                    <div class="col">
+                        <i class="bi bi-file-earmark-bar-graph"></i>
+                        <span>CB-stage : {{ icb.matrix }} 단계</span>
                     </div>
                 </div>
             </div>
@@ -47,6 +50,8 @@ export default {
     },
     data() {
         return {
+            scrollY: 0,
+            timer: null,
             isChartType: {
                 mix: false,
                 line: false,
@@ -248,10 +253,13 @@ export default {
             }
         }
 
-        //body class add
-        document.getElementsByTagName('body')[0].classList.add('chart-show')
+        //chart modal
+        document.getElementsByTagName('body')[0].classList.add('modal-open');
     },
     mounted() {
+        // 핸들러 등록하기
+        document.getElementById('surveyChart').addEventListener('scroll', this.throttleUsingRaf(this.handleScroll));
+
         let _isChartType = this.isChartType;
         let _isChartTitle = this.isChartTitle;
         let _isChartLabels = this.isChartLabels;
@@ -358,30 +366,108 @@ export default {
 
         }
     },
+    beforeDestroy: function () {
+        document.getElementById('surveyChart').removeEventListener('scroll', this.handleScroll)
+    },
+    methods: {
+        throttleUsingRaf(cb) {
+
+            let rAfTimeout = null;
+
+            return function () {
+                if (rAfTimeout) {
+                    window.cancelAnimationFrame(rAfTimeout);
+                }
+                rAfTimeout = window.requestAnimationFrame(function () {
+                    cb();
+                })
+            }
+        },
+        handleScroll () {
+            // let _surveyChartScrollTop = document.getElementById('surveyChart').scrollTop;
+            // let _surveyChartInfoWrap = document.querySelector('.chart-info-wrap');
+            // let _surveyChartInfoScrollTop = _surveyChartInfoWrap.offsetTop;
+            // let _surveyChartInfoList = document.querySelector('.chart-info-list');
+
+            // if (_surveyChartScrollTop >= _surveyChartInfoScrollTop) {
+            //     _surveyChartInfoList.classList.add('fixed');
+            // } else {
+            //     _surveyChartInfoList.classList.remove('fixed');
+            // }
+        },
+        chartClose() {
+            this.$emit('chartClose');
+        }
+    },
 }
 </script>
 
 <style>
+    .chart-wrap .container-md {
+        padding-top: 5rem;
+    }
+
     .chart-wrap {
         overflow: auto;
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        padding-top: 7rem;
-        background-color: #fff;
+        background-color: #f7f7f7;
     }
 
+    .chart-info-wrap {
+        height: 4.5rem;
+    }
+
+    .chart-info-wrap .chart-info-list {
+        padding: 1.5rem 0;
+        background-color: #4778c1;
+        border-radius: 1rem;
+        box-shadow: 0 5px 3px 0 rgb(0 0 0 / 20%);
+        color: #fff;
+    }
+
+    .chart-info-wrap .chart-info-list .col > span {
+        margin-left: 5px;
+    }
+
+    .chart-info-wrap .chart-info-list.fixed {
+        position: fixed;
+        top: 0;
+        width: 1320px;
+    }
+
+    /* .chart-wrap .card-header {
+        background-color: #fff;
+    } */
+
     .chart-list-wrap {
-        margin-top: 8rem;
+        margin-top: 5rem;
     }
 
     .chart-list-wrap .chart-item {
-        margin: 0 5rem 5rem;
+        padding: 5rem;
+        margin-bottom: 5rem;
+        background-color: #fff;
+        border-radius: 1rem;
+        box-shadow: 0 5px 3px 0 rgb(0 0 0 / 10%);
     }
 
     .chart-title {
         font-size: 1.75rem;
+    }
+
+    .btn-chart-close {
+        z-index: 20;
+        position: fixed;
+        top: 0.4rem;
+        right: 2rem;
+        font-size: 2rem;
+    }
+
+    .btn-chart-close:hover {
+        color: #4778c1;
     }
 </style>

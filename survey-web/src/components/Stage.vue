@@ -1,9 +1,19 @@
 <template>
     <div class="stage-wrap" v-if="surveyTypeData">
         <h4 v-html="surveyTypeData.title"></h4>
+        <div class="form-check-box">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="auto" checked @change="scoreTypeCheck">
+                <label class="form-check-label" for="inlineRadio1">자동 계산 버전</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="manual" @change="scoreTypeCheck">
+                <label class="form-check-label" for="inlineRadio2">점수입력 버전</label>
+            </div>
+        </div>
 
         <!-- step compontent -->
-        <Step :surveyTable="surveyTypeData.table" @scoreResultObject="chartData" />
+        <Step :surveyTable="surveyTypeData.table" @scoreResultObject="chartData" :scoreType="scoreType" />
 
         <!-- step 결과에 따른 chart compontent -->
         <transition name="fade">
@@ -29,7 +39,11 @@ export default {
             surveyData: surveyData,
             surveyTypeData: null,
             chartResultData: null,
-            layerOpen: false
+            layerOpen: false,
+            scoreType: {
+                manual: false,
+                auto: true
+            }
         }
     },
     computed: {
@@ -53,6 +67,13 @@ export default {
             this.layerOpen = true;
             this.chartResultData = _data;
         },
+        scoreTypeCheck(e) {
+            const _type = e.target.value;
+            for(let _key in this.scoreType) {
+                if (_key === _type) this.scoreType[_key] = true;
+                if (_key !== _type) this.scoreType[_key] = false;
+            }
+        },
         layerClose() {
             this.layerOpen = false;
             document.getElementsByTagName('body')[0].classList.remove('modal-open');
@@ -65,6 +86,10 @@ export default {
     .stage-wrap {
         margin-bottom: 10rem;
         text-align: center;
+    }
+
+    .stage-wrap .form-check-box {
+        margin-top: 2rem;
     }
 
     .fade-enter-from {

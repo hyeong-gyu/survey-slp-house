@@ -5,7 +5,7 @@
             <button type="button" class="btn btn-outline-danger btn-sm" title="전체 닫힘" @click="closeAll"><i class="bi bi-fullscreen-exit"></i></button>
             <button type="button" class="btn btn-primary btn-sm" @click="inpResult">RESULT</button>
         </div>
-        <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion" id="accordion-manual-wrap" v-if="scoreType.auto">
             <div class="accordion-item" v-for="(table, i) in surveyTable" :key="i">
                 <h2 class="accordion-header" :id="`question-heading-${i}`">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" :data-bs-target="`#question-${i}`" aria-expanded="true" :aria-controls="`question-${i}`">
@@ -61,6 +61,32 @@
                 </div>
             </div>
         </div>
+    
+        <div class="accordion" id="accordion-manual-wrap" v-if="scoreType.manual">
+            <div class="accordion-item" v-for="(table, i) in surveyTable" :key="i">
+                <h2 class="accordion-header" :id="`question-manual-heading-${i}`">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" :data-bs-target="`#question-manual-${i}`" aria-expanded="true" :aria-controls="`question-manual-${i}`">
+                        <span>{{ table.title }}</span>
+                        <em>(총 합계 : {{ surveyScoreObject[table.name].total }})</em>
+                    </button>
+                </h2>
+                <div :id="`question-manual-${i}`" class="accordion-collapse collapse show row question-manual-wrap" :aria-labelledby="`question-manual-heading-${i}`">
+                    <div class="col" :class="{'hidden' : a1 === 0}" v-for="(thead, a1) in table.thead" :key="a1">
+                        <h5 v-if="a1 === 0" class="question-manual-title">
+                            자동계산버전
+                        </h5>
+                        <div v-if="a1 !== 0" class="input-group question-manual-score">
+                            <label :for="`survey-${i}-${a1}`" class="input-group-text">{{ thead }}</label>
+                            <input type="number" class="form-control" :id="`survey-${i}-${a1}`" placeholder="0" value="0">
+                        </div>
+                    </div>
+                    <div class="question-sum-box">
+                        <i class="bi bi-save2"></i>
+                        총 합계 : {{ surveyScoreObject[table.name].total }}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -69,7 +95,8 @@ import { mapState, mapMutations } from 'vuex';
 export default {
     name: 'Step',
     props: {
-        surveyTable: Array
+        surveyTable: Array,
+        scoreType: Object
     },
     data() {
         return {
@@ -170,6 +197,17 @@ export default {
 </script>
 
 <style>
+    .hidden {
+        overflow: hidden;
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        font-size: 1;
+        line-height: 0;
+    }
+
     .step-box {
         margin-top: 2rem;
     }
@@ -229,5 +267,25 @@ export default {
     .question-sum-box {
         text-align: right;
         font-size: 0.9rem;
+    }
+
+    /* 자동계산 버전 css */
+    .question-manual-wrap {
+        width: 100%;
+        padding: 2rem;
+        margin: 0;
+    }
+
+    .question-manual-wrap .col label {
+        width: 40%;
+        flex-flow: column;
+    }
+
+    .question-manual-wrap .col input {
+        text-align: center;
+    }
+
+    .question-manual-wrap .question-sum-box {
+        margin-top: 1rem;
     }
 </style>

@@ -4464,6 +4464,11 @@
   "resolved" "https://registry.npmjs.org/hex-color-regex/-/hex-color-regex-1.1.0.tgz"
   "version" "1.1.0"
 
+"highcharts-solid-gauge@^0.1.7":
+  "integrity" "sha1-S/Lcp2tfVZA0tZ0MbUdV0ccaals="
+  "resolved" "https://registry.npmjs.org/highcharts-solid-gauge/-/highcharts-solid-gauge-0.1.7.tgz"
+  "version" "0.1.7"
+
 "highcharts-vue@^1.4.0":
   "integrity" "sha512-fTPqJmU/wR/nUEtofbC/iJqcgULGcP3C0Hd4YYCKH2FiiteNs7UidjSM4eYj5Y4ldpOVhwPtNj/m6XwC3ajp6g=="
   "resolved" "https://registry.npmjs.org/highcharts-vue/-/highcharts-vue-1.4.0.tgz"

@@ -13,7 +13,7 @@
         </div>
 
         <!-- step compontent -->
-        <Step :surveyTable="surveyTypeData.table" @scoreResultObject="chartData" :scoreType="scoreType" />
+        <Step :surveyManualRule="surveyTypeData.manual" :surveyTable="surveyTypeData.table" @scoreResultObject="chartData" :scoreType="scoreType" />
 
         <!-- step 결과에 따른 chart compontent -->
         <transition name="fade">

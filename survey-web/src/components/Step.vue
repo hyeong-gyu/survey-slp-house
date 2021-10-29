@@ -5,6 +5,7 @@
             <button type="button" class="btn btn-outline-danger btn-sm" title="전체 닫힘" @click="closeAll"><i class="bi bi-fullscreen-exit"></i></button>
             <button type="button" class="btn btn-primary btn-sm" @click="inpResult">RESULT</button>
         </div>
+        <!-- 자동 계산 버전 -->
         <div class="accordion" id="accordion-manual-wrap" v-if="scoreType.auto">
             <div class="accordion-item" v-for="(table, i) in surveyTable" :key="i">
                 <h2 class="accordion-header" :id="`question-heading-${i}`">
@@ -30,7 +31,7 @@
                             <tbody>
                                 <tr v-for="(questionArray, n2) in table.q" :key="n2">
                                     <td v-for="(question, n3) in questionArray" :key="n3">
-                                        <div class="question-box" v-if="question !== 'checkbox'">
+                                        <div class="question-box" v-if="question !== 'checkbox' && question !== 'radio'">
                                             <span class="number">{{ n2 + 1 }}.</span>
                                             <span v-html="question"></span>
                                         </div>
@@ -38,6 +39,13 @@
                                             <div class="form-check">
                                                 <label class="form-check-label" :for="`question-${i}-${n2}-${n3}`">
                                                     <input class="form-check-input" type="checkbox" :id="`question-${i}-${n2}-${n3}`" :data-role-name="`${table.score.name[n3 - 1]}`" :data-role-index="`${i}`" @change="inpCalculation">
+                                                </label>
+                                            </div>
+                                        </span>
+                                        <span v-if="question === 'radio'">
+                                            <div class="form-check">
+                                                <label class="form-check-label" :for="`question-radio-${i}-${n2}-${n3}`">
+                                                    <input class="form-check-input" type="radio" :name="`radio-${i}-${n2}`" :id="`question-radio-${i}-${n2}-${n3}`" :data-role-name="`${table.score.name[n3 - 1]}`" :data-role-index="`${n3}`" @change="imitRepeatCalculation">
                                                 </label>
                                             </div>
                                         </span>
@@ -61,7 +69,7 @@
                 </div>
             </div>
         </div>
-    
+        <!-- 점수 입력 버전 -->
         <div class="accordion" id="accordion-manual-wrap" v-if="scoreType.manual">
             <div class="accordion-item" v-for="(table, i) in surveyTable" :key="i">
                 <h2 class="accordion-header" :id="`question-manual-heading-${i}`">
@@ -70,19 +78,29 @@
                         <em>(총 합계 : {{ surveyScoreObject[table.name].total }})</em>
                     </button>
                 </h2>
-                <div :id="`question-manual-${i}`" class="accordion-collapse collapse show row question-manual-wrap" :aria-labelledby="`question-manual-heading-${i}`">
-                    <div class="col" :class="{'hidden' : a1 === 0}" v-for="(thead, a1) in table.thead" :key="a1">
-                        <h5 v-if="a1 === 0" class="question-manual-title">
-                            자동계산버전
-                        </h5>
-                        <div v-if="a1 !== 0" class="input-group question-manual-score">
-                            <label :for="`survey-${i}-${a1}`" class="input-group-text">{{ thead }}</label>
-                            <input type="number" class="form-control" :id="`survey-${i}-${a1}`" placeholder="0" value="0">
+                <div :id="`question-manual-${i}`" class="accordion-collapse collapse show" :aria-labelledby="`question-manual-heading-${i}`">
+                    <div class="accordion-body" :data-role-name="`${table.name}`">
+                        <div class="row question-manual-wrap">
+                            <div class="col" :class="{'hidden' : a1 === 0}" v-for="(thead, a1) in table.thead" :key="a1" v-if="table.name !== 'imitRepeat'">
+                                <h5 v-if="a1 === 0" class="question-manual-title">
+                                    점수 입력 버전
+                                </h5>
+                                <div v-if="a1 !== 0" class="input-group question-manual-score">
+                                    <label :for="`survey-${i}-${a1}`" class="input-group-text">{{ thead }}</label>
+                                    <input type="number" class="form-control" :id="`survey-${i}-${a1}`" placeholder="0" value="0" :data-role-name="`${table.score.name[a1 - 1]}`" :data-role-index="`${i}`" @input="inpManualCalculation">
+                                </div>
+                            </div>
+                            <div class="col" v-if="table.name === 'imitRepeat'">
+                                <div class="input-group question-manual-score">
+                                    <label for="survey-imit-repeat" class="input-group-text">점수 입력</label>
+                                    <input type="number" class="form-control" id="survey-imit-repeat" placeholder="0" value="0" :data-role-name="`${table.score.name[a1 - 1]}`" :data-role-index="`${i}`">
+                                </div>
+                            </div>
+                            <div class="question-sum-box">
+                                <i class="bi bi-save2"></i>
+                                총 합계 : {{ surveyScoreObject[table.name].total }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="question-sum-box">
-                        <i class="bi bi-save2"></i>
-                        총 합계 : {{ surveyScoreObject[table.name].total }}
                     </div>
                 </div>
             </div>
@@ -96,7 +114,8 @@ export default {
     name: 'Step',
     props: {
         surveyTable: Array,
-        scoreType: Object
+        scoreType: Object,
+        surveyManualRule: Object
     },
     data() {
         return {
@@ -125,6 +144,19 @@ export default {
                 _surveyScoreObject[_tableObj.name]['rule'][_key] = _tableObj.score.rule[_key];
             }
         });
+    },
+    //데이터 변경 감지
+    watch: {
+        scoreType: {
+            deep: true,
+            handler(newData) {
+                for(let _key in this.surveyScoreObject) {
+                    for(let _scroeKey in this.surveyScoreObject[_key]) {
+                        if (_scroeKey != 'rule') this.surveyScoreObject[_key][_scroeKey] = 0;
+                    }
+                }
+            },
+        }
     },
     methods: {
         ...mapMutations(['getParents']),
@@ -162,6 +194,66 @@ export default {
             for (let _key in _surveyScoreObject[_checkBodyName].rule) {
                 _surveyScoreObject[_checkBodyName].total = _surveyScoreObject[_checkBodyName].total + _surveyScoreObject[_checkBodyName][_key];
             }
+        },
+        inpManualCalculation(e) {
+            console.log('e : ', e.target.value)
+
+            const _tableIndex = Number(e.target.getAttribute('data-role-index'));
+            let _parentFindNode = null;
+
+            [].forEach.call(document.querySelectorAll('.accordion-body'), (_el, _i) => {
+                if (_i === _tableIndex) {
+                    _parentFindNode = _el;
+                }
+            })
+
+            //부모 노드 찾기 위한 함수 실행
+            this.getParents({
+                el: e.target,
+                parentSelector: _parentFindNode
+            });
+
+            let _surveyNum = Number(e.target.value);
+            let _surveyScoreObject = this.surveyScoreObject;
+            let _inpBodyName = this.parentNode[this.parentNode.length -1].getAttribute('data-role-name');
+            let _inpName = e.target.getAttribute('data-role-name');
+            let _surveyManualRule = this.surveyManualRule[_inpBodyName].rule;
+
+            if (_surveyNum > _surveyManualRule.max) {
+                e.target.value = _surveyManualRule.max
+                _surveyNum = Number(e.target.value);
+            }
+            if (_surveyNum < _surveyManualRule.min) {
+                e.target.value = _surveyManualRule.min
+                _surveyNum = Number(e.target.value);
+            }
+
+            _surveyScoreObject[_inpBodyName][_inpName] = _surveyNum;
+
+            //total 합산
+            _surveyScoreObject[_inpBodyName].total = 0;
+            for (let _key in _surveyScoreObject[_inpBodyName].rule) {
+                _surveyScoreObject[_inpBodyName].total = _surveyScoreObject[_inpBodyName].total + _surveyScoreObject[_inpBodyName][_key];
+            }
+        },
+        imitRepeatCalculation(e) {
+
+            let _type = e.target.getAttribute('type');
+            let _imitRepeatTotal = 0;
+
+            if (_type === 'radio') {
+
+                const _radioEl = document.getElementsByClassName(event.target.className);
+
+                for (let _i = 0; _i < _radioEl.length; _i++) {
+                    if (_radioEl[_i].checked) _imitRepeatTotal += Number(_radioEl[_i].getAttribute('data-role-index'));
+                }
+            }
+
+            this.surveyScoreObject.imitRepeat.total = _imitRepeatTotal;
+
+            console.log('this.surveyScoreObject.imitRepeat.total : ', this.surveyScoreObject.imitRepeat.total)
+            
         },
         inpResult() {
             this.$emit('scoreResultObject', this.surveyScoreObject);

@@ -20,7 +20,7 @@
             </div>
             <div class="chart-list-wrap">
                 <div class="chart-item row" v-if="isChartType.mix">
-                    <canvas id="mix-chart"></canvas>
+                    <highcharts :options="mixChartOption" />
                 </div>
                 <div class="chart-item row" v-if="isChartType.line">
                     <highcharts :options="lineChartOptions" />
@@ -30,6 +30,9 @@
                 </div>
                 <div class="chart-item row" v-if="isChartType.bar">
                     <highcharts :options="barChartOption" />
+                </div>
+                <div class="chart-item row" v-if="isChartType.solidgauge">
+                    <highcharts :options="solidgaugeChartOption" />
                 </div>
             </div>
         </div>
@@ -47,7 +50,7 @@ export default {
         chartSurveyData: Object,
         chartResultData: Object
     },
-    data() {
+    data(prop) {
         return {
             scrollY: 0,
             timer: null,
@@ -55,7 +58,8 @@ export default {
                 mix: false,
                 line: false,
                 pie: false,
-                bar: false
+                bar: false,
+                solidgauge: false
             },
             isChartTitle: {
                 mix: '',
@@ -68,6 +72,67 @@ export default {
                 line: [],
                 pie: [],
                 bar: []
+            },
+            mixChartOption: {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    useHTML: true,
+                    text: ''
+                },
+                xAxis: {
+                    categories: ['a', 'b', 'c', 'd'],
+                    labels: {
+                        style: {
+                            fontSize: '14px'
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    max: 10,
+                    title: {
+                        text: '점수',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                colors: ['#247deb', '#91bef5', '#d0e3fb', '#2e2a4f', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
+                tooltip: {
+                    formatter: function() {
+                        let name = this.series.name;
+                        let key = this.key;
+                        let y = this.y;
+                        
+                        if (this.series.type === 'column') {
+                            let _criteriaText = name === '숙달완료' ? '이상' : name === '미숙달' ? '이하' : '';
+                            let _mixChartCriteria;
+
+                            for (let _chartKey in prop.chartSurveyData.chart) {
+                                if (prop.chartSurveyData.chart[_chartKey].type === 'mix') _mixChartCriteria = prop.chartSurveyData.chart[_chartKey].datasetForm.criteria;
+                            }
+
+                            return `${name} : ${_mixChartCriteria[key][name]}`;
+                        } else {
+                            return `${this.x} : ${y}`;
+                        }
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        stacking: 'normal',
+                        dataLabels: {
+                            enabled: true,
+                            formatter: function() {
+                                return '';
+                            }
+                        }
+                    }
+                },
+                series: []
             },
             lineChartOptions: {
                 title: {
@@ -217,6 +282,75 @@ export default {
                     enabled: false
                 },
                 series: null
+            },
+            solidgaugeChartOption: {
+                chart: {
+                    type: 'solidgauge',
+                    alignTicks: false
+                },
+                title: {
+                    useHTML: true,
+                    text: ``
+                },
+                pane: {
+                    center: ['50%', '85%'],
+                    size: '140%',
+                    startAngle: -90,
+                    endAngle: 90,
+                    background: {
+                        backgroundColor: '#EEE',
+                        innerRadius: '60%',
+                        outerRadius: '100%',
+                        shape: 'arc'
+                    }
+                },
+                exporting: {
+                    enabled: false
+                },
+                tooltip: {
+                    enabled: false
+                },
+                // the value axis
+                yAxis: {
+                    stops: [
+                        [0.1, '#d0e3fb'], // green
+                        [0.5, '#91bef5'], // yellow
+                        [0.9, '#247deb'] // red
+                    ],
+                    min: 0,
+                    max: 6,
+                    minorTickInterval: null,
+                    tickInterval:0,
+                    lineWidth: 0,
+                    tickWidth: 0,
+                    tickAmount: 1,
+                    title: {
+                        y: -70
+                    },
+                    labels: {
+                        y: 16,
+                        overflow: 'justify',
+                        step: 1
+                    }
+                },
+                plotOptions: {
+                    solidgauge: {
+                        dataLabels: {
+                            y: 5,
+                            borderWidth: 0,
+                            useHTML: true
+                        }
+                    }
+                },
+                series: [{
+                    data: [0],
+                    dataLabels: {
+                        format: ''
+                    },
+                    tooltip: {
+                        // valueSuffix: props.radioTotal.mastery
+                    }
+                }]
             }
         }
     },
@@ -239,6 +373,8 @@ export default {
             }
         }
 
+        console.log('_isChartType : ', _isChartType)
+
         //chart modal
         document.getElementsByTagName('body')[0].classList.add('modal-open');
     },
@@ -255,8 +391,37 @@ export default {
 
                 if (_isChartType[_key]) {
 
+                    //mix
+                    if (_key === 'mix') {
+
+                        let _mixDataset = [];
+                        let _mixLabels;
+                        let _mixCategories = [];
+
+                        for (let _mixLabelKey in this.chartSurveyData.chart) {
+                            if (this.chartSurveyData.chart[_mixLabelKey].type === _key) _mixLabels = this.chartSurveyData.chart[_mixLabelKey];
+                        }
+                        
+                        _mixDataset = _mixLabels.datasetForm.set;
+                        _mixDataset.forEach((_itemObj) => {
+                            if (_itemObj.type === 'spline') {
+                                _itemObj.data = [];
+                                for (let _resultKey in this.chartResultData) {
+                                    if (_resultKey !== 'imitRepeat') _itemObj.data.push(this.chartResultData[_resultKey].total);
+                                }
+                            }
+                        });
+
+                        console.log('_mixDataset : ', _mixDataset);
+                        this.mixChartOption.title.text = `<div class="chart-title">${this.icb.name} : ${_isChartTitle[_key]}</div>`;
+                        this.mixChartOption.yAxis.max = _mixLabels.datasetForm.max;
+                        this.mixChartOption.xAxis.categories = _isChartLabels[_key];
+                        this.mixChartOption.series = _mixDataset;
+
+                    }
+
                     //line
-                    if (_key === "line") {
+                    if (_key === 'line') {
                         let _lineDataset = [
                             {
                                 name: this.icb.name,
@@ -274,7 +439,8 @@ export default {
                         this.lineChartOptions.series = _lineDataset;
                     }
 
-                    if (_key === "pie") {
+                    //pie
+                    if (_key === 'pie') {
                         let _pieData = {};
                         let _pieTotalData = 0;
                         let _pieDataset = [];
@@ -319,14 +485,15 @@ export default {
                         this.pieChartOptions.series[0].data = _pieDataset;
                     }
 
-                    if (_key === "bar") {
+                    //bar
+                    if (_key === 'bar') {
                         let _barDataset = [];
                         let _barIndex = 0;
                         let _barLabels;
                         let _barCategories = [];
                         
                         for (let _barLabelKey in this.chartSurveyData.chart) {
-                            _barLabels = this.chartSurveyData.chart[_barLabelKey].type === _key && this.chartSurveyData.chart[_barLabelKey];
+                            if (this.chartSurveyData.chart[_barLabelKey].type === _key) _barLabels = this.chartSurveyData.chart[_barLabelKey];
                         }
 
                         //bar dataset setting
@@ -334,9 +501,11 @@ export default {
                         _barDataset.forEach((_itemObj) => {
                             _itemObj.data = [];
                             for (let _resultKey in this.chartResultData) {
-                                for (let _subKey in this.chartResultData[_resultKey]) {
-                                    if (_subKey === _itemObj.key) {
-                                        _itemObj.data.push(this.chartResultData[_resultKey][_subKey]);
+                                if (_resultKey !== 'imitRepeat') {
+                                    for (let _subKey in this.chartResultData[_resultKey]) {
+                                        if (_subKey === _itemObj.key) {
+                                            _itemObj.data.push(this.chartResultData[_resultKey][_subKey]);
+                                        }
                                     }
                                 }
                             }
@@ -347,6 +516,35 @@ export default {
                         this.barChartOption.yAxis.max = _barLabels.datasetForm.max;
                         this.barChartOption.series = _barDataset;
 
+                    }
+
+                    //solidgauge
+                    if (_key === 'solidgauge') {
+                        let _solidgaugeDataset;
+                        let _solidgaugeLabels;
+                        let _solidgaugeTotal = this.chartResultData.imitRepeat.total;
+                        let _solidgaugeText = '';
+                        
+                        for (let _solidgaugeKey in this.chartSurveyData.chart) {
+                            if (this.chartSurveyData.chart[_solidgaugeKey].type === _key) _solidgaugeLabels = this.chartSurveyData.chart[_solidgaugeKey];
+                        }
+
+                        //숙달여부 체크
+                        _solidgaugeDataset = _solidgaugeLabels.datasetForm;
+                        for (let _ruleKey in _solidgaugeDataset.rule) {
+                            _solidgaugeDataset.rule[_ruleKey].forEach((_ruleNum) => {
+                                if (_ruleNum === _solidgaugeTotal) _solidgaugeText = _ruleKey;
+                            });
+                        }
+
+                        this.solidgaugeChartOption.title.text = `<div class="chart-title">${this.icb.name} : ${_isChartTitle[_key]}</div>`;
+                        this.solidgaugeChartOption.series[0].data.push(_solidgaugeTotal);
+                        this.solidgaugeChartOption.series[0].dataLabels.format = `
+                            <div style="text-align:center">
+                                <span style="font-size:2rem">${_solidgaugeTotal}</span><br/>
+                                <span style="font-size:2rem;">${_solidgaugeText}</span>
+                            </div>
+                        `;
                     }
 
                 }

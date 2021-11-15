@@ -28,7 +28,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody v-if="typeof table.q !== 'undefined'">
                                 <tr v-for="(questionArray, n2) in table.q" :key="n2">
                                     <td v-for="(question, n3) in questionArray" :key="n3">
                                         <div class="question-box" v-if="question !== 'checkbox' && question !== 'radio'">
@@ -51,13 +51,68 @@
                                         </span>
                                     </td>
                                 </tr>
+                                <!-- <tr v-if="typeof table['q-mult'] !== 'undefined'" v-for="(questionArray, n2) in table['q-mult']" :key="n2">
+                                    <td v-for="(question, n3) in questionArray" :key="n3">
+                                        <div v-if="n3 == 0">
+                                            <span v-html="question"></span>
+                                        </div>
+                                        <div class="question-box" v-if="question !== 'checkbox' && question !== 'radio' && n3 !== 0">
+                                            <span class="number">{{ n2 + 1 }}.</span>
+                                            <span v-html="question"></span>
+                                        </div>
+                                        <span v-if="question === 'checkbox'">
+                                            <div class="form-check">
+                                                <label class="form-check-label" :for="`question-${i}-${n2}-${n3}`">
+                                                    <input class="form-check-input" type="checkbox" :id="`question-${i}-${n2}-${n3}`" :data-role-name="`${table.score.name[n3 - 1]}`" :data-role-index="`${i}`" @change="inpCalculation">
+                                                </label>
+                                            </div>
+                                        </span>
+                                        <span v-if="question === 'radio'">
+                                            <div class="form-check">
+                                                <label class="form-check-label" :for="`question-radio-${i}-${n2}-${n3}`">
+                                                    <input class="form-check-input" type="radio" :name="`radio-${i}-${n2}`" :id="`question-radio-${i}-${n2}-${n3}`" :data-role-name="`${table.score.name[n3 - 1]}`" :data-role-index="`${n3}`" @change="imitRepeatCalculation">
+                                                </label>
+                                            </div>
+                                        </span>
+                                    </td>
+                                </tr> -->
                             </tbody>
-                            <tfoot>
+                            <tbody v-if="typeof table['q-mult']" v-for="(questionArray, n2) in table['q-mult']" :key="n2" class="table-mult-body">
+                                <tr>
+                                    <th colspan="5" class="table-mult-title">
+                                        {{ table.colSpan[n2].text }}
+                                    </th>
+                                </tr>
+                                <tr v-if="typeof table['q-mult'] !== 'undefined'" v-for="(qArray, n3) in questionArray" :key="n3">
+                                    <td v-for="(question, n4) in qArray" :key="n4">
+                                        <div class="question-box" v-if="question !== 'checkbox' && question !== 'radio'">
+                                            <span class="number">{{ n2 + 1 }}.</span>
+                                            <span v-html="question"></span>
+                                        </div>
+                                        <span v-if="question === 'checkbox'">
+                                            <div class="form-check">
+                                                <label class="form-check-label" :for="`question-${i}-${n3}-${n4}`">
+                                                    <input class="form-check-input" type="checkbox" :id="`question-${i}-${n3}-${n4}`" :data-role-name="`${table.score.name[n4 - 1]}`" :data-role-index="`${i}`" @change="inpCalculation">
+                                                </label>
+                                            </div>
+                                        </span>
+                                        <span v-if="question === 'radio'">
+                                            <div class="form-check">
+                                                <label class="form-check-label" :for="`question-radio-${i}-${n3}-${n4}`">
+                                                    <input class="form-check-input" type="radio" :name="`radio-${i}-${n3}`" :id="`question-radio-${i}-${n3}-${n4}`" :data-role-name="`${table.score.name[n4 - 1]}`" :data-role-index="`${n4}`" @change="imitRepeatCalculation">
+                                                </label>
+                                            </div>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot v-if="table.name !== 'imitRepeat'">
                                 <tr>
                                     <td>합 계</td>
                                     <td v-html="surveyScoreObject[table.name][table.score.name[0]]"></td>
                                     <td v-html="surveyScoreObject[table.name][table.score.name[1]]"></td>
                                     <td v-html="surveyScoreObject[table.name][table.score.name[2]]"></td>
+                                    <td v-if="table.score.name[3] !== 'total'" v-html="surveyScoreObject[table.name][table.score.name[3]]"></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -238,16 +293,17 @@ export default {
         },
         imitRepeatCalculation(e) {
 
+            const _el = document.getElementsByClassName(event.target.className);
             let _type = e.target.getAttribute('type');
             let _imitRepeatTotal = 0;
+            let _radioEl = [];
+                        
+            [].forEach.call(_el, (_searchEl) => {
+                if (_searchEl.getAttribute('type') === _type) _radioEl.push(_searchEl);
+            });
 
-            if (_type === 'radio') {
-
-                const _radioEl = document.getElementsByClassName(event.target.className);
-
-                for (let _i = 0; _i < _radioEl.length; _i++) {
-                    if (_radioEl[_i].checked) _imitRepeatTotal += Number(_radioEl[_i].getAttribute('data-role-index'));
-                }
+            for (let _i = 0; _i < _radioEl.length; _i++) {
+                if (_radioEl[_i].checked) _imitRepeatTotal += Number(_radioEl[_i].getAttribute('data-role-index'));
             }
 
             this.surveyScoreObject.imitRepeat.total = _imitRepeatTotal;
@@ -354,6 +410,11 @@ export default {
         font-size: 0.8rem;
         font-style: normal;
         color: #1976d2;
+    }
+
+    .accordion-body .table tbody.table-mult-body .table-mult-title {
+        padding: 1.2rem;
+        border-bottom: 2px solid #646464;
     }
     
     .question-sum-box {

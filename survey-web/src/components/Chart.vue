@@ -448,8 +448,9 @@ export default {
                         for (let _dataKey in this.chartResultData) {
                             _pieTotalData += this.chartResultData[_dataKey].total;
                         }
-                        
+
                         for (let _pieKey in _isChartLabels[_key]) {
+                            
                             if (typeof _pieData['labels'] === 'undefined') _pieData['labels'] = [];
                             if (typeof _pieData['data'] === 'undefined') _pieData['data'] = [];
                             _pieData['labels'].push(_isChartLabels[_key][_pieKey]);
@@ -458,19 +459,20 @@ export default {
                             let _singleDataSum = 0;
 
                             for (let _dataKey in this.chartResultData) {
-                                
-                                let _typeData = this.chartResultData[_dataKey];
-                                let _typeSingleData = _typeData[_pieKey];
+                                let _keyMinus = typeof this.chartResultData['imitRepeat'] === 'undefined' ? 1 : 2;
+                                if (_dataKey !== 'imitRepeat') {
+                                    let _typeData = this.chartResultData[_dataKey];
+                                    let _typeSingleData = _typeData[_pieKey];
+                                    _singleDataSum += _typeSingleData;
 
-                                _singleDataSum += _typeSingleData;
-
-                                if (_keyIndex === Object.keys(this.chartResultData).length -1) {
-                                    _pieData['data'].push(
-                                        Math.round(((_singleDataSum / _pieTotalData) * 100) * 100) / 100
-                                    );
+                                    if (_keyIndex === Object.keys(this.chartResultData).length - _keyMinus) {
+                                        _pieData['data'].push(
+                                            Math.round(((_singleDataSum / _pieTotalData) * 100) * 100) / 100
+                                        );
+                                    }
+                                    _keyIndex++;
                                 }
-
-                                _keyIndex++;
+                                
                             }
                         }
 
@@ -537,6 +539,7 @@ export default {
                             });
                         }
 
+                        this.solidgaugeChartOption.yAxis.max = _solidgaugeDataset.max;
                         this.solidgaugeChartOption.title.text = `<div class="chart-title">${this.icb.name} : ${_isChartTitle[_key]}</div>`;
                         this.solidgaugeChartOption.series[0].data.push(_solidgaugeTotal);
                         this.solidgaugeChartOption.series[0].dataLabels.format = `

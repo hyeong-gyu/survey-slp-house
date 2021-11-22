@@ -87,7 +87,7 @@ import { mapState, mapMutations } from 'vuex';
 export default {
     name: 'IcbMain',
     beforeMount() {
-        if (this.$cookie.getCookie('token') === null) this.$router.push('/');
+        if (this.$cookie.getCookie('token') === null) this.$router.push('/');  
     },
     computed: {
         ...mapState(['icb'])

@@ -42,7 +42,10 @@ export default {
     },
     beforeMount() {
         const _cookieInfo = this.$cookie.getCookie('info');
-
+        if (_cookieInfo === null && this.$cookie.getCookie('token') === null) {
+            this.$router.push('/');
+            return;
+        }
         if (this.icb.name === null) this.icb.name = _cookieInfo.name;
         if (this.icb.birth === null) this.icb.birth = _cookieInfo.birth;
         if (this.icb.matrix === null) this.icb.matrix = _cookieInfo.matrix;

@@ -437,10 +437,12 @@ export default {
     }
 
     .accordion-body .table tbody .question-box em {
-        margin-left: 14px;
+        display: inline-block;
+        margin-left: 25px;
         font-size: 0.8rem;
         font-style: normal;
         color: #1976d2;
+        text-indent: -10px;
     }
 
     .accordion-body .table tbody.table-mult-body .table-mult-title {

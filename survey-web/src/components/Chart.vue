@@ -234,7 +234,8 @@ export default {
             },
             barChartOption: {
                 chart: {
-                    type: 'bar'
+                    type: 'bar',
+                    height: 800
                 },
                 title: {
                     useHTML: true,
@@ -512,7 +513,8 @@ export default {
                                 }
                             }
                         });
-
+                        
+                        this.barChartOption.chart.height = 150 * _isChartLabels[_key].length;
                         this.barChartOption.title.text = `<div class="chart-title">${this.icb.name} : ${_isChartTitle[_key]}</div>`;
                         this.barChartOption.xAxis.categories = _isChartLabels[_key];
                         this.barChartOption.yAxis.max = _barLabels.datasetForm.max;

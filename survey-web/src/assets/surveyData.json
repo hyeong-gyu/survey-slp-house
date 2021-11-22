@@ -1504,7 +1504,7 @@
                         "rule": {
                             "move": 1,
                             "sight": 1,
-                            "expression": 12
+                            "expression": 2
                         }
                     },
                     "thead": [

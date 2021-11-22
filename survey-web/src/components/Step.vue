@@ -86,7 +86,7 @@
                                 <tr v-if="typeof table['q-mult'] !== 'undefined'" v-for="(qArray, n3) in questionArray" :key="n3">
                                     <td v-for="(question, n4) in qArray" :key="n4">
                                         <div class="question-box" v-if="question !== 'checkbox' && question !== 'radio'">
-                                            <span class="number">{{ n2 + 1 }}.</span>
+                                            <span class="number">{{ n3 + 1 }}.</span>
                                             <span v-html="question"></span>
                                         </div>
                                         <span v-if="question === 'checkbox'">
@@ -148,7 +148,7 @@
                             <div class="col" v-if="table.name === 'imitRepeat'">
                                 <div class="input-group question-manual-score">
                                     <label for="survey-imit-repeat" class="input-group-text">점수 입력</label>
-                                    <input type="number" class="form-control" id="survey-imit-repeat" placeholder="0" value="0" :data-role-name="`${table.score.name[a1 - 1]}`" :data-role-index="`${i}`">
+                                    <input type="number" class="form-control" id="survey-imit-repeat" placeholder="0" value="0" :data-role-name="`${table.name}`" :data-role-index="`${i}`" @input="imitRepeatManualCalculation">
                                 </div>
                             </div>
                             <div class="question-sum-box">
@@ -159,6 +159,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="btn-wrap mt-5">
+            <button type="button" class="btn btn-primary btn-sm" @click="inpResult">RESULT</button>
         </div>
     </div>
 </template>
@@ -273,13 +277,15 @@ export default {
             let _inpBodyName = this.parentNode[this.parentNode.length -1].getAttribute('data-role-name');
             let _inpName = e.target.getAttribute('data-role-name');
             let _surveyManualRule = this.surveyManualRule[_inpBodyName].rule;
+            let _targetName = e.target.getAttribute('data-role-name');
+            let _max = typeof _surveyManualRule[`${_targetName}Max`] !== 'undefined' ? _surveyManualRule[`${_targetName}Max`] : _surveyManualRule.max;
 
-            if (_surveyNum > _surveyManualRule.max) {
-                e.target.value = _surveyManualRule.max
+            if (_surveyNum > _max) {
+                e.target.value = _max;
                 _surveyNum = Number(e.target.value);
             }
             if (_surveyNum < _surveyManualRule.min) {
-                e.target.value = _surveyManualRule.min
+                e.target.value = _surveyManualRule.min;
                 _surveyNum = Number(e.target.value);
             }
 
@@ -310,6 +316,26 @@ export default {
 
             console.log('this.surveyScoreObject.imitRepeat.total : ', this.surveyScoreObject.imitRepeat.total)
             
+        },
+        imitRepeatManualCalculation(e) {
+
+            let _targetName = e.target.getAttribute('data-role-name');
+            let _surveyNum = Number(e.target.value);
+            let _surveyManualRule = this.surveyManualRule[_targetName].rule;
+            let _max = _surveyManualRule.max;
+            let _min = _surveyManualRule.min;
+
+            if (_surveyNum > _max) {
+                e.target.value = _max;
+                _surveyNum = Number(e.target.value);
+            }
+            if (_surveyNum < _min) {
+                e.target.value = _min;
+                _surveyNum = Number(e.target.value);
+            }
+
+            this.surveyScoreObject.imitRepeat.total = _surveyNum;
+
         },
         inpResult() {
             this.$emit('scoreResultObject', this.surveyScoreObject);

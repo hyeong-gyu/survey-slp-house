@@ -50,7 +50,7 @@ export default {
         ...mapState(['surveyType', 'icb'])
     },
     mounted() {
-        const _type = this.surveyType;
+        const _type = this.surveyType === null ? this.$cookie.getCookie('type') : this.surveyType;
         const _surveyData = this.surveyData;
         const _icbObj = this.icb;
 

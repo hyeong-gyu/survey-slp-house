@@ -39,7 +39,14 @@ export default {
     },
     computed: {
         ...mapState(['icb'])
-    }
+    },
+    beforeMount() {
+        const _cookieInfo = this.$cookie.getCookie('info');
+
+        if (this.icb.name === null) this.icb.name = _cookieInfo.name;
+        if (this.icb.birth === null) this.icb.birth = _cookieInfo.birth;
+        if (this.icb.matrix === null) this.icb.matrix = _cookieInfo.matrix;
+    },
 }
 </script>
 

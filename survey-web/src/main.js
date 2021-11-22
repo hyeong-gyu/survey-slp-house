@@ -9,10 +9,13 @@ import HighchartsVue from 'highcharts-vue';
 import HighchartMore from 'highcharts/highcharts-more';
 import Highcharts from 'highcharts';
 import HighchartSolidGauge from 'highcharts/modules/solid-gauge';
+import { VueCookieNext } from 'vue-cookie-next';
 
 const app = createApp(App);
 app.use(router);
 app.use(store);
+
+app.use(VueCookieNext);
 
 HighchartMore(Highcharts);
 HighchartSolidGauge(Highcharts);

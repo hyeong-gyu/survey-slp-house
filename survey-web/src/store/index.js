@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
 import { router } from '../router/';
+import { VueCookieNext } from 'vue-cookie-next';
 import CryptoJS from 'crypto-js';
 import icbToken from '../assets/token/icbToken.json';
 
@@ -40,6 +41,7 @@ const store = createStore({
             return state.parentNode = parents;
         },
         codeType(state, type) {
+            console.log('type : ', type);
             state.surveyType = type;
         },
         codeInput(state, code) {
@@ -68,8 +70,10 @@ const store = createStore({
                 if (_modalBack) _modalBack.remove();
 
                 document.getElementsByTagName('body')[0].classList.remove('modal-open');
-
+                VueCookieNext.setCookie('token', `${_tokenValid}`);
+                VueCookieNext.setCookie('type', `${state.surveyType}`);
                 router.push('/icb/main');
+                
             } else {
                 state.validCheck = false;
             }
@@ -80,6 +84,12 @@ const store = createStore({
             state.icb.birth = document.getElementById('icb-info-birth').value;
             state.icb.matrix = Number(document.getElementById('icb-info-matrix').value);
 
+            let _cookieText = {
+                name: state.icb.name, birth: state.icb.birth, matrix: state.icb.matrix
+            };
+
+            _cookieText = JSON.stringify(_cookieText);
+            VueCookieNext.setCookie('info', _cookieText);
             if (state.icb.name !== null && state.icb.birth !== null) router.push('/icb/matrix');
         }
     },

@@ -161,7 +161,7 @@
             </div>
         </div>
 
-        <div class="btn-wrap mt-5">
+        <div class="btn-wrap mt-5" v-if="icb.matrix > 1 && closeCheck === false">
             <button type="button" class="btn btn-primary btn-sm" @click="inpResult">RESULT</button>
         </div>
     </div>
@@ -178,11 +178,12 @@ export default {
     },
     data() {
         return {
-            surveyScoreObject: {}
+            surveyScoreObject: {},
+            closeCheck: false
         }
     },
     computed: {
-        ...mapState(['parentNode'])
+        ...mapState(['icb', 'parentNode'])
     },
     beforeMount() {
         const _tableData = this.surveyTable;
@@ -352,6 +353,8 @@ export default {
             [].forEach.call(_accordionContent, (_el) => {
                 _el.classList.add('show');
             });
+
+            this.closeCheck = false;
         },
         closeAll() {
             const _accordionButton = document.querySelectorAll('.accordion-button');
@@ -365,6 +368,8 @@ export default {
             [].forEach.call(_accordionContent, (_el) => {
                 _el.classList.remove('show');
             });
+
+            this.closeCheck = true;
         }
     },
 }

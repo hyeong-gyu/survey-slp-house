@@ -53,6 +53,13 @@ export default {
         const _type = this.surveyType === null ? this.$cookie.getCookie('type') : this.surveyType;
         const _surveyData = this.surveyData;
         const _icbObj = this.icb;
+        
+        if (this.$cookie.getCookie('info') !== null) {
+            const __info = this.$cookie.getCookie('info');
+            _icbObj.name = __info.name;
+            _icbObj.birth = __info.birth;
+            _icbObj.matrix = __info.matrix;
+        }
 
         this.surveyTypeData = _surveyData[_type].filter((_surveyObj) => {
             return _surveyObj.matrix === _icbObj.matrix;

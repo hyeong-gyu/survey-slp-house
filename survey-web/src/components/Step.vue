@@ -447,7 +447,9 @@ export default {
 
     .accordion-body .table tbody.table-mult-body .table-mult-title {
         padding: 1.2rem;
-        border-bottom: 2px solid #646464;
+        background-color: #e7f1ff;
+        border-bottom: 1px solid #e7e7e7;
+        box-shadow: none;
     }
     
     .question-sum-box {
@@ -463,12 +465,14 @@ export default {
     }
 
     .question-manual-wrap .col label {
-        width: 40%;
-        flex-flow: column;
+        width: 60%;
+        justify-content: center;
+        font-size: 12px;
     }
 
     .question-manual-wrap .col input {
         text-align: center;
+        font-size: 12px;
     }
 
     .question-manual-wrap .question-sum-box {

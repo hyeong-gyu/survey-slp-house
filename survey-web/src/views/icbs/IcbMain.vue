@@ -31,7 +31,7 @@
                         <li>5 ~ 6점 : <em>4단계</em></li>
                         <li>3 ~ 4점 : <em>3단계</em></li>
                         <li>3점 미만 : <em>1 ~ 2단계</em></li>
-                        <li class="circle">의도가 조금 나타나면 <em>2단계</em></li>
+                        <li class="circle">의도가 조금이라도 나타나면 <em>2단계</em></li>
                         <li class="circle">의도가 전혀 나타나지 않으면 <em>1단계</em></li>
                     </ol>
                 </div>

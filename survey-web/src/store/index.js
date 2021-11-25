@@ -3,6 +3,7 @@ import { router } from '../router/';
 import { VueCookieNext } from 'vue-cookie-next';
 import CryptoJS from 'crypto-js';
 import icbToken from '../assets/token/icbToken.json';
+import conveToken from '../assets/token/conveToken.json';
 
 const store = createStore({
     //데이터 저장 공간
@@ -11,7 +12,9 @@ const store = createStore({
             parentNode: null,
             surveyType: null,
             icbCode: null,
+            conveCode: null,
             icbTokenData: icbToken,
+            conveTokenData: conveToken,
             validCheck: true,
             icb: {
                 name: null,
@@ -50,18 +53,24 @@ const store = createStore({
                     state.icbCode = code;
                     break;
 
+                case 'conve':
+                    state.conveCode = code;
+                    break;
+
                 default:
                     break;
             }
         },
         codeValidation(state) {
             //0S8O0CMW2
-            const _tokenData = state.surveyType === 'icb' ? state.icbTokenData.token : '';
+            const _tokenData = state.surveyType === 'icb' ? state.icbTokenData.token : state.conveTokenData.token;
+            const _tokenInpData = state.surveyType === 'icb' ? state.icbCode : state.conveCode;
+            
             const _tokenValid = _tokenData.filter((_token) => {
                 let _bytes = CryptoJS.AES.decrypt(_token, 'SLP-HOUSE-LIVE');
                 let _tokenString = _bytes.toString(CryptoJS.enc.Utf8);
 
-                return _tokenString === state.icbCode;
+                return _tokenString === _tokenInpData;
             });
             
             if (_tokenValid.length > 0) {
@@ -72,7 +81,8 @@ const store = createStore({
                 document.getElementsByTagName('body')[0].classList.remove('modal-open');
                 VueCookieNext.setCookie('token', `${_tokenValid}`);
                 VueCookieNext.setCookie('type', `${state.surveyType}`);
-                router.push('/icb/main');
+                if (state.surveyType === 'icb') router.push('/icb/main');
+                if (state.surveyType === 'conve') router.push('/conve/main');
                 
             } else {
                 state.validCheck = false;

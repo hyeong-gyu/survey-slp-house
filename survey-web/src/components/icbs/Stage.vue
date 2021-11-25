@@ -24,7 +24,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import surveyData from '../assets/surveyData.json';
+import surveyData from '../../assets/surveyData.json';
 import Step from './Step';
 import Chart from './Chart';
 

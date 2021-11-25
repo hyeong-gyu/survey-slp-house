@@ -15,7 +15,12 @@ const routes = [
         path: '/icb/matrix',
         name: 'Matrix',
         component: () => import('@/views/icbs/Matrix')
-    }
+    },
+    {
+        path: '/conve/main',
+        name: 'ConveMain',
+        component: () => import('@/views/conve/ConveMain')
+    },
 ];
 
 export const router = createRouter({

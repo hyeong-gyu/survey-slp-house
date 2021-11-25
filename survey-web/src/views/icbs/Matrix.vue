@@ -30,7 +30,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import Stage from '@/components/Stage.vue';
+import Stage from '@/components/icbs/Stage.vue';
 
 export default {
     name: 'Matrix',

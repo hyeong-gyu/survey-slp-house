@@ -13,10 +13,10 @@
             </div>
             <div class="col">
                 <div class="card" style="width: 18rem;">
-                    <button type="button" class="btn-survey-enter" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button type="button" class="btn-survey-enter" data-bs-toggle="modal" data-bs-target="#staticBackdrop" @click="codeType('conve')">
                         <img src="https://valetmag.com/gr/daily/living/features/how_to_make_better_conversation_080719/art-strangers_staring_at_their_phone.webp" class="card-img-top" alt="test">
                         <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="card-text">우리같이 대화기술 설문지...</p>
                         </div>
                     </button>
                 </div>
@@ -41,22 +41,24 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" v-if="surveyType">
-                    <div class="row g-3 align-items-center">
-                        <div class="col-auto">
-                            <label for="survey-code" class="col-form-label">{{ surveyType.toUpperCase() }} CODE</label>
-                        </div>
-                        <div class="col-auto position-relative">
-                            <input type="password" maxlength="9" id="survey-code" class="form-control" aria-describedby="passwordHelpInline" @input="codeInput($event.target.value)" required>
-                            <div class="invalid-tooltip" :class="{'on': !validCheck}">
-                                Please provide a {{ surveyType.toUpperCase() }} Code.
+                    <form>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-auto">
+                                <label for="survey-code" class="col-form-label">{{ surveyType.toUpperCase() }} CODE</label>
+                            </div>
+                            <div class="col-auto position-relative">
+                                <input type="password" maxlength="9" id="survey-code" class="form-control" aria-describedby="passwordHelpInline" @input="codeInput($event.target.value)" autocomplete="on" required>
+                                <div class="invalid-tooltip" :class="{'on': !validCheck}">
+                                    Please provide a {{ surveyType.toUpperCase() }} Code.
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <span id="passwordHelpInline" class="form-text">
+                                    Must be 9 characters long.
+                                </span>
                             </div>
                         </div>
-                        <div class="col-auto">
-                            <span id="passwordHelpInline" class="form-text">
-                                Must be 9 characters long.
-                            </span>
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

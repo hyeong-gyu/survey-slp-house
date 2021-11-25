@@ -3,11 +3,11 @@
         <div class="row mt-5">
             <div class="col-md info-box">
                 <div class="form-floating">
-                    <input type="email" class="form-control" id="icb-info-name" placeholder="name" value="홍길동">
+                    <input type="text" class="form-control" id="icb-info-name" placeholder="name" value="홍길동">
                     <label for="icb-info-name">아동이름</label>
                 </div>
                 <div class="form-floating">
-                    <input type="email" class="form-control" id="icb-info-birth" placeholder="1999.01.01" value="1999.01.01">
+                    <input type="text" class="form-control" id="icb-info-birth" placeholder="1999.01.01" value="1999.01.01">
                     <label for="icb-info-birth">생년월일</label>
                 </div>
             </div>

@@ -594,7 +594,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .chart-wrap .container-md {
         padding-top: 5rem;
     }

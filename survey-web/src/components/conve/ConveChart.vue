@@ -21,6 +21,9 @@
                 <div class="chart-item row">
                     <highcharts :options="columChartOption" />
                 </div>
+                <div class="chart-item row">
+                    <highcharts :options="spiderChartOption" />
+                </div>
             </div>
         </div>
     </div>
@@ -60,7 +63,7 @@ export default {
                 tooltip: {
                     pointFormat: '{point.name} {point.y}점'
                 },
-                colors: ['#247deb', '#91bef5', '#d0e3fb', '#e73a40', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
+                // colors: ['#247deb', '#91bef5', '#d0e3fb', '#e73a40', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
                 legend: {
                     enabled: false
                 },
@@ -109,8 +112,62 @@ export default {
                     }
                 },
                 series: null
+            },
+            spiderChartOption: {
+                chart: {
+                    polar: true,
+                    type: 'line'
+                },
+                title: {
+                    text: '',
+                    x: -80
+                },
+                pane: {
+                    size: '90%'
+                },
+                xAxis: {
+                    categories: ['주도형', '무반응형', '설명형', '특이형', '반응형'],
+                    tickmarkPlacement: 'on',
+                    lineWidth: 0
+                },
+                yAxis: {
+                    gridLineInterpolation: 'polygon',
+                    lineWidth: 0,
+                    min: 0
+                },
+                tooltip: {
+                    shared: true,
+                    pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y}</b><br/>'
+                },
+                legend: {
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    layout: 'vertical'
+                },
+                series: null,
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 800
+                        },
+                        chartOptions: {
+                            legend: {
+                                align: 'center',
+                                verticalAlign: 'bottom',
+                                layout: 'horizontal'
+                            },
+                            pane: {
+                                size: '70%'
+                            }
+                        }
+                    }]
+                }
             }
         }
+    },
+    beforeMount() {
+        //chart modal
+        document.getElementsByTagName('body')[0].classList.add('modal-open');
     },
     mounted() {
         console.log(this.dataset);
@@ -130,6 +187,16 @@ export default {
                 data: []
             }
         ];
+        let __spiderSeries = [
+            {
+                name: this.dataset.labels[0],
+                data: []
+            },
+            {
+                name: this.dataset.labels[1],
+                data: []
+            }
+        ]
 
         //bar chart
         this.dataset.labels.forEach((__label, __i) => {
@@ -158,7 +225,30 @@ export default {
 
         this.columChartOption.series = __columSeries;
 
-        console.log('__columSeries : ', __columSeries);
+        //spider chart ['주도형', '무반응형', '설명형', '특이형', '반응형']
+        __spiderSeries[0].data.push(
+            this.dataset.asisLeading,
+            this.dataset.asisNoneReactive,
+            this.dataset.asisExplanation,
+            this.dataset.asisUnusual,
+            this.dataset.asisReactive
+        );
+
+        __spiderSeries[1].data.push(
+            this.dataset.tobeLeading,
+            this.dataset.tobeNoneReactive,
+            this.dataset.tobeExplanation,
+            this.dataset.tobeUnusual,
+            this.dataset.tobeReactive
+        );
+
+        this.spiderChartOption.series = __spiderSeries;
+        console.log('__barSeries2 : ', __barSeries);
+    },
+    methods: {
+        chartClose() {
+            this.$emit('chartClose');
+        }
     },
 }
 </script>

@@ -6,11 +6,11 @@
                 <div class="chart-info-list row">
                     <div class="col">
                         <i class="bi bi-person-circle"></i>
-                        <span></span>
+                        <span>{{ conve.name }}</span>
                     </div>
                     <div class="col">
                         <i class="bi bi-heart-half"></i>
-                        <span></span>
+                        <span>{{ conve.birth }}</span>
                     </div>
                 </div>
             </div>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 
@@ -164,6 +165,9 @@ export default {
                 }
             }
         }
+    },
+    computed: {
+        ...mapState(['conve'])
     },
     beforeMount() {
         //chart modal

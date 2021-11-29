@@ -20,6 +20,10 @@ const store = createStore({
                 name: null,
                 birth: null,
                 matrix: 1
+            },
+            conve: {
+                name: null,
+                birth: null
             }
         }
     },

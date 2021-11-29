@@ -47,14 +47,18 @@
                                 <label for="survey-code" class="col-form-label">{{ surveyType.toUpperCase() }} CODE</label>
                             </div>
                             <div class="col-auto position-relative">
-                                <input type="password" maxlength="9" id="survey-code" class="form-control" aria-describedby="passwordHelpInline" @input="codeInput($event.target.value)" autocomplete="on" required>
+                                <input v-if="surveyType === 'icb'" type="password" maxlength="9" id="survey-code" class="form-control" aria-describedby="passwordHelpInline" @input="codeInput($event.target.value)" autocomplete="on" required>
+                                <input v-if="surveyType === 'conve'" type="password" maxlength="6" id="survey-code" class="form-control" aria-describedby="passwordHelpInline" @input="codeInput($event.target.value)" autocomplete="on" required>
                                 <div class="invalid-tooltip" :class="{'on': !validCheck}">
                                     Please provide a {{ surveyType.toUpperCase() }} Code.
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <span id="passwordHelpInline" class="form-text">
+                                <span id="passwordHelpInline" class="form-text" v-if="surveyType === 'icb'">
                                     Must be 9 characters long.
+                                </span>
+                                <span id="passwordHelpInline" class="form-text" v-if="surveyType === 'conve'">
+                                    Must be 6 characters long.
                                 </span>
                             </div>
                         </div>
@@ -80,7 +84,7 @@
             }
         },
         computed: {
-            ...mapState(['surveyType', 'icbCode', 'validCheck']),
+            ...mapState(['surveyType', 'icbCode', 'validCheck', 'icb', 'conve']),
         },
         methods: {
             ...mapMutations(['codeType', 'codeInput', 'codeValidation'])

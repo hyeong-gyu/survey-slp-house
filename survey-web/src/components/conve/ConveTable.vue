@@ -562,8 +562,8 @@
                 </tr>
             </tbody>
         </table>
-        <div class="mt-5 mb-5">
-            <button type="submit" class="btn btn-primary" @click="onResult">Result</button>
+        <div class="conve-btn-wrap mt-5 mb-5">
+            <button type="button" class="btn btn-primary" @click="onResult">Result</button>
         </div>
     </div>
     <ConveChart v-if="chartCheck" :dataset="dataset" @chartClose="layerClose" />
@@ -819,6 +819,10 @@ export default {
     }
 
     .conve-table-wrap table tbody td.number + td ~ td {
+        text-align: center;
+    }
+
+    .conve-btn-wrap {
         text-align: center;
     }
 

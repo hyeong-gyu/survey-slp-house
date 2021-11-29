@@ -18,6 +18,9 @@
                 <div class="chart-item row">
                     <highcharts :options="barChartOption" />
                 </div>
+                <div class="chart-item row">
+                    <highcharts :options="columChartOption" />
+                </div>
             </div>
         </div>
     </div>
@@ -37,7 +40,7 @@ export default {
             barChartOption: {
                 chart: {
                     type: 'column',
-                    height: 700
+                    height: 500
                 },
                 title: {
                     useHTML: true,
@@ -49,7 +52,7 @@ export default {
                 yAxis: {
                     min: 0,
                     max: 34,
-                    tickInterval:1,
+                    // tickInterval:1,
                     title: {
                         text: ''
                     }
@@ -74,26 +77,88 @@ export default {
                 },
                 series: null
             },
+            columChartOption: {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: ''
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    categories: [
+                        '대화차례',
+                        '대화기능',
+                        '비언어적 대화반응',
+                        '기타'
+                    ],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: ''
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: null
+            }
         }
     },
     mounted() {
         console.log(this.dataset);
-        let __series = [
+        let __barSeries = [
             {
                 colorByPoint: true,
                 data: []
             }
         ];
+        let __columSeries = [
+            {
+                name: this.dataset.labels[0],
+                data: []
+            },
+            {
+                name: this.dataset.labels[1],
+                data: []
+            }
+        ];
 
+        //bar chart
         this.dataset.labels.forEach((__label, __i) => {
-            __series[0].data.push({});
-            __series[0].data[__i]['name'] = __label;
-            __series[0].data[__i]['y'] = __i === 0 ? this.dataset.asis : this.dataset.tobe;
+            __barSeries[0].data.push({});
+            __barSeries[0].data[__i]['name'] = __label;
+            __barSeries[0].data[__i]['y'] = __i === 0 ? this.dataset.asis : this.dataset.tobe;
         });
 
         this.barChartOption.title.text =`${this.dataset.labels[0]}, ${this.dataset.labels[1]}`;
-        this.barChartOption.series = __series;
-        console.log('__series : ', __series);
+        this.barChartOption.series = __barSeries;
+
+        //colum chart
+        __columSeries[0].data.push(
+            this.dataset.asisConversation,
+            this.dataset.asisFunction,
+            this.dataset.asisNonverbal,
+            this.dataset.asisEtc
+        );
+
+        __columSeries[1].data.push(
+            this.dataset.tobeConversation,
+            this.dataset.tobeFunction,
+            this.dataset.tobeNonverbal,
+            this.dataset.tobeEtc
+        );
+
+        this.columChartOption.series = __columSeries;
+
+        console.log('__columSeries : ', __columSeries);
     },
 }
 </script>

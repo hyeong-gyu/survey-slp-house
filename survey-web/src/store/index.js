@@ -66,11 +66,13 @@ const store = createStore({
             }
         },
         codeValidation(state) {
-            //0S8O0CMW2
+            //0S8O0CMW2, conve : T7UI9E
             const _tokenData = state.surveyType === 'icb' ? state.icbTokenData.token : state.conveTokenData.token;
             const _tokenInpData = state.surveyType === 'icb' ? state.icbCode : state.conveCode;
             
             const _tokenValid = _tokenData.filter((_token) => {
+                // console.log(CryptoJS.AES.encrypt(_token, 'SLP-HOUSE-LIVE').toString());
+
                 let _bytes = CryptoJS.AES.decrypt(_token, 'SLP-HOUSE-LIVE');
                 let _tokenString = _bytes.toString(CryptoJS.enc.Utf8);
 

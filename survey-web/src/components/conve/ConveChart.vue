@@ -86,6 +86,7 @@ export default {
                     type: 'column'
                 },
                 title: {
+                    useHTML: true,
                     text: ''
                 },
                 subtitle: {
@@ -209,7 +210,7 @@ export default {
             __barSeries[0].data[__i]['y'] = __i === 0 ? this.dataset.asis : this.dataset.tobe;
         });
 
-        this.barChartOption.title.text =`${this.dataset.labels[0]}, ${this.dataset.labels[1]}`;
+        this.barChartOption.title.text =`이름 : ${this.conve.name} / 생년월일 : ${this.conve.birth} / ${this.dataset.labels[0]}, ${this.dataset.labels[1]}`;
         this.barChartOption.series = __barSeries;
 
         //colum chart
@@ -227,6 +228,7 @@ export default {
             this.dataset.tobeEtc
         );
 
+        this.columChartOption.title.text =`이름 : ${this.conve.name} / 생년월일 : ${this.conve.birth} / ${this.dataset.labels[0]}, ${this.dataset.labels[1]}`;
         this.columChartOption.series = __columSeries;
 
         //spider chart ['주도형', '무반응형', '설명형', '특이형', '반응형']

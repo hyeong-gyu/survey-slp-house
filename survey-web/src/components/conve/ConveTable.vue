@@ -41,7 +41,7 @@
                 </tr>
                 <tr>
                     <td class="number">2</td>
-                    <td>대화를 시작하는 것을 주저하지 않는다..</td>
+                    <td>대화를 시작하는 것을 주저하지 않는다.</td>
                     <td>
                         <label class="form-check-label" for="">
                             <input class="form-check-input" type="checkbox" id="" data-role-default="asis" data-role-ctegory="conversation" data-role-spider="leading">
@@ -112,7 +112,7 @@
                 </tr>
                 <tr>
                     <td class="number">7</td>
-                    <td>“그래서? 그런데?” 등으로 다른 사람의 말을 좀 더 확장할 수 있다.</td>
+                    <td>“그래서?, 그런데?” 등으로 다른 사람의 말을 좀 더 확장할 수 있다.</td>
                     <td>
                         <label class="form-check-label" for="">
                             <input class="form-check-input" type="checkbox" id="" data-role-default="asis" data-role-ctegory="function" data-role-spider="leading">
@@ -350,7 +350,7 @@
                 </tr>
                 <tr>
                     <td class="number">24</td>
-                    <td>방법이나 미래계획, 소망 등을 묻는 개방형 질문을 사용할 수 있다.<br>(예 : “어떻게 할까?”, “왜 안 될까?”, “뭐 하고 싶어?”)</td>
+                    <td>방법이나 미래 계획, 소망 등을 묻는 개방형 질문을 사용할 수 있다.<br>(예 : “어떻게 할까?”, “왜 안 될까?”, “뭐 하고 싶어?”)</td>
                     <td>
                         <label class="form-check-label" for="">
                             <input class="form-check-input" type="checkbox" id="" data-role-default="asis" data-role-ctegory="function" data-role-spider="leading">
@@ -393,7 +393,7 @@
                 </tr>
                 <tr>
                     <td class="number">27</td>
-                    <td>대화 시 상대방을 보며 미소를 적절하게 지을 수 있다.</td>
+                    <td>대화 시 상대방을 보며 적절하게 미소를 지을 수 있다.</td>
                     <td>
                         <label class="form-check-label" for="">
                             <input class="form-check-input" type="checkbox" id="" data-role-default="asis" data-role-ctegory="nonverbal">

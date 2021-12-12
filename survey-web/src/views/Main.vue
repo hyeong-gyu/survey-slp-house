@@ -4,9 +4,11 @@
             <div class="col">
                 <div class="card" style="width: 18rem;">
                     <button type="button" class="btn-survey-enter" data-bs-toggle="modal" data-bs-target="#staticBackdrop" @click="codeType('icb')">
-                        <img src="https://valetmag.com/gr/daily/living/features/how_to_make_better_conversation_080719/art-strangers_staring_at_their_phone.webp" class="card-img-top" alt="test">
+                        <figure>
+                            <img src="../assets/images/slp_main01.png" class="card-img-top" alt="">
+                        </figure>
                         <div class="card-body">
-                            <p class="card-text">ICB 설문지 관련 설명 글....</p>
+                            <p class="card-text">아동의 의사소통 기능 및 수단을 단계적으로 확인할 수 있는 설문지(ICB)</p>
                         </div>
                     </button>
                 </div>
@@ -14,19 +16,25 @@
             <div class="col">
                 <div class="card" style="width: 18rem;">
                     <button type="button" class="btn-survey-enter" data-bs-toggle="modal" data-bs-target="#staticBackdrop" @click="codeType('conve')">
-                        <img src="https://valetmag.com/gr/daily/living/features/how_to_make_better_conversation_080719/art-strangers_staring_at_their_phone.webp" class="card-img-top" alt="test">
+                        <figure>
+                            <img src="../assets/images/slp_main02.png" class="card-img-top" alt="">
+                        </figure>
                         <div class="card-body">
-                            <p class="card-text">우리같이 대화기술 설문지...</p>
+                            <p class="card-text">아동의 대화기술 능력을 체계적으로 확인할 수 있는 설문지</p>
                         </div>
                     </button>
                 </div>
             </div>
             <div class="col">
                 <div class="card" style="width: 18rem;">
-                    <img src="https://valetmag.com/gr/daily/living/features/how_to_make_better_conversation_080719/art-strangers_staring_at_their_phone.webp" class="card-img-top" alt="test">
-                    <div class="card-body">
-                        <p class="card-text">Comming Soon.</p>
-                    </div>
+                    <button type="button" class="btn-survey-enter">
+                        <figure>
+                            <img src="../assets/images/slp_main03.png" class="card-img-top" alt="test">
+                        </figure>
+                        <div class="card-body">
+                            <p class="card-text">아동의 대화기술을 일반화할 수 있는 프로그램</p>
+                        </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -92,15 +100,22 @@
     }
 </script>
 
-<style>
+<style scoped>
     .col .card {
+        min-height: 520px;
         margin: auto;
     }
 
     .col .card button {
+        min-height: 520px;
+        height: 100%;
         padding: 0;
         background-color: transparent;
         border: none;
+    }
+
+    .col .card button figure {
+        height: 380px;    
     }
 
     .on {

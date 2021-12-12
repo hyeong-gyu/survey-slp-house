@@ -31,6 +31,9 @@ export default {
     computed: {
         ...mapState(['conve'])
     },
+    beforeMount() {
+        if (this.$cookie.getCookie('conve-token') === null) this.$router.push('/');  
+    },
     mounted() {
         this.conve.name = document.getElementById('conve-info-name').value;
         this.conve.birth = document.getElementById('icb-info-birth').value;

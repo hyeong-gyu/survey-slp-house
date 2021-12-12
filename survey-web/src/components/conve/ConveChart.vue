@@ -44,14 +44,19 @@ export default {
             barChartOption: {
                 chart: {
                     type: 'column',
-                    height: 500
+                    height: 600
                 },
                 title: {
                     useHTML: true,
                     text: ''
                 },
                 xAxis: {
-                    type: 'category'
+                    type: 'category',
+                    labels: {
+                        style: {
+                            fontSize:'14px'
+                        }
+                    }
                 },
                 yAxis: {
                     min: 0,
@@ -83,7 +88,8 @@ export default {
             },
             columChartOption: {
                 chart: {
-                    type: 'column'
+                    type: 'column',
+                    height: 600
                 },
                 title: {
                     useHTML: true,
@@ -99,7 +105,12 @@ export default {
                         '비언어적 대화반응',
                         '기타'
                     ],
-                    crosshair: true
+                    crosshair: true,
+                    labels: {
+                        style: {
+                            fontSize:'14px'
+                        }
+                    }
                 },
                 yAxis: {
                     min: 0,
@@ -118,7 +129,8 @@ export default {
             spiderChartOption: {
                 chart: {
                     polar: true,
-                    type: 'line'
+                    type: 'line',
+                    height: 600
                 },
                 title: {
                     text: '',
@@ -130,7 +142,12 @@ export default {
                 xAxis: {
                     categories: ['주도형', '무반응형', '설명형', '특이형', '반응형'],
                     tickmarkPlacement: 'on',
-                    lineWidth: 0
+                    lineWidth: 0,
+                    labels: {
+                        style: {
+                            fontSize:'14px'
+                        }
+                    }
                 },
                 yAxis: {
                     gridLineInterpolation: 'polygon',
@@ -144,7 +161,8 @@ export default {
                 legend: {
                     align: 'right',
                     verticalAlign: 'middle',
-                    layout: 'vertical'
+                    layout: 'vertical',
+                    fontSize: '15px'
                 },
                 series: null,
                 responsive: {
@@ -156,7 +174,8 @@ export default {
                             legend: {
                                 align: 'center',
                                 verticalAlign: 'bottom',
-                                layout: 'horizontal'
+                                layout: 'horizontal',
+                                fontSize: '25px'
                             },
                             pane: {
                                 size: '70%'
@@ -286,6 +305,10 @@ export default {
         color: #fff;
     }
 
+    .conve-chart-wrap .chart-info-wrap .chart-info-list .col {
+        text-align: center;
+    }
+
     .conve-chart-wrap .chart-info-wrap .chart-info-list .col > span {
         margin-left: 5px;
     }
@@ -305,6 +328,7 @@ export default {
     }
 
     .conve-chart-wrap .chart-list-wrap .chart-item {
+        min-height: 600px;
         padding: 5rem;
         margin-bottom: 5rem;
         background-color: #fff;

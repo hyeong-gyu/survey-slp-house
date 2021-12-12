@@ -85,10 +85,17 @@ const store = createStore({
                 if (_modalBack) _modalBack.remove();
 
                 document.getElementsByTagName('body')[0].classList.remove('modal-open');
-                VueCookieNext.setCookie('token', `${_tokenValid}`);
-                VueCookieNext.setCookie('type', `${state.surveyType}`);
-                if (state.surveyType === 'icb') router.push('/icb/main');
-                if (state.surveyType === 'conve') router.push('/conve/main');
+                if (state.surveyType === 'icb') {
+                    VueCookieNext.setCookie('token', `${_tokenValid}`);
+                    VueCookieNext.setCookie('type', `${state.surveyType}`);
+                    router.push('/icb/main');
+                }
+                
+                if (state.surveyType === 'conve') {
+                    VueCookieNext.setCookie('conve-token', `${_tokenValid}`);
+                    VueCookieNext.setCookie('type', `${state.surveyType}`);
+                    router.push('/conve/main');
+                }
                 
             } else {
                 state.validCheck = false;

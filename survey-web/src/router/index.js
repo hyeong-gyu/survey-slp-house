@@ -21,6 +21,11 @@ const routes = [
         name: 'ConveMain',
         component: () => import('@/views/conve/ConveMain')
     },
+    {
+        path: '/gen/main',
+        name: 'GenMain',
+        component: () => import('@/views/gen/GenMain')
+    },
 ];
 
 export const router = createRouter({

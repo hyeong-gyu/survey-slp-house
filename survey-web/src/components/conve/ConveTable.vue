@@ -182,7 +182,7 @@
                 </tr>
                 <tr>
                     <td class="number">12</td>
-                    <td>갑작스럽게 엉뚱한 내용으로 대화주제를 바꾸지 않는다.</td>
+                    <td>갑작스럽게 엉뚱한 내용으로 요구하거나 반응하지 않았다.</td>
                     <td>
                         <label class="form-check-label" for="">
                             <input class="form-check-input" type="checkbox" id="" data-role-default="asis" data-role-ctegory="function" data-role-spider="unusual">

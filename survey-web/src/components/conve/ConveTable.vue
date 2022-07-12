@@ -698,12 +698,7 @@ export default {
 
             //asis unusaual total
             [].forEach.call(__asisUnusualEl, (__el) => {
-                if (__el.checked) __asisUnusuaTotal++;
-            });
-
-            //asis ete total
-            [].forEach.call(__asisEtcEl, (__el) => {
-                if (__el.checked) __asisEtcTotal++;
+                if (!__el.checked) __asisUnusuaTotal++;
             });
 
             //tobe total
@@ -749,7 +744,7 @@ export default {
 
             //tobe unusaual total
             [].forEach.call(__tobeUnusualEl, (__el) => {
-                if (__el.checked) __tobeUnusuaTotal++;
+                if (!__el.checked) __tobeUnusuaTotal++;
             });
 
             this.dataset.labels = [];

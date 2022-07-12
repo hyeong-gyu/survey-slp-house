@@ -4,6 +4,7 @@ import { VueCookieNext } from 'vue-cookie-next';
 import CryptoJS from 'crypto-js';
 import icbToken from '../assets/token/icbToken.json';
 import conveToken from '../assets/token/conveToken.json';
+import genToken from '../assets/token/genToken.json';
 
 const store = createStore({
     //데이터 저장 공간
@@ -15,6 +16,7 @@ const store = createStore({
             conveCode: null,
             icbTokenData: icbToken,
             conveTokenData: conveToken,
+            genTokenData: genToken,
             validCheck: true,
             icb: {
                 name: null,
@@ -48,7 +50,6 @@ const store = createStore({
             return state.parentNode = parents;
         },
         codeType(state, type) {
-            console.log('type : ', type);
             state.surveyType = type;
         },
         codeInput(state, code) {
@@ -61,23 +62,49 @@ const store = createStore({
                     state.conveCode = code;
                     break;
 
+                case 'gen':
+                    state.genCode = code;
+                    break;
+
                 default:
                     break;
             }
         },
         codeValidation(state) {
             //0S8O0CMW2, conve : T7UI9E
-            const _tokenData = state.surveyType === 'icb' ? state.icbTokenData.token : state.conveTokenData.token;
-            const _tokenInpData = state.surveyType === 'icb' ? state.icbCode : state.conveCode;
+            let _tokenData = null;
+            let _tokenInpData = null;
+            
+            switch (state.surveyType) {
+                case 'icb':
+                    _tokenData = state.icbTokenData.token
+                    _tokenInpData = state.icbCode;
+                    break;
+
+                case 'conve':
+                    _tokenData = state.conveTokenData.token;
+                    _tokenInpData = state.conveCode;
+                    break;
+
+                case 'gen':
+                    _tokenData = state.genTokenData.token;
+                    _tokenInpData = state.genCode;
+                    break;
+
+                default:
+                    break;
+            };
             
             const _tokenValid = _tokenData.filter((_token) => {
                 // console.log(CryptoJS.AES.encrypt(_token, 'SLP-HOUSE-LIVE').toString());
 
                 let _bytes = CryptoJS.AES.decrypt(_token, 'SLP-HOUSE-LIVE');
                 let _tokenString = _bytes.toString(CryptoJS.enc.Utf8);
-
                 return _tokenString === _tokenInpData;
             });
+
+            // var testA = CryptoJS.AES.decrypt('U2FsdGVkX19+36cIjkomhnb+kTSa12taeNrbOcnBWTg=', 'SLP-HOUSE-LIVE');
+            // console.log(testA.toString(CryptoJS.enc.Utf8));
             
             if (_tokenValid.length > 0) {
                 state.validCheck = true;
@@ -95,6 +122,12 @@ const store = createStore({
                     VueCookieNext.setCookie('conve-token', `${_tokenValid}`);
                     VueCookieNext.setCookie('type', `${state.surveyType}`);
                     router.push('/conve/main');
+                }
+
+                if (state.surveyType === 'gen') {
+                    VueCookieNext.setCookie('gen-token', `${_tokenValid}`);
+                    VueCookieNext.setCookie('type', `${state.surveyType}`);
+                    router.push('/gen/main');
                 }
                 
             } else {

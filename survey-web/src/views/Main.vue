@@ -37,6 +37,18 @@
                     </button>
                 </div>
             </div>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <button type="button" class="btn-survey-enter" @click="rinkTo()">
+                        <figure>
+                            <img src="../assets/images/slphouse_main3.png" class="card-img-top" alt="">
+                        </figure>
+                        <div class="card-body">
+                            <p class="card-text">test</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 

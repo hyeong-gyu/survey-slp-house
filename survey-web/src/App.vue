@@ -22,9 +22,19 @@ export default {
 </script>
 
 <style>
+    ul, li {
+        list-style: none;
+    }
+
+    button {
+        background: none;
+        border: none;
+    }
+
     .navbar {
         background-color: #fff;
         box-shadow: 0px -36px 40px 0px #000;
+        height: 63px;
     }
 
     .navbar .container-md.slp-nav {

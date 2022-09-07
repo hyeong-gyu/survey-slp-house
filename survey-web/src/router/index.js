@@ -26,6 +26,16 @@ const routes = [
         name: 'GenMain',
         component: () => import('@/views/gen/GenMain')
     },
+    {
+        path: '/talk/main',
+        name: 'talkMain',
+        component: () => import('@/views/talk/talkMain'),
+    },
+    {
+        path: '/talk/sub1',
+        name: 'Sub1',
+        component: () => import('@/views/talk/sub/Sub1'),
+    },
 ];
 
 export const router = createRouter({

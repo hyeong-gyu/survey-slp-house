@@ -37,7 +37,7 @@
                     </button>
                 </div>
             </div>
-            <div class="col">
+            <!-- <div class="col">
                 <div class="card" style="width: 18rem;">
                     <button type="button" class="btn-survey-enter" @click="rinkTo()">
                         <figure>
@@ -48,7 +48,7 @@
                         </div>
                     </button>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 

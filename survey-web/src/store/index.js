@@ -93,10 +93,12 @@ const store = createStore({
 
                 default:
                     break;
-            };
+            }
             
             const _tokenValid = _tokenData.filter((_token) => {
                 // console.log(CryptoJS.AES.encrypt(_token, 'SLP-HOUSE-LIVE').toString());
+                // var testA = CryptoJS.AES.decrypt(_token, 'SLP-HOUSE-LIVE');
+                // console.log(testA.toString(CryptoJS.enc.Utf8));
 
                 let _bytes = CryptoJS.AES.decrypt(_token, 'SLP-HOUSE-LIVE');
                 let _tokenString = _bytes.toString(CryptoJS.enc.Utf8);

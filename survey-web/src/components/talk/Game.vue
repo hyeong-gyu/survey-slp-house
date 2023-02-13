@@ -1,6 +1,9 @@
 <template>
     <div class="talk-box">
         <div class="game-wrap">
+            <div class="shark-wrap">
+                <img src="../../assets/images/talk/shark.png" alt="">
+            </div>
             <div class="ocean">
                 <div class="bubbles">
                     <span></span>
@@ -202,8 +205,8 @@ export default {
             this.layer = true;
         },
         _resultEvent(_answer) {
-            document.getElementsByClassName('game-layer')[0].classList.add('result');
-
+            //document.getElementsByClassName('game-layer')[0].classList.add('result');
+            this.layer = false;
             if (this.answer === _answer) {
                 if (this.answer) {
                     // fish animation
@@ -223,10 +226,27 @@ export default {
                 }
             } else {
                 this.answer = false;
+                const _fish = document.getElementsByClassName('fish');
+                const _sharkWrap = document.getElementsByClassName('shark-wrap')[0];
+                _sharkWrap.classList.add('show');
+
+                [..._fish].forEach((_el) => {
+                    _el.classList.add('run-fish');
+                })
+
+                setTimeout(() => {
+                    [..._fish].forEach((_el) => {
+                        _el.classList.remove('run-fish');
+                        _sharkWrap.classList.remove('show');
+                    });
+                }, 1500);
+
+                /*
                 this.fishEl.classList.add('not_fish');
                 setTimeout(() => {
                     this.fishEl.classList.remove('not_fish')
                 }, 1000);
+                */
             }
         }
     }
@@ -234,6 +254,32 @@ export default {
 </script>
 
 <style>
+
+    .shark-wrap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 950px;
+    }
+
+    .shark-wrap img {
+        width: 100%;
+        opacity: 0;
+    }
+
+    .shark-wrap.show img {
+        animation: sharkAni 2s ease;
+    }
+
+    @keyframes sharkAni {
+        0%, 100% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+    }
+
     .game-wrap {
         overflow: hidden;
         position: relative;
@@ -242,6 +288,14 @@ export default {
         margin: 20px;
         background-image: linear-gradient(0deg, #022244, #58c8da);
         border-radius: 20px;
+    }
+
+    @media (max-width: 1440px) {
+        .game-wrap {
+            width: 65.972vw;
+            height: 41.666vw;
+            margin: 1.3888vw;
+        }
     }
 
     .fish-wrap button {
@@ -708,5 +762,9 @@ export default {
 
     .fish.not_fish {
         animation: none;
+    }
+
+    .fish.run-fish {
+        animation-duration: 1s;
     }
 </style>

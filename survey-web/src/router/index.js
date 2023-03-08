@@ -36,6 +36,11 @@ const routes = [
         name: 'Sub1',
         component: () => import('@/views/talk/sub/Sub1'),
     },
+    {
+        path: '/talk/sub2',
+        name: 'Sub2',
+        component: () => import('@/views/talk/sub/Sub2'),
+    },
 ];
 
 export const router = createRouter({

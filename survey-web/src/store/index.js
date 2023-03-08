@@ -66,6 +66,10 @@ const store = createStore({
                     state.genCode = code;
                     break;
 
+                case 'talk':
+                    state.talkCode = code;
+                    break;
+
                 default:
                     break;
             }
@@ -93,6 +97,20 @@ const store = createStore({
 
                 default:
                     break;
+            }
+
+            if (state.surveyType === 'talk') {
+                if (state.talkCode === null || state.talkCode.toLowerCase() !== 'talk-code-2023-slp') {
+                    state.validCheck = false;
+                } else {
+                    state.validCheck = true;
+                    const _modalBack = document.querySelector('.modal-backdrop');
+                    if (_modalBack) _modalBack.remove();
+                    VueCookieNext.setCookie('talk-code', 'code-set-2023-slp');
+                    router.push('/talk/main');
+                }
+
+                return;
             }
             
             const _tokenValid = _tokenData.filter((_token) => {

@@ -15,20 +15,23 @@
                     <img src="../../assets/images/talk/wakeup.jpg" alt="Avatar" style="width:100%">
                 </div> -->
                 <div class="sent-card" v-for="imgs in selectImgData" :key="imgs">
-                    <img :src="_getUrl(imgs)" style="width:100%" />
+                    <img :src="imgs" style="width:100%" />
                 </div>
             </div>
             <div class="sent-card-control">
-                <button type="button" class="on" @click="_colsClick(2)">2장</button>
-                <button type="button" @click="_colsClick(3)">3장</button>
-                <button type="button" @click="_colsClick(4)">4장</button>
+                <button type="button" class="on btn-re" @click="_colsClick(2)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-bootstrap-reboot" viewBox="0 0 16 16">
+                        <path d="M1.161 8a6.84 6.84 0 1 0 6.842-6.84.58.58 0 1 1 0-1.16 8 8 0 1 1-6.556 3.412l-.663-.577a.58.58 0 0 1 .227-.997l2.52-.69a.58.58 0 0 1 .728.633l-.332 2.592a.58.58 0 0 1-.956.364l-.643-.56A6.812 6.812 0 0 0 1.16 8z"/>
+                        <path d="M6.641 11.671V8.843h1.57l1.498 2.828h1.314L9.377 8.665c.897-.3 1.427-1.106 1.427-2.1 0-1.37-.943-2.246-2.456-2.246H5.5v7.352h1.141zm0-3.75V5.277h1.57c.881 0 1.416.499 1.416 1.32 0 .84-.504 1.324-1.386 1.324h-1.6z"/>
+                    </svg>
+                </button>
                 <!-- <button type="button">reset</button> -->
             </div>
         </div>
     </div>
     <div class="talk-text-box">
         <p class="talk-result">
-            그림을 보고 이야기를 만들어 주세요.
+            그림을 보고 &lt;{{ selectData.title }}&gt; 이야기를 만들어 주세요.
         </p>
     </div>
 </template>
@@ -37,80 +40,26 @@
 export default {
     name: 'Sentence',
     props: {
-        currentIndex: Number
+        currentIndex: Number,
+        sentData: Object,
+        selectData: Array,
+        imageUrl: String
     },
     components: {
     },
     data() {
         return {
             updatedCheck: false,
-            imgData: [
-                [
-                    'wakeup1.jpg',
-                    'wakeup2.jpg',
-                    'wakeup3.jpg',
-                    'wakeup4.jpg',
-                    'wakeup5.jpg',
-                ],
-                [
-                    'eat1.jpg',
-                    'eat2.jpg',
-                    'eat3.jpg',
-                    'eat4.jpg',
-                    'eat5.jpg',
-                    'eat6.jpg',
-                    'eat7.jpg',
-                    'eat8.jpg',
-                ],
-                [
-                    'rot1.jpg',
-                    'rot2.jpg',
-                    'rot3.jpg',
-                ],
-                [
-                    'make1.jpg',
-                    'make2.jpg',
-                    'make3.jpg',
-                    'make4.jpg',
-                    'make5.jpg',
-                    'make6.jpg',
-                    'make7.jpg',
-                    'make8.jpg',
-                    'make9.jpg',
-                ],
-                [
-                    'call1.jpg',
-                    'call2.jpg',
-                    'call3.jpg',
-                    'call4.jpg',
-                    'call5.jpg',
-                    'call6.jpg',
-                ],
-                [
-                    'not1.jpg',
-                    'not2.jpg',
-                    'not3.jpg',
-                ],
-                [
-                    'put1.jpg',
-                    'put2.jpg',
-                    'put3.jpg',
-                    'put4.jpg',
-                    'put5.jpg',
-                    'put6.jpg',
-                ]
-            ],
             cols: 2,
             selectImgData: []
         }
     },
     mounted() {
-        this._random();
-        console.log('mounted');
+        this._random(this.currentIndex);
     },
     methods: {
         _getUrl(_fileName) {
-            return `${require(`@/assets/images/talk/${_fileName}`)}`;
+            return `${require(`@/assets/images/talk/${this.imageUrl}/sentence/${_fileName}`)}`;
         },
         _selectIndex(totalIndex, selectingNumber) {
             let randomIndexArray = []
@@ -118,47 +67,21 @@ export default {
                 let randomNum = Math.floor(Math.random() * totalIndex);
                 if (randomIndexArray.indexOf(randomNum) === -1 && randomNum !== (this.currentIndex -1)) {
                     randomIndexArray.push(randomNum);
-                } else { //if the randomNum is already in the array retry
+                } else {
                     i--;
                 }
             }
             return randomIndexArray;
         },
-        _random() {
+        _random(_n = this.currentIndex) {
             //reset
             this.selectImgData = [];
-
-            let _randomNumber = [];
-            let _choiceData = this.imgData[this.currentIndex -1];
-            for (let _i = 0; _i < this.imgData.length; _i++) {
-                if (_i !== this.currentIndex -1) _randomNumber.push(_i);
-            }
-
-            if (this.cols === 2) {
-                let _randomData = this.imgData[_randomNumber[Math.floor(Math.random() * _randomNumber.length)]];
-
-                _choiceData = _choiceData[Math.floor(Math.random() * _choiceData.length)];
-                _randomData = _randomData[Math.floor(Math.random() * _randomData.length)];
-                
-                this.selectImgData.push(_randomData);
-                this.selectImgData.push(_choiceData);
-            } else {
-                let _this = this;
-                let _randomIndexArray = this._selectIndex(_randomNumber.length, this.cols - 1);
-                let _ramdomDataArray = [];
-                let _randomData = [];
-
-                _randomIndexArray.forEach((_n) => {
-                    _ramdomDataArray.push(_this.imgData[_n]);
-                });
-
-                _ramdomDataArray.forEach((_imgArr) => {
-                    _randomData.push(_imgArr[Math.floor(Math.random() * _imgArr.length)]);
-                });
-
-                _randomData.push(_choiceData[Math.floor(Math.random() * _choiceData.length)]);
-                this.selectImgData = _randomData;
-            }
+            console.log('_n : ', _n);
+            const _sentLength = this.sentData[_n];
+            const _random = Math.floor(Math.random() * _sentLength) + 1;
+            
+            this.selectImgData.push(this._getUrl(`${_n}/${_random}/1.png`));
+            this.selectImgData.push(this._getUrl(`${_n}/${_random}/2.png`));
         },
         _colsClick(_n) {
             let _cardWrap = document.getElementsByClassName('sent-card-wrap')[0];
@@ -166,10 +89,7 @@ export default {
 
             setTimeout(() => {
                 _cardWrap.classList.remove('col2');
-                _cardWrap.classList.remove('col3');
-                _cardWrap.classList.remove('col4');
-
-                _cardWrap.classList.add(`col${_n}`);
+                _cardWrap.classList.add(`col2`);
                 this.cols = _n;
                 this._random();
             }, 500);
@@ -242,5 +162,40 @@ export default {
 
     .sent-card-control {
         height: 60px;
+    }
+
+    .btn-re {
+        margin: 0 auto;
+        display: block;
+    }
+
+    @media (max-width: 1440px) {
+        .sent-wrap {
+            margin: 1.3888vw;
+            border-radius: 1.7361vw;
+        }
+
+        .sent-card-wrap {
+            height: 37.5vw;
+            margin: 0 auto 0.6944vw;
+        }
+
+        .sent-card-wrap .sent-card {
+            margin: 0.6944vw;
+            border-radius: 1.7361vw;
+        }
+        
+        .sent-card-wrap .sent-card img {
+            border-radius: 1.7361vw;
+        }
+
+        .sent-card-control {
+            height: 4.1666vw;
+        }
+
+        .sent-card-control .btn-re {
+            border-radius: 0.6944vw;
+            padding: 0.3472vw 1.3888vw;
+        }
     }
 </style>

@@ -8,10 +8,11 @@
                     </figure>
                 </li>
             </ul> -->
-            <carousel :items-to-show="1" ref="myCarousel" @slide-end="_slideEnd">
+            <carousel class="video-carousel" :items-to-show="1" ref="myCarousel" @slide-end="_slideEnd" :v-model="slideIndex">
                 <slide v-for="videoList in selectData.video" :key="videoList">
-                    <video controlsList="nodownload" controls>
-                        <source :src="_getUrl(videoList)" type="video/mp4">
+                    <video controlsList="nodownload" controls preload>
+                        <source :src="_getUrl(`${videoList}.webm`)" type="video/webm">
+                        <source :src="_getUrl(`${videoList}.mp4`)" type="video/mp4">
                     </video>
                 </slide>
                 <template #addons>
@@ -22,7 +23,7 @@
         <div class="navi-talk-list">
             <ul>
                 <li v-for="listName in selectData.list[currentIndex]" :key="listName">
-                    {{ listName }}
+                    &lt;{{ listName }}&gt;
                 </li>
             </ul>
             <button type="button" class="btn-use-sent" @click="_useSentClick">문장활용</button>
@@ -39,15 +40,16 @@
 </template>
 
 <script>
-// import { ref } from 'vue';
-// const myCarousel = ref(null);
+import { ref } from 'vue';
 import 'vue3-carousel/dist/carousel.css';
 import { Carousel, Slide, Navigation } from 'vue3-carousel';
+const myCarousel = ref(null);
 
 export default {
     name: 'Vocabulary',
     props: {
-        selectData: Array
+        selectData: Array,
+        videoUrl: String
     },
     components: {
         Carousel,
@@ -65,10 +67,20 @@ export default {
     },
     methods: {
         _getUrl(_fileName) {
-            return `${require(`../../assets/video/talk/${_fileName}`)}`;
+            return `${require(`../../assets/video/talk/${this.videoUrl}/${_fileName}`)}`;
+        },
+        _resetSlide() {
+            this.$refs.myCarousel.slideTo(0);
+            this.currentIndex = 0;
         },
         _slideEnd(data) {
-            this.currentIndex = data.currentSlideIndex;
+            const _li = document.getElementsByClassName('video-carousel')[0].getElementsByTagName('li');
+            const _afterLi = [..._li].filter((_el, _i) => { return _i === data.prevSlideIndex });
+            
+            if (_afterLi[0] !== null && _afterLi[0] !== undefined) {
+                _afterLi[0].getElementsByTagName('video')[0].pause();
+                this.currentIndex = data.currentSlideIndex;
+            }
         },
         _slideClick() {
             let _bSlide = document.getElementsByClassName('talk-b-side')[0];

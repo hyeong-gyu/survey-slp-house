@@ -37,6 +37,7 @@
                     </button>
                 </div>
             </div>
+            
             <!-- <div class="col">
                 <div class="card" style="width: 18rem;">
                     <button type="button" class="btn-survey-enter" @click="rinkTo()">
@@ -49,6 +50,20 @@
                     </button>
                 </div>
             </div> -->
+        </div>
+        <div class="row mt-5">
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <button class="btn-survey-enter" data-bs-toggle="modal" data-bs-target="#staticBackdrop" @click="codeType('talk')">
+                        <figure>
+                            <img src="../assets/images/slphouse_main4.png" class="card-img-top" alt="">
+                        </figure>
+                        <div class="card-body">
+                            <p class="card-text">coming soon</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -70,6 +85,7 @@
                                 <input v-if="surveyType === 'icb'" type="password" maxlength="9" id="survey-code" class="form-control" aria-describedby="passwordHelpInline" @input="codeInput($event.target.value)" @keydown.enter.prevent="codeValidation" autocomplete="on" required>
                                 <input v-if="surveyType === 'conve'" type="password" maxlength="6" id="survey-code" class="form-control" aria-describedby="passwordHelpInline" @input="codeInput($event.target.value)" @keydown.enter.prevent="codeValidation" autocomplete="on" required>
                                 <input v-if="surveyType === 'gen'" type="password" maxlength="12" id="survey-code" class="form-control" aria-describedby="passwordHelpInline" @input="codeInput($event.target.value)" @keydown.enter.prevent="codeValidation" autocomplete="on" required>
+                                <input v-if="surveyType === 'talk'" type="password" id="survey-code" class="form-control" aria-describedby="passwordHelpInline" @input="codeInput($event.target.value)" @keydown.enter.prevent="codeValidation" autocomplete="on" required>
                                 <div class="invalid-tooltip" :class="{'on': !validCheck}">
                                     Please provide a {{ surveyType.toUpperCase() }} Code.
                                 </div>
@@ -122,15 +138,17 @@
         margin: auto;
     }
 
-    .col .card button {
+    .col .card .btn-survey-enter {
         min-height: 520px;
         height: 100%;
         padding: 0;
         background-color: transparent;
         border: none;
+        text-decoration: none;
+        color: #000;
     }
 
-    .col .card button figure {
+    .col .card .btn-survey-enter figure {
         height: 380px;    
     }
 

@@ -11,7 +11,6 @@
             <carousel class="video-carousel" :items-to-show="1" ref="myCarousel" @slide-end="_slideEnd" :v-model="slideIndex">
                 <slide v-for="videoList in selectData.video" :key="videoList">
                     <video controlsList="nodownload" controls preload>
-                        <source :src="_getUrl(`${videoList}.webm`)" type="video/webm">
                         <source :src="_getUrl(`${videoList}.mp4`)" type="video/mp4">
                     </video>
                 </slide>

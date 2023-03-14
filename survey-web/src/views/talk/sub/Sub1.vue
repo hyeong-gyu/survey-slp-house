@@ -90,7 +90,7 @@ export default {
         const _inner = document.getElementsByClassName('sub-inner')[0];
         const _innerHeight = _inner.offsetHeight;
 
-        if (window.innerWidth < 1024) _talkWrap.style.height = `${_innerHeight + 63}px`;
+        // if (window.innerWidth < 1024) _talkWrap.style.height = `${_innerHeight + 63}px`;
     },
     data() {
         return {

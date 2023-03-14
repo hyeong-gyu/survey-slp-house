@@ -339,11 +339,9 @@
 </template>
 
 <script>
-
 export default {
     name: 'GenMain',
     beforeMount() {
-        console.log(this.$cookie.getCookie('gen-token'));
         if (this.$cookie.getCookie('gen-token') === null) this.$router.push('/');  
     },
     methods: {
@@ -398,6 +396,10 @@ export default {
     }
 
     .main-gen .tab-content .video-tab-content .video-box {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
         width: 100%;
         min-height: 650px;
         box-sizing: border-box;
@@ -452,5 +454,47 @@ export default {
     .main-gen .tab-content .video-tab-content .video-category {
         flex-basis: 12%;
         font-size: 14px;
+    }
+
+    .video-js {
+        margin: 0 auto;
+    }
+    
+    @media (max-width: 1200px) {
+        .main-gen .tab-content .video-tab-content .video-box {
+            width: auto;
+            flex-basis: 87%;
+            height: 54.1666vw;
+            min-height: auto;
+        }
+
+        .main-gen .tab-content .video-tab-content .video-box .tab-pane .gen-video {
+            width: 65vw;
+            min-width: auto;
+            height: 48.7555vw;
+            margin-top: 0;
+        }
+
+        .main-gen .tab-content .video-tab-content .video-category {
+            flex-basis: 13%;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .main-gen .tab-content .video-tab-content .video-box {
+            flex-basis: 80%;
+            height: 52.1666vw;
+            min-height: auto;
+        }
+
+        .main-gen .tab-content .video-tab-content .video-box .tab-pane .gen-video {
+            width: 55vw;
+            height: 41.2222vw;
+            margin-top: 0px;
+        }
+
+        .main-gen .tab-content .video-tab-content .video-category {
+            flex-basis: 20%;
+        }
     }
 </style>

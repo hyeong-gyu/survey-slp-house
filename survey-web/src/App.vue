@@ -76,4 +76,15 @@ export default {
     .slp-shop a:hover {
         color: #35a3ed;
     }
+
+    @media (max-width: 768px) {
+        .navbar .container-md.slp-nav {
+            display: flex;
+            align-items: baseline;
+        }
+
+        .slp-shop {
+            right: 10px;
+        }
+    }
 </style>

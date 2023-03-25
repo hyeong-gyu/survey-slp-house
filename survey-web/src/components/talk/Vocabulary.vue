@@ -1,16 +1,9 @@
 <template>
     <div class="talk-box">
         <div class="slide-img-box">
-            <!-- <ul>
-                <li>
-                    <figure>
-                        <img src="../../../assets/images/contents-base.jpg" alt="">
-                    </figure>
-                </li>
-            </ul> -->
             <carousel class="video-carousel" :items-to-show="1" ref="myCarousel" @slide-end="_slideEnd" :v-model="slideIndex">
                 <slide v-for="videoList in selectData.video" :key="videoList">
-                    <video controlsList="nodownload" controls preload>
+                    <video controlsList="nodownload" controls preload oncontextmenu='return false'>
                         <source :src="_getUrl(`${videoList}.mp4`)" type="video/mp4">
                     </video>
                 </slide>
@@ -66,7 +59,7 @@ export default {
     },
     methods: {
         _getUrl(_fileName) {
-            return `${require(`../../assets/video/talk/${this.videoUrl}/${_fileName}`)}`;
+            return `${require(`@/assets/video/talk/${this.videoUrl}/${_fileName}`)}`;
         },
         _resetSlide() {
             this.$refs.myCarousel.slideTo(0);

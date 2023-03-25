@@ -41,6 +41,26 @@ const routes = [
         name: 'Sub2',
         component: () => import('@/views/talk/sub/Sub2'),
     },
+    {
+        path: '/talk/sub3',
+        name: 'Sub3',
+        component: () => import('@/views/talk/sub/Sub3'),
+    },
+    {
+        path: '/talk/sub4',
+        name: 'Sub4',
+        component: () => import('@/views/talk/sub/Sub4'),
+    },
+    {
+        path: '/talk/sub5',
+        name: 'Sub5',
+        component: () => import('@/views/talk/sub/Sub5'),
+    },
+    {
+        path: '/talk/sub6',
+        name: 'Sub6',
+        component: () => import('@/views/talk/sub/Sub6'),
+    },
 ];
 
 export const router = createRouter({

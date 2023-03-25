@@ -2,18 +2,6 @@
     <div class="talk-box">
         <div class="sent-wrap">
             <div class="sent-card-wrap col2">
-                <!-- <div class="sent-card">
-                    <img src="../../assets/images/talk/wakeup1.jpg" alt="Avatar" style="width:100%">
-                </div>
-                <div class="sent-card">
-                    <img src="../../assets/images/talk/wakeup1.jpg" alt="Avatar" style="width:100%">
-                </div> -->
-                <!-- <div class="sent-card">
-                    <img src="../../assets/images/talk/wakeup.jpg" alt="Avatar" style="width:100%">
-                </div> -->
-                <!-- <div class="sent-card">
-                    <img src="../../assets/images/talk/wakeup.jpg" alt="Avatar" style="width:100%">
-                </div> -->
                 <div class="sent-card" v-for="imgs in selectImgData" :key="imgs">
                     <img :src="imgs" style="width:100%" />
                 </div>
@@ -61,6 +49,19 @@ export default {
         _getUrl(_fileName) {
             return `${require(`@/assets/images/talk/${this.imageUrl}/sentence/${_fileName}`)}`;
         },
+        _shuffle(_array) {
+            for (let index = _array.length - 1; index > 0; index--) {
+                // 무작위 index 값을 만든다. (0 이상의 배열 길이 값)
+                const randomPosition = Math.floor(Math.random() * (index + 1));
+
+                // 임시로 원본 값을 저장하고, randomPosition을 사용해 배열 요소를 섞는다.
+                const temporary = _array[index];
+                _array[index] = _array[randomPosition];
+                _array[randomPosition] = temporary;
+            }
+
+            return _array;
+        },
         _selectIndex(totalIndex, selectingNumber) {
             let randomIndexArray = []
             for (let i = 0; i < selectingNumber; i++) {
@@ -82,6 +83,8 @@ export default {
             
             this.selectImgData.push(this._getUrl(`${_n}/${_random}/1.png`));
             this.selectImgData.push(this._getUrl(`${_n}/${_random}/2.png`));
+
+            this.selectImgData = this._shuffle(this.selectImgData);
         },
         _colsClick(_n) {
             let _cardWrap = document.getElementsByClassName('sent-card-wrap')[0];
@@ -196,6 +199,17 @@ export default {
         .sent-card-control .btn-re {
             border-radius: 0.6944vw;
             padding: 0.3472vw 1.3888vw;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .sent-card-wrap {
+            height: 30.5vw;
+            margin: 0 auto -0.3056vw;
+        }
+
+        .sent-card-wrap .sent-card {
+            margin: 1.6944vw;
         }
     }
 </style>

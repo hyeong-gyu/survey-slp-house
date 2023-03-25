@@ -4,8 +4,17 @@
             <div class="shark-wrap">
                 <img src="../../assets/images/talk/common/shark.png" alt="">
             </div>
-            <audio controls autoplay loop>
+            <audio controls loop id="background-audio">
                 <source src="../../assets/audio/talk/aquatic.wav" type="audio/wav">
+            </audio>
+            <audio controls loop id="shark-audio">
+                <source src="../../assets/audio/talk/Suspense_Horror_Movie.wav" type="audio/wav">
+            </audio>
+            <audio controls id="success-audio">
+                <source src="../../assets/audio/talk/success.wav" type="audio/wav">
+            </audio>
+            <audio controls id="end-success-audio">
+                <source src="../../assets/audio/talk/end_success.mp3" type="audio/mp3">
             </audio>
             <div class="ocean">
                 <div class="bubbles">
@@ -43,13 +52,20 @@
                         <div class="result-content">
                             <div class="result-answer" v-if="answer">
                                 <div class="result-answer-box">
-                                    <figure>
-                                        <img src="../../assets/images/talk/common/success.png" alt="">
-                                    </figure>
-                                    <strong class="success_text">
-                                        <img src="../../assets/images/talk/common/success_text.png" alt="">
-                                    </strong>
-                                    <button v-if="!end" type="button" class="btn-result" @click="layer = false">OK</button>
+                                    <div v-if="!end">
+                                        <figure>
+                                            <img src="../../assets/images/talk/common/success.png" alt="">
+                                        </figure>
+                                        <strong class="success_text">
+                                            <img src="../../assets/images/talk/common/success_text.png" alt="">
+                                        </strong>
+                                    </div>
+                                    <div class="end-success" v-if="end">
+                                        <figure>
+                                            <img src="../../assets/images/talk/common/end_success.gif" alt="">
+                                        </figure>
+                                    </div>
+                                    <button v-if="!end" type="button" class="btn-result" @click="_ok">OK</button>
                                     <button v-else-if="end" type="button" class="btn-result" @click="_reset">다시하기</button>
                                 </div>
                             </div>
@@ -116,11 +132,26 @@ export default {
     },
     components: {
     },
+    mounted() {
+        const _backgroundAudio = document.getElementById('background-audio');
+        _backgroundAudio.play();
+    },
+    beforeUnmounted() {
+        const _backgroundAudio = document.getElementById('background-audio');
+        const _sharkAudio = document.getElementById('shark-audio');
+        const _successAudio = document.getElementById('success-audio');
+        const _endSuccessAudio = document.getElementById('end-success-audio');
+        
+        _backgroundAudio.pause();
+        _sharkAudio.pause();
+        _successAudio.pause();
+        _endSuccessAudio.puase();
+    },
     data() {
         return {
             fishArray: ['fish1', 'fish2', 'fish3', 'fish4', 'fish5', 'fish6'],
             fishClassName: 'fish',
-            pbt: [30, 70],
+            pbt: [40, 60],
             layer: false,
             imgSrc: '',
             fishSrc: '',
@@ -130,15 +161,6 @@ export default {
             end: false
         }
     },
-    mounted() {
-        // console.log('mounted : ', this.selectData);
-        // console.log('mounted : ', this.gameLangthData);
-        //this._createGameSet();
-    },
-    updated() {
-        // console.log('up : ', this.currentIndex);
-        //this._createGameSet();
-    },
     methods: {
         _getCommonUrl(_fileName) {
             return `${require(`../../assets/images/talk/common/${_fileName}`)}`;
@@ -147,9 +169,24 @@ export default {
             return `${require(`../../assets/images/talk/${this.imageUrl}/game/${_fileName}`)}`;
         },
         _reset() {
+            const _backgroundAudio = document.getElementById('background-audio');
+            const _endSuccessAudio = document.getElementById('end-success-audio');
+            _endSuccessAudio.pause();
+            _endSuccessAudio.currentTime = 0;
+            _backgroundAudio.play();
             this.layer = false;
             this.end = false;
             this.answerArray = [];
+        },
+        _ok() {
+            const _backgroundAudio = document.getElementById('background-audio');
+            const _successAudio = document.getElementById('success-audio');
+
+            _successAudio.pause();
+            _successAudio.currentTime = 0;
+            _backgroundAudio.play();
+
+            this.layer = false;
         },
         _play(_fishName) {
             if (this.layer) return;
@@ -198,8 +235,11 @@ export default {
             this.layer = true;
         },
         _resultEvent(_answer) {
-            //document.getElementsByClassName('game-layer')[0].classList.add('result');
-            
+            const _backgroundAudio = document.getElementById('background-audio');
+            const _sharkAudio = document.getElementById('shark-audio');
+            const _successAudio = document.getElementById('success-audio');
+            const _endSuccessAudio = document.getElementById('end-success-audio');
+
             if (this.answer === _answer) {
                 if (this.answer) {
                     // fish animation
@@ -212,7 +252,12 @@ export default {
                     
                     if (this.answerArray.length < 6) this.answerArray.push(this.fishSrc);
                     if (this.answerArray.length >= 6) {
+                        _backgroundAudio.pause();
+                        _endSuccessAudio.play();
                         this.end = true;
+                    } else {
+                        _backgroundAudio.pause();
+                        _successAudio.play();
                     }
                     
                 } else {
@@ -223,6 +268,11 @@ export default {
                 this.answer = false;
                 const _fish = document.getElementsByClassName('fish');
                 const _sharkWrap = document.getElementsByClassName('shark-wrap')[0];
+                
+                _backgroundAudio.pause();
+                _sharkAudio.currentTime = 2;
+                _sharkAudio.play();
+                
                 _sharkWrap.classList.add('show');
 
                 [..._fish].forEach((_el) => {
@@ -234,14 +284,10 @@ export default {
                         _el.classList.remove('run-fish');
                         _sharkWrap.classList.remove('show');
                     });
-                }, 2000);
 
-                /*
-                this.fishEl.classList.add('not_fish');
-                setTimeout(() => {
-                    this.fishEl.classList.remove('not_fish')
-                }, 1000);
-                */
+                    _backgroundAudio.play();
+                    _sharkAudio.pause();
+                }, 3000);
             }
         }
     }

@@ -15,72 +15,72 @@
                 <div class="video-tab-content d-flex align-items-start">
                     <div class="video-box tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-hello1" role="tabpanel" aria-labelledby="v-pills-hello1-tab">
-                            <video class="gen-video" controlsList="nodownload" controls>
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
                                 <source src="@/assets/video/behavior/1.인사1.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-pills-hello2" role="tabpanel" aria-labelledby="v-pills-hello2-tab">
-                            <video class="gen-video" controlsList="nodownload" controls>
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
                                 <source src="@/assets/video/behavior/2.인사2.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-pills-hello3" role="tabpanel" aria-labelledby="v-pills-hello3-tab">
-                            <video class="gen-video" controlsList="nodownload" controls>
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
                                 <source src="@/assets/video/behavior/3.인사3.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-pills-material1" role="tabpanel" aria-labelledby="v-pills-material1-tab">
-                            <video class="gen-video" controlsList="nodownload" controls>
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
                                 <source src="@/assets/video/behavior/4.준비물1.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-pills-material2" role="tabpanel" aria-labelledby="v-pills-material2-tab">
-                            <video class="gen-video" controlsList="nodownload" controls>
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
                                 <source src="@/assets/video/behavior/5.준비물2.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-pills-tease" role="tabpanel" aria-labelledby="v-pills-tease">
-                            <video class="gen-video" controlsList="nodownload" controls>
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
                                 <source src="@/assets/video/behavior/6.놀리는형규.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-pills-mad" role="tabpanel" aria-labelledby="v-pills-mad">
-                            <video class="gen-video" controlsList="nodownload" controls>
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
                                 <source src="@/assets/video/behavior/7.화난하은.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-pills-ignoring" role="tabpanel" aria-labelledby="v-pills-ignoring">
-                            <video class="gen-video" controlsList="nodownload" controls>
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
                                 <source src="@/assets/video/behavior/8.무시해요.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-pills-cutin" role="tabpanel" aria-labelledby="v-pills-cutin">
-                            <video class="gen-video" controlsList="nodownload" controls>
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
                                 <source src="@/assets/video/behavior/9.끼어들어요.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-pills-oppose" role="tabpanel" aria-labelledby="v-pills-oppose">
-                            <video class="gen-video" controlsList="nodownload" controls>
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
                                 <source src="@/assets/video/behavior/10.반대하는형규.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-pills-dirty1" role="tabpanel" aria-labelledby="v-pills-dirty1">
-                            <video class="gen-video" controlsList="nodownload" controls>
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
                                 <source src="@/assets/video/behavior/11.더러운치호.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-pills-dirty2" role="tabpanel" aria-labelledby="v-pills-dirty2">
-                            <video class="gen-video" controlsList="nodownload" controls>
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
                                 <source src="@/assets/video/behavior/12.더러운형규.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-pills-excited" role="tabpanel" aria-labelledby="v-pills-excited">
-                            <video class="gen-video" controlsList="nodownload" controls>
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
                                 <source src="@/assets/video/behavior/13.신난하은이.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-pills-perm" role="tabpanel" aria-labelledby="v-pills-perm">
-                            <video class="gen-video" controlsList="nodownload" controls>
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
                                 <source src="@/assets/video/behavior/14.파마한은정.mp4" type="video/mp4">
                             </video>
                         </div>
@@ -108,58 +108,58 @@
                 <div class="video-tab-content d-flex align-items-start">
                     <div class="video-box tab-content" id="v-topic-tabContent">
                         <div class="tab-pane fade show active" id="v-topic-hello1" role="tabpanel" aria-labelledby="v-topic-hello1-tab">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/topic/1.예쁜은정_주제개시_.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/topic/1.예쁜은정(주제개시).mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-topic-hello2" role="tabpanel" aria-labelledby="v-topic-hello2-tab">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/topic/2.100점_주제개시_.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/topic/2.100점(주제개시).mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-topic-hello3" role="tabpanel" aria-labelledby="v-topic-hello3-tab">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/topic/3.우는민영_주제개시_.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/topic/3.우는민영(주제개시).mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-topic-material1" role="tabpanel" aria-labelledby="v-topic-material1-tab">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/topic/4.공룡좋아해_주제개시_.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/topic/4.공룡좋아해(주제개시).mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-topic-material2" role="tabpanel" aria-labelledby="v-topic-material2-tab">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/topic/5.슬픈형규_주제개시_.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/topic/5.슬픈형규(주제개시).mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-topic-tease" role="tabpanel" aria-labelledby="v-topic-tease">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/topic/6.벌_주제개시_.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/topic/6.벌(주제개시).mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-topic-mad" role="tabpanel" aria-labelledby="v-topic-mad">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/topic/7.점심시간_주제개시_.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/topic/7.점심시간(주제개시).mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-topic-ignoring" role="tabpanel" aria-labelledby="v-topic-ignoring">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/topic/8.생일_주제개시_.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/topic/8.생일(주제개시).mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-topic-cutin" role="tabpanel" aria-labelledby="v-topic-cutin">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/topic/9.시험_주제개시_.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/topic/9.시험(주제개시).mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-topic-oppose" role="tabpanel" aria-labelledby="v-topic-oppose">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/topic/10.여행_주제개시_.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/topic/10.여행(주제개시).mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-topic-dirty1" role="tabpanel" aria-labelledby="v-topic-dirty1">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/topic/11.아픈하은_주제개시_.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/topic/11.아픈하은(주제개시).mp4" type="video/mp4">
                             </video>
                         </div>
                     </div>
@@ -189,109 +189,109 @@
                 <div class="video-tab-content d-flex align-items-start">
                     <div class="video-box tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-maintain-hello1" role="tabpanel" aria-labelledby="v-maintain-hello1-tab">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/maintain/1.싸움_주제유지_-정보요청-단서없음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/maintain/1.싸움(주제유지)-정보요청-단서없음.mp4" type="video/mp4">
                             </video>
-                            <video class="gen-video" controlsList="nodownload" controls data-role="clue">
-                                <source src="@/assets/video/maintain/1.싸움_주제유지_-정보요청-단서있음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls data-role="clue">
+                                <source src="@/assets/video/maintain/1.싸움(주제유지)-정보요청-단서있음.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-maintain-hello2" role="tabpanel" aria-labelledby="v-maintain-hello2-tab">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/maintain/2.싸움_주제유지_-반응하기-단서없음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/maintain/2.싸움(주제유지)-반응하기-단서없음.mp4" type="video/mp4">
                             </video>
-                            <video class="gen-video" controlsList="nodownload" controls data-role="clue">
-                                <source src="@/assets/video/maintain/2.싸움_주제유지_-반응하기-단서있음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls data-role="clue">
+                                <source src="@/assets/video/maintain/2.싸움(주제유지)-반응하기-단서있음.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-maintain-hello3" role="tabpanel" aria-labelledby="v-maintain-hello3-tab">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/maintain/3.싸움_주제유지_-진술_언급하기-단서없음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/maintain/3.싸움(주제유지)-진술,언급하기-단서없음.mp4" type="video/mp4">
                             </video>
-                            <video class="gen-video" controlsList="nodownload" controls data-role="clue">
-                                <source src="@/assets/video/maintain/3.싸움_주제유지_-진술_언급하기-단서있음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls data-role="clue">
+                                <source src="@/assets/video/maintain/3.싸움(주제유지)-진술,언급하기-단서있음.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-maintain-material1" role="tabpanel" aria-labelledby="v-maintain-material1-tab">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/maintain/4.싸움_주제유지_-통합-단서없음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/maintain/4.싸움(주제유지)-통합-단서없음.mp4" type="video/mp4">
                             </video>
-                            <video class="gen-video" controlsList="nodownload" controls data-role="clue">
-                                <source src="@/assets/video/maintain/4.싸움_주제유지_-통합-단서있음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls data-role="clue">
+                                <source src="@/assets/video/maintain/4.싸움(주제유지)-통합-단서있음.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-maintain-material2" role="tabpanel" aria-labelledby="v-maintain-material2-tab">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/maintain/5.게임_주제유지_-정보요청-단서없음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/maintain/5.게임(주제유지)-정보요청-단서없음.mp4" type="video/mp4">
                             </video>
-                            <video class="gen-video" controlsList="nodownload" controls data-role="clue">
-                                <source src="@/assets/video/maintain/5.게임_주제유지_-정보요청-단서있음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls data-role="clue">
+                                <source src="@/assets/video/maintain/5.게임(주제유지)-정보요청-단서있음.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-maintain-tease" role="tabpanel" aria-labelledby="v-maintain-tease">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/maintain/6.게임_주제유지_-반응하기-단서없음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/maintain/6.게임(주제유지)-반응하기-단서없음.mp4" type="video/mp4">
                             </video>
-                            <video class="gen-video" controlsList="nodownload" controls data-role="clue">
-                                <source src="@/assets/video/maintain/6.게임_주제유지_-반응하기-단서있음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls data-role="clue">
+                                <source src="@/assets/video/maintain/6.게임(주제유지)-반응하기-단서있음.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-maintain-mad" role="tabpanel" aria-labelledby="v-maintain-mad">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/maintain/7.게임_주제유지_-진술_언급하기-단서없음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/maintain/7.게임(주제유지)-진술,언급하기-단서없음.mp4" type="video/mp4">
                             </video>
-                            <video class="gen-video" controlsList="nodownload" controls data-role="clue">
-                                <source src="@/assets/video/maintain/7.게임_주제유지_-진술_언급하기-단서있음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls data-role="clue">
+                                <source src="@/assets/video/maintain/7.게임(주제유지)-진술,언급하기-단서있음.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-maintain-ignoring" role="tabpanel" aria-labelledby="v-maintain-ignoring">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/maintain/8.게임_주제유지_-통합-단서없음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/maintain/8.게임(주제유지)-통합-단서없음.mp4" type="video/mp4">
                             </video>
-                            <video class="gen-video" controlsList="nodownload" controls data-role="clue">
-                                <source src="@/assets/video/maintain/8.게임_주제유지_-통합-단서있음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls data-role="clue">
+                                <source src="@/assets/video/maintain/8.게임(주제유지)-통합-단서있음.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-maintain-cutin" role="tabpanel" aria-labelledby="v-maintain-cutin">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/maintain/9.동물원_주제유지_-정보요청-단서없음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/maintain/9.동물원(주제유지)-정보요청-단서없음.mp4" type="video/mp4">
                             </video>
-                            <video class="gen-video" controlsList="nodownload" controls data-role="clue">
-                                <source src="@/assets/video/maintain/9.-동물원_주제유지_-정보요청-단서있음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls data-role="clue">
+                                <source src="@/assets/video/maintain/9.동물원(주제유지)-정보요청-단서있음.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-maintain-oppose" role="tabpanel" aria-labelledby="v-maintain-oppose">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/maintain/10.동물원_주제유지_-반응하기-단서없음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/maintain/10.동물원(주제유지)-반응하기-단서없음.mp4" type="video/mp4">
                             </video>
-                            <video class="gen-video" controlsList="nodownload" controls data-role="clue">
-                                <source src="@/assets/video/maintain/10.동물원_주제유지-반응하기-단서있음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls data-role="clue">
+                                <source src="@/assets/video/maintain/10.동물원(주제유지)-반응하기-단서있음.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-maintain-dirty1" role="tabpanel" aria-labelledby="v-maintain-dirty1">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/maintain/11.-동물원_주제유지_-진술언급하기-단서있음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/maintain/11.동물원(주제유지)-진술,언급하기-단서없음.mp4" type="video/mp4">
                             </video>
-                            <video class="gen-video" controlsList="nodownload" controls data-role="clue">
-                                <source src="@/assets/video/maintain/11.-동뭘원_주제유지-진술언급하기-단서없음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls data-role="clue">
+                                <source src="@/assets/video/maintain/11.동물원(주제유지)-진술,언급하기-단서있음.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-maintain-dirty2" role="tabpanel" aria-labelledby="v-maintain-dirty2">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/maintain/12.동물원_주제유지_-통합-단서없음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/maintain/12.동물원(주제유지)-통합-단서없음.mp4" type="video/mp4">
                             </video>
-                            <video class="gen-video" controlsList="nodownload" controls data-role="clue">
-                                <source src="@/assets/video/maintain/12.동물원_주제유지_-통합-단서있음.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls data-role="clue">
+                                <source src="@/assets/video/maintain/12.동물원(주제유지)-통합-단서있음.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-maintain-excited" role="tabpanel" aria-labelledby="v-maintain-excited">
-                            <video class="gen-video show" controlsList="nodownload" controls>
-                                <source src="@/assets/video/maintain/13.말해요1_주제유지_.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video show" controlsList="nodownload" controls>
+                                <source src="@/assets/video/maintain/13.말해요1(주제유지).mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-maintain-perm" role="tabpanel" aria-labelledby="v-maintain-perm">
-                            <video class="gen-video show" controlsList="nodownload" controls>
-                                <source src="@/assets/video/maintain/14.말해요2_주제유지_.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video show" controlsList="nodownload" controls>
+                                <source src="@/assets/video/maintain/14.말해요2(주제유지).mp4" type="video/mp4">
                             </video>
                         </div>
                     </div>
@@ -318,13 +318,13 @@
                 <div class="video-tab-content d-flex align-items-start">
                     <div class="video-box tab-content" id="v-topic-tabContent">
                         <div class="tab-pane fade show active" id="v-subject-hello1" role="tabpanel" aria-labelledby="v-subject-hello1-tab">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/subject/15.지루해_주제변경_.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/subject/1.지루해(주제변경).mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="tab-pane fade" id="v-subject-hello2" role="tabpanel" aria-labelledby="v-subject-hello2-tab">
-                            <video class="gen-video" controlsList="nodownload" controls>
-                                <source src="@/assets/video/subject/16.무서워_주제변경_.mp4" type="video/mp4">
+                            <video oncontextmenu='return false' class="gen-video" controlsList="nodownload" controls>
+                                <source src="@/assets/video/subject/2.무서워(주제변경).mp4" type="video/mp4">
                             </video>
                         </div>
                     </div>

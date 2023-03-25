@@ -100,12 +100,17 @@ const store = createStore({
             }
 
             if (state.surveyType === 'talk') {
-                if (state.talkCode === null || state.talkCode.toLowerCase() !== 'talk-code-2023-slp') {
+                if (state.talkCode === null || state.talkCode.toLowerCase() !== 'master-talk-slp2023') {
                     state.validCheck = false;
                 } else {
                     state.validCheck = true;
                     const _modalBack = document.querySelector('.modal-backdrop');
-                    if (_modalBack) _modalBack.remove();
+                    if (_modalBack) {
+                        _modalBack.remove();
+                        document.getElementsByTagName('body')[0].classList.remove('modal-open');
+                        document.getElementsByTagName('body')[0].removeAttribute('style');
+                        window.scrollTo(0,0);
+                    }
                     VueCookieNext.setCookie('talk-code', 'code-set-2023-slp');
                     router.push('/talk/main');
                 }

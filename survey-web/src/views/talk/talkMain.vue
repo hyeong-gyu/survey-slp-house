@@ -51,12 +51,12 @@
                     </router-link>
                 </li>
                 <li class="menu-list">
-                    <router-link to="/talk/main" class="menu-link green">
+                    <router-link to="/talk/sub2" class="menu-link red" @mouseover.prevent="_hover" @mouseout.prevent="_hoverOut">
                         <figure>
                             <img src="../../assets/images/talk/sub5.png" alt="">
                         </figure>
                         <em>심부름</em>
-                        <!--div class="sub-menu">
+                        <div class="sub-menu">
                             <ul>
                                 <li>
                                     <router-link to="/talk/sub2?list=1">
@@ -104,39 +104,165 @@
                                     </router-link>
                                 </li>
                             </ul>
-                        </div-->
+                        </div>
                     </router-link>
                 </li>
                 <li class="menu-list">
-                    <router-link to="/talk/main" class="menu-link red">
-                        <figure>
-                            <img src="../../assets/images/talk/sub2.png" alt="">
-                        </figure>
-                        <em>노력하는 <br>두 형제</em>
-                    </router-link>
-                </li>
-                <li class="menu-list">
-                    <router-link to="/talk/main" class="menu-link orange">
-                        <figure>
-                            <img src="../../assets/images/talk/sub3.png" alt="">
-                        </figure>
-                        <em>무서운 꿈</em>
-                    </router-link>
-                </li>
-                <li class="menu-list">
-                    <router-link to="/talk/main" class="menu-link blue">
+                    <router-link to="/talk/sub3" class="menu-link blue" @mouseover.prevent="_hover" @mouseout.prevent="_hoverOut">
                         <figure>
                             <img src="../../assets/images/talk/sub4.png" alt="">
                         </figure>
                         <em>벌을 받았어요</em>
+                        <div class="sub-menu">
+                            <ul>
+                                <li>
+                                    <router-link to="/talk/sub3?list=1">
+                                        수업
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub3?list=2">
+                                        공책
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub3?list=3">
+                                        벌
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub3?list=4">
+                                        재미있다
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub3?list=5">
+                                        걸다
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub3?list=6">
+                                        받다
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub3?list=7">
+                                        듣다
+                                    </router-link>
+                                </li>
+                            </ul>
+                        </div>
                     </router-link>
                 </li>
                 <li class="menu-list">
-                    <router-link to="/talk/main" class="menu-link red">
+                    <router-link to="/talk/sub4" class="menu-link red" @mouseover.prevent="_hover" @mouseout.prevent="_hoverOut">
                         <figure>
                             <img src="../../assets/images/talk/sub6.png" alt="">
                         </figure>
                         <em>어린이날</em>
+                        <div class="sub-menu">
+                            <ul>
+                                <li>
+                                    <router-link to="/talk/sub4?list=1">
+                                        어린이날
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub4?list=2">
+                                        공원
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub4?list=3">
+                                        대회
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub4?list=4">
+                                        막히다
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub4?list=5">
+                                        오르다
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub4?list=6">
+                                        타다
+                                    </router-link>
+                                </li>
+                            </ul>
+                        </div>
+                    </router-link>
+                </li>
+                <li class="menu-list">
+                    <router-link to="/talk/sub5" class="menu-link orange" @mouseover.prevent="_hover" @mouseout.prevent="_hoverOut">
+                        <figure>
+                            <img src="../../assets/images/talk/sub3.png" alt="">
+                        </figure>
+                        <em>무서운 꿈</em>
+                        <div class="sub-menu">
+                            <ul>
+                                <li>
+                                    <router-link to="/talk/sub5?list=1">
+                                        소풍
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub5?list=2">
+                                        꿈
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub5?list=3">
+                                        꾸다
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub5?list=4">
+                                        무섭다
+                                    </router-link>
+                                </li>
+                            </ul>
+                        </div>
+                    </router-link>
+                </li>
+                <li class="menu-list">
+                    <router-link to="/talk/sub6" class="menu-link green" @mouseover.prevent="_hover" @mouseout.prevent="_hoverOut">
+                        <figure>
+                            <img src="../../assets/images/talk/sub2.png" alt="">
+                        </figure>
+                        <em>노력하는 <br>두 형제</em>
+                        <div class="sub-menu">
+                            <ul>
+                                <li>
+                                    <router-link to="/talk/sub6?list=1">
+                                        운동
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub6?list=2">
+                                        뚱뚱하다
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub6?list=3">
+                                        마르다
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub6?list=4">
+                                        줄이다
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub6?list=5">
+                                        되다
+                                    </router-link>
+                                </li>
+                            </ul>
+                        </div>
                     </router-link>
                 </li>
             </ul>

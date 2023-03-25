@@ -12,6 +12,12 @@
                 <div class="sub-aside">
                     <ul class="sub-step">
                         <li>
+                            <button type="button" data-role="story" :class="{'on': page === 'story'}" @click="_pageMove">
+                                <img src="../../../assets/images/sub_icon4.png" alt="">
+                                <span>이야기</span>
+                            </button>
+                        </li>
+                        <li>
                             <button type="button" data-role="vocabulary" :class="{'on': page === 'vocabulary'}" @click="_pageMove">
                                 <img src="../../../assets/images/sub_icon1.svg" alt="">
                                 <span>어휘톡</span>
@@ -33,6 +39,7 @@
                 </div>
                 <div class="sub-content">
                     <div class="sub-talk-inner">
+                        <Story v-if="page === 'story'" :videoUrl="'sub2'" :videoTitle="'심부름'" />
                         <Vocabulary v-if="page === 'vocabulary'" :selectData="selectData" ref="vocabSlide" :videoUrl="'sub2'" />
                         <Game v-if="page === 'game'" :selectData="selectData" :gameLangthData="[1,1,1,1,3,7,6,3,3]" :currentIndex="currentIndex" :imageUrl="'sub2'" ref="sentChildGame" />
                         <Sentence v-if="page === 'sentence'" :selectData="selectData" :sentData="sentData" :currentIndex="currentIndex" :imageUrl="'sub2'" ref="sentChild" />
@@ -66,7 +73,7 @@
                         <button type="button" data-role="7" @click="_listClick">찾다</button>
                     </li>
                     <li>
-                        <button type="button" data-role="8" @click="_listClick">다가오댜</button>
+                        <button type="button" data-role="8" @click="_listClick">다가오다</button>
                     </li>
                     <li>
                         <button type="button" data-role="9" @click="_listClick">생각하다</button>
@@ -79,6 +86,7 @@
 
 <script>
 import { router } from '../../../router';
+import Story from '@/components/talk/Story';
 import Vocabulary from '@/components/talk/Vocabulary';
 import Game from '@/components/talk/Game';
 import Sentence from '@/components/talk/Sentence';
@@ -86,6 +94,7 @@ import Sentence from '@/components/talk/Sentence';
 export default {
     name: 'Sub2',
     components: {
+        Story,
         Vocabulary,
         Game,
         Sentence
@@ -96,11 +105,11 @@ export default {
         const _inner = document.getElementsByClassName('sub-inner')[0];
         const _innerHeight = _inner.offsetHeight;
 
-        if (window.innerWidth < 1024) _talkWrap.style.height = `${_innerHeight + 63}px`;
+        // if (window.innerWidth < 1024) _talkWrap.style.height = `${_innerHeight + 63}px`;
     },
     data() {
         return {
-            page: 'vocabulary',
+            page: 'story',
             pageData: '1',
             currentIndex: 1,
             sentData: {
@@ -124,7 +133,7 @@ export default {
                         ]
                     ],
                     video: [
-                        'sub2-1.mp4'
+                        'sub2-1'
                     ],
                     use: [
                         '우리 동네에는 나무가 많아요.<br><br>같은 반 친구들이 동네에 많이 살아요.'
@@ -140,7 +149,7 @@ export default {
                         ]
                     ],
                     video: [
-                        'sub2-2.mp4'
+                        'sub2-2'
                     ],
                     use: [
                         '여름이가 빵을 사려고 가게에 가요.<br><br>나는 떡볶이가게에서 파는 순대를 좋아해요.'
@@ -154,7 +163,7 @@ export default {
                         ]
                     ],
                     video: [
-                        'sub2-3.mp4'
+                        'sub2-3'
                     ],
                     use: [
                         '엄마가 여름이에게 심부름을 시켜요.<br><br>나는 심부름을 잘하면 용돈을 받아요.'
@@ -168,7 +177,7 @@ export default {
                         ]
                     ],
                     video: [
-                        'sub2-4.mp4'
+                        'sub2-4'
                     ],
                     use: [
                         '아빠 생신 선물로 지갑을 사요.<br><br>지갑에서 돈을 꺼내요.'
@@ -187,8 +196,8 @@ export default {
                         ]
                     ],
                     video: [
-                        'sub2-5-1.mp4',
-                        'sub2-5-2.mp4'
+                        'sub2-5-1',
+                        'sub2-5-2'
                     ],
                     use: [
                         '여름이는 스테이크랑 아이스크림을 시켜요.<br><br>배가 너무 고파서 미리 음식을 주문해요.',
@@ -228,13 +237,13 @@ export default {
                         ],
                     ],
                     video: [
-                        'sub2-6-1.mp4',
-                        'sub2-6-2.mp4',
-                        'sub2-6-3.mp4',
-                        'sub2-6-4.mp4',
-                        'sub2-6-5.mp4',
-                        'sub2-6-6.mp4',
-                        'sub2-6-7.mp4',
+                        'sub2-6-1',
+                        'sub2-6-2',
+                        'sub2-6-3',
+                        'sub2-6-4',
+                        'sub2-6-5',
+                        'sub2-6-6',
+                        'sub2-6-7',
                     ],
                     use: [
                         '가을이는 버스를 타고 가게 앞으로 가요.<br><br>할머니 댁에 가려면 버스를 타고 이동해야 해요.',
@@ -274,11 +283,11 @@ export default {
                         ]
                     ],
                     video: [
-                        'sub2-7-1.mp4',
-                        'sub2-7-2.mp4',
-                        'sub2-7-3.mp4',
-                        'sub2-7-4.mp4',
-                        'sub2-7-5.mp4'
+                        'sub2-7-1',
+                        'sub2-7-2',
+                        'sub2-7-3',
+                        'sub2-7-4',
+                        'sub2-7-5'
                     ],
                     use: [
                         '봄이는 핸드폰으로 길을 찾아요.<br><br>인터넷으로 식당가는 길을 검색해요.',
@@ -305,9 +314,9 @@ export default {
                         ]
                     ],
                     video: [
-                        'sub2-8-1.mp4',
-                        'sub2-8-2.mp4',
-                        'sub2-8-3.mp4'
+                        'sub2-8-1',
+                        'sub2-8-2',
+                        'sub2-8-3'
                     ],
                     use: [
                         '가울이 다가오면 나뭇잎이 떨어지기 시작해요.<br><br>봄이 지나고 이제 여름이 찾아와요.',
@@ -319,6 +328,12 @@ export default {
                     title: '생각하다',
                     list: [
                         [
+                            '어린 시절을 생각하다',
+                            '기억하다',
+                            '추억하다',
+                            '떠올리다'
+                        ],
+                        [
                             '원인을 생각하다',
                             '고민하다'
                         ],
@@ -329,10 +344,12 @@ export default {
                         ]
                     ],
                     video: [
-                        'sub2-9-1.mp4',
-                        'sub2-9-2.mp4'
+                        'sub2-9-1',
+                        'sub2-9-2',
+                        'sub2-9-3'
                     ],
                     use: [
+                        '경찰이 된 가을이는 어렸을 때를 생각해요.<br><br>나는 가끔 바다에 놀러 갔던 일을 떠올려요.',
                         '겨울이는 자전거 바퀴에 구멍이 난 이유를 생각해요.<br><br>나는 동생이 우는 이유가 무엇인지 고민해요.',
                         '가을이는 피아노 대회에 나가려고 생각해요.<br><br>나는 이제 숙제를 열심히 하기로 결심해요.'
                     ]

@@ -12,6 +12,7 @@
 }
 
 .main-talk {
+    overflow-x: hidden;
     width: 100%;
     height: calc(100vh - 63px);
     background: url('./assets/images/talk_bg.svg') no-repeat center;
@@ -24,7 +25,8 @@
 }
 
 .main-talk .talk-menu-wrap {
-    padding-top: 100px;
+    padding: 100px 0;
+    height: calc(100vh - 63px);
 }
 
 .main-talk .talk-menu-wrap .menu-list-wrap {
@@ -45,6 +47,7 @@
 
 .main-talk .talk-menu-wrap .menu-list-wrap .menu-link {
     transition: 0.25s;
+    -webkit-transition: 0.25s;
     display: block;
     width: 226px;
     height: 266px;
@@ -128,6 +131,7 @@
     box-shadow: 1px 2px 4px 1px #999;
     opacity: 0;
     transition: opacity 0.4s ease-in;
+    -webkit-transition: opacity 0.4s ease-in;
 }
 
 .sub-menu.on {
@@ -158,51 +162,8 @@
     color: chocolate;
 }
 
-@media (max-width: 1440px) {
-    .main-talk .talk-menu-wrap {
-        padding-top: 6.9444vw;
-    }
-
-    .main-talk .talk-menu-wrap .menu-list-wrap {
-        width: 100vw;
-        gap: 4.1666vw;
-    }
-
-    .main-talk .talk-menu-wrap .menu-list-wrap .menu-link {
-        width: 15.6944vw;
-        height: 18.4722vw;
-        border-radius: 3.4722vw;
-    }
-
-    .main-talk .talk-menu-wrap .menu-list-wrap .menu-link figure {
-        padding-top: 2.7777vw;
-    }
-
-    .main-talk .talk-menu-wrap .menu-list-wrap .menu-link figure img {
-        width: 6.9444vw;
-        height: 6.9444vw;
-    }
-
-    .main-talk .talk-menu-wrap .menu-list-wrap .menu-link em {
-        font-size: 1.3888vw;
-    }
-
-    .main-talk .talk-menu-wrap .menu-list-wrap .menu-link p {
-        font-size: 1.25vw;
-    }
-
-    .sub-menu {
-        width: 10.4166vw;
-        border-radius: 1.3888vw;
-    }
-
-    .sub-menu ul {
-        padding: 1.3888vw;
-    }
-
-    .sub-menu ul li {
-        margin-top: 0.6944vw;
-    }
+.sub-contents .sub-aside ul button img {
+    width: 68px;
 }
 
 .sub-talk {
@@ -213,14 +174,17 @@
 }
 
 .sub-inner {
-    overflow: hidden;
+    overflow-x: hidden;
     position: relative;
     /* top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); */
     width: 1440px;
+    height: calc(100vh - 63px);
     margin: 0 auto;
-    padding-top: 60px;
+    padding: 60px 0;
+    /* background: url('./assets/images/sub_bg.svg') no-repeat bottom;
+    background-size: cover; */
 }
 
 .sub-step li button.on span {
@@ -288,6 +252,7 @@
 .sub-contents .sub-aside ul li button span {
     display: block;
     font-size: 20px;
+    color: #000;
 }
 
 .sub-contents .sub-content {
@@ -370,6 +335,7 @@
     z-index: 100;
     position: absolute;
     transition: all 0.5s;
+    -webkit-transition: all 0.5s;
     top: 60px;
     right: -250px;
     width: 330px;
@@ -422,6 +388,7 @@
     text-align: left;
     box-sizing: border-box;
     font-size: 20px;
+    color: #000;
 }
 
 .talk-text-box {
@@ -484,115 +451,13 @@
     border-radius: 30px;
 }
 
-@media (max-width: 1440px) {
-    .sub-inner {
-        width: 100vw;
-        padding-top: 4.1666vw;
-    }
-
-    .sub-contents .sub-aside ul li {
-        margin-top: 3.4722vw;
-    }
-
-    .sub-talk-inner {
-        width: 68.75vw;
-        margin: 0 auto 0 2.7777vw;
-    }
-
-    .talk-box {
-        gap: 1.3888vw;
-        width: 68.75vw;
-        height: 44.4444vw;
-    }
-
-    .slide-img-box {
-        width: 48.0555vw;
-        margin-top: 1.3888vw;
-        margin-left: 1.3888vw;
-    }
-
-    .navi-talk-list {
-        margin: 1.3888vw 0;
-    }
-
-    .navi-talk-list ul li {
-        width: 16.5277vw;
-        height: 2.7777vw;
-        margin-top: 1.3888vw;
-        border-radius: 4.8611vw;
-        line-height: 2.7777vw;
-        font-size: 1.3888vw;
-    }
-
-    .btn-use-sent {
-        width: 16.5277vw;
-        height: 3.8888vw;
-        line-height: 3.8888vw;
-        font-size: 1.6666vw;
-    }
-
-    .talk-b-side {
-        z-index: 10;
-        top: 4.1666vw;
-        right: -17.3611vw;
-        width: 22.9166vw;
-        height: 52.0833vw;
-    }
-
-    .talk-b-side .btn-b-side-toggle {
-        width: 4.8611vw;
-        height: 4.8611vw;
-    }
-
-    .talk-b-side .btn-b-side-toggle img {
-        width: 100%;
-    }
-
-    .talk-b-side ul {
-        margin-top: 3.125vw;
-    }
-
-    .talk-b-side ul li {
-        margin-top: 2.083vw;
-    }
-
-    .talk-b-side ul li button {
-        width: 17.3611vw;
-        height: 3.1944vw;
-        padding: 0 1.3888vw;
-        font-size: 1.3888vw;
-    }
-
-    .talk-text-box {
-        width: 68.75vw;
-        height: 6.25vw;
-        margin-top: 1.3888vw;
-    }
-
-    .talk-text-box p {
-        line-height: 6.25vw;
-        font-size: 1.9444vw;
-    }
-
-    .use-sent-wrap {
-        padding: 2.0833vw;
-    }
-
-    .use-sent-wrap.use-sent-show {
-        display: block;
-    }
-
-    .carousel__slide video {
-        width: 41.6666vw;
-    }
-}
-
 .shark-wrap {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 600px;
     transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
 }
 
 .shark-wrap img {
@@ -601,7 +466,8 @@
 }
 
 .shark-wrap.show img {
-    animation: sharkAni 2s ease;
+    animation: sharkAni 3s ease;
+    -webkit-animation: sharkAni 3s ease;
 }
 
 @keyframes sharkAni {
@@ -622,6 +488,7 @@
     height: 600px;
     margin: 20px;
     background-image: linear-gradient(0deg, #022244, #58c8da);
+    -webkit-background-image: linear-gradient(0deg, #022244, #58c8da);
     border-radius: 20px;
 }
 
@@ -652,6 +519,7 @@
     height: 450px;
     border-radius: 20px;
     perspective: 500px;
+    -webkit-perspective: 500px;
 }
 
 .game-layer .content {
@@ -660,21 +528,25 @@
     height: 100%;
     box-shadow: 0 0 15px rgba(0,0,0,0.1);
     transition: transform 1s;
+    -webkit-transition: transform 1s;
     transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
 }
 
 .game-layer.result .content {
     transform: rotateY( 180deg ) ;
+    -webkit-transform: rotateY( 180deg ) ;
     transition: transform 0.5s;
+    -webkit-transition: transform 0.5s;
 }
 
 .game-layer .content .btn-wrap button {
     font-size: 40px;
     color: #fff;
-    background: linear-gradient(#fff, #2f7992);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+}
+
+.game-layer .content .btn-wrap button:first-child {
+    margin-right: 40px
 }
 
 .game-layer .back .result-answer .success_text {
@@ -698,14 +570,15 @@
     text-align: center;
     border-radius: 5px;
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .game-layer .front {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgb(0 0 0 / 10%);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    /* backdrop-filter: blur(5px); */
+    /* -webkit-backdrop-filter: blur(5px); */
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -721,14 +594,15 @@
 
 .game-layer .back {
     /* From https://css.glass */
-    background: rgba(36, 167, 255, 0.2);
+    background: rgba(40, 107, 155, 0.9);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    /* backdrop-filter: blur(5px); */
+    /* -webkit-backdrop-filter: blur(5px); */
     border: 1px solid rgba(255, 255, 255, 0.3);
     color: white;
     transform: rotateY( 180deg );
+    -webkit-transform: rotateY( 180deg );
 }
 
 .game-layer .back .result-content {
@@ -955,6 +829,7 @@
     top: 50%;
     left: -15%;
     transition: transform 1s;
+    -webkit-transition: transform 1s;
 }
 
 .fish:hover {
@@ -978,7 +853,7 @@
 
 .fish4 {
     top: 35%;
-    animation: fish4 32.5s ease-in infinite;
+    animation: fish4 20.5s ease-in infinite;
 }
 
 .fish5 {
@@ -989,14 +864,18 @@
 
 .fish6 {
     top: 25%;
-    animation: fish5 30s ease-in infinite;
+    animation: fish6 30s ease-in infinite;
     animation-delay: 4s;
 }
 
 @keyframes fish1 {
     0% {
-        left: -11%;
+        left: 0%;
         top: 50%;
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
     }
     25% {
         top: 47%
@@ -1015,8 +894,12 @@
 
 @keyframes fish2 {
     0% {
-        left: -12%;
+        left: -5%;
         top: 15%;
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
     }
     25% {
         top: 25%
@@ -1035,8 +918,12 @@
 
 @keyframes fish3 {
     0% {
-        left: 95%;
+        left: 85%;
         top: 70%;
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
     }
     25% {
         top: 60%
@@ -1057,6 +944,10 @@
     0% {
         left: 100%;
         top: 35%;
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
     }
     25% {
         top: 45%
@@ -1076,40 +967,48 @@
 @keyframes fish5 {
     0% {
         left: 100%;
-        top: 45%;
+        top: 15%;
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
     }
     25% {
-        top: 35%
+        top: 25%
     }
     50% {
-        top: 45%;
+        top: 15%;
     }
     75% {
         top: 35%
     }
     100% {
         left: -20%;
-        top: 45%;
+        top: 25%;
     }
 }
 
 @keyframes fish6 {
     0% {
         left: 100%;
-        top: 25%;
+        top: 55%;
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
     }
     25% {
-        top: 15%
+        top: 35%
     }
     50% {
-        top: 25%;
+        top: 45%;
     }
     75% {
-        top: 15%
+        top: 35%
     }
     100% {
         left: -20%;
-        top: 25%;
+        top: 45%;
     }
 }
 
@@ -1141,7 +1040,162 @@
     animation-duration: 1s;
 }
 
+.game-layer .back .end-success figure {
+    width: 400px;
+}
+
+.game-layer .back .end-success figure img {
+    width: 100%;
+    border-radius: 20px;
+}
+
 @media (max-width: 1440px) {
+    .main-talk .talk-menu-wrap {
+        padding: 6.9444vw 0;
+    }
+
+    .main-talk .talk-menu-wrap .menu-list-wrap {
+        width: 100vw;
+        gap: 4.1666vw;
+    }
+
+    .main-talk .talk-menu-wrap .menu-list-wrap .menu-link {
+        width: 15.6944vw;
+        height: 18.4722vw;
+        border-radius: 3.4722vw;
+    }
+
+    .main-talk .talk-menu-wrap .menu-list-wrap .menu-link figure {
+        padding-top: 2.7777vw;
+    }
+
+    .main-talk .talk-menu-wrap .menu-list-wrap .menu-link figure img {
+        width: 6.9444vw;
+        height: 6.9444vw;
+    }
+
+    .main-talk .talk-menu-wrap .menu-list-wrap .menu-link em {
+        font-size: 1.3888vw;
+    }
+
+    .main-talk .talk-menu-wrap .menu-list-wrap .menu-link p {
+        font-size: 1.25vw;
+    }
+
+    .sub-menu {
+        width: 10.4166vw;
+        border-radius: 1.3888vw;
+    }
+
+    .sub-menu ul {
+        padding: 1.3888vw;
+    }
+
+    .sub-menu ul li {
+        margin-top: 0.6944vw;
+    }
+
+    .sub-inner {
+        width: 100vw;
+        padding: 4.1666vw 0;
+    }
+
+    .sub-contents .sub-aside ul li {
+        margin-top: 3.4722vw;
+    }
+
+    .sub-talk-inner {
+        width: 68.75vw;
+        margin: 0 auto 0 2.7777vw;
+    }
+
+    .talk-box {
+        gap: 1.3888vw;
+        width: 68.75vw;
+        height: 44.4444vw;
+    }
+
+    .slide-img-box {
+        width: 48.0555vw;
+        margin-top: 1.3888vw;
+        margin-left: 1.3888vw;
+    }
+
+    .navi-talk-list {
+        margin: 1.3888vw 0;
+    }
+
+    .navi-talk-list ul li {
+        width: 16.5277vw;
+        height: 2.7777vw;
+        margin-top: 1.3888vw;
+        border-radius: 4.8611vw;
+        line-height: 2.7777vw;
+        font-size: 1.3888vw;
+    }
+
+    .btn-use-sent {
+        width: 16.5277vw;
+        height: 3.8888vw;
+        line-height: 3.8888vw;
+        font-size: 1.6666vw;
+    }
+
+    .talk-b-side {
+        z-index: 10;
+        top: 4.1666vw;
+        right: -17.3611vw;
+        width: 22.9166vw;
+        height: 52.0833vw;
+    }
+
+    .talk-b-side .btn-b-side-toggle {
+        width: 4.8611vw;
+        height: 4.8611vw;
+    }
+
+    .talk-b-side .btn-b-side-toggle img {
+        width: 100%;
+    }
+
+    .talk-b-side ul {
+        margin-top: 3.125vw;
+    }
+
+    .talk-b-side ul li {
+        margin-top: 2.083vw;
+    }
+
+    .talk-b-side ul li button {
+        width: 17.3611vw;
+        height: 3.1944vw;
+        padding: 0 1.3888vw;
+        font-size: 1.3888vw;
+    }
+
+    .talk-text-box {
+        width: 68.75vw;
+        height: 6.25vw;
+        margin-top: 1.3888vw;
+    }
+
+    .talk-text-box p {
+        line-height: 6.25vw;
+        font-size: 1.9444vw;
+    }
+
+    .use-sent-wrap {
+        padding: 2.0833vw;
+    }
+
+    .use-sent-wrap.use-sent-show {
+        display: block;
+    }
+
+    .carousel__slide video {
+        width: 41.6666vw;
+    }
+
     .game-wrap {
         width: 65.972vw;
         height: 41.666vw;
@@ -1152,11 +1206,15 @@
         width: 41.6666vw;
     }
 
+    .fish {
+        width: 10.4166vw;
+        height: 10.4166vw;
+    }
+
     .game-layer {
         width: 34.7222vw;
         height: 31.25vw;
         border-radius: 1.3888vw;
-        perspective: 500px;
     }
 
     .game-layer .front figure {
@@ -1213,9 +1271,30 @@
     .ocean::before {
         top: -4.1666vw;
     }
+
+    .game-layer .back .end-success figure {
+        width: 27.7777vw;
+    }
+    
+    .game-layer .back .end-success figure img {
+        border-radius: 1.3888vw;
+    }
 }
 
 @media (max-width: 1024px) {
+    .game-wrap {
+        height: 35.666vw;
+    }
+
+    .game-layer {
+        width: 29.25vw;
+        height: 29.25vw;
+    }
+
+    .game-layer .front figure {
+        width: 21.2222vw;
+    }
+
     .sub-contents .sub-aside ul button img {
         width: 40px;
     }
@@ -1238,6 +1317,14 @@
 
     .talk-b-side {
         height: 45.1111vw;
+    }
+
+    .talk-b-side ul {
+        margin: 2.125vw;
+    }
+
+    .talk-b-side ul li {
+        margin-top: 1.5555vw;
     }
 }
 

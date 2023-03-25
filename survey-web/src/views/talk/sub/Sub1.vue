@@ -12,6 +12,12 @@
                 <div class="sub-aside">
                     <ul class="sub-step">
                         <li>
+                            <button type="button" data-role="story" :class="{'on': page === 'story'}" @click="_pageMove">
+                                <img src="../../../assets/images/sub_icon4.png" alt="">
+                                <span>이야기</span>
+                            </button>
+                        </li>
+                        <li>
                             <button type="button" data-role="vocabulary" :class="{'on': page === 'vocabulary'}" @click="_pageMove">
                                 <img src="../../../assets/images/sub_icon1.svg" alt="">
                                 <span>어휘톡</span>
@@ -33,6 +39,7 @@
                 </div>
                 <div class="sub-content">
                     <div class="sub-talk-inner">
+                        <Story v-if="page === 'story'" :videoUrl="'sub1'" :videoTitle="'오늘은 내가 요리사'" />
                         <Vocabulary v-if="page === 'vocabulary'" :selectData="selectData" ref="vocabSlide" :videoUrl="'sub1'" />
                         <Game v-if="page === 'game'" :selectData="selectData" :gameLangthData="[5,8,3,9,6,3,7]" :currentIndex="currentIndex" :imageUrl="'sub1'" ref="sentChildGame" />
                         <Sentence v-if="page === 'sentence'" :selectData="selectData" :sentData="sentData" :currentIndex="currentIndex" :imageUrl="'sub1'" ref="sentChild" />
@@ -73,6 +80,7 @@
 
 <script>
 import { router } from '../../../router';
+import Story from '@/components/talk/Story';
 import Vocabulary from '@/components/talk/Vocabulary';
 import Game from '@/components/talk/Game';
 import Sentence from '@/components/talk/Sentence';
@@ -80,6 +88,7 @@ import Sentence from '@/components/talk/Sentence';
 export default {
     name: 'Sub1',
     components: {
+        Story,
         Vocabulary,
         Game,
         Sentence
@@ -94,7 +103,7 @@ export default {
     },
     data() {
         return {
-            page: 'vocabulary',
+            page: 'story',
             pageData: '1',
             currentIndex: 1,
             sentData: {

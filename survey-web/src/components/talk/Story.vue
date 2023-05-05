@@ -60,4 +60,10 @@ export default {
             border-radius: 1.3888vw;
         }
     }
+
+    @media (max-width: 1024px) {
+        .story-video-box {
+            padding: 2.5%;
+        }
+    }
 </style>

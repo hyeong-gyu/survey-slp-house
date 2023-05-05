@@ -133,19 +133,24 @@ export default {
     components: {
     },
     mounted() {
-        const _backgroundAudio = document.getElementById('background-audio');
-        _backgroundAudio.play();
+        this.unmountedCheck = false;
+        this.backgroundAudio.play();
+        
+        this.backgroundAudio.addEventListener('pause', () => {
+            if (this.sharkAudio.paused && this.successAudio.paused && this.endSuccessAudio.paused && !this.unmountedCheck) {
+                this.backgroundAudio.play();
+            }
+        });
     },
     beforeUnmounted() {
-        const _backgroundAudio = document.getElementById('background-audio');
-        const _sharkAudio = document.getElementById('shark-audio');
-        const _successAudio = document.getElementById('success-audio');
-        const _endSuccessAudio = document.getElementById('end-success-audio');
         
-        _backgroundAudio.pause();
-        _sharkAudio.pause();
-        _successAudio.pause();
-        _endSuccessAudio.puase();
+    },
+    unmounted() {
+        this.backgroundAudio.pause();
+        this.sharkAudio.pause();
+        this.successAudio.pause();
+        this.endSuccessAudio.pause();
+        this.unmountedCheck = true;
     },
     data() {
         return {
@@ -158,7 +163,12 @@ export default {
             answer: null,
             answerArray: [],
             fishEl: null,
-            end: false
+            end: false,
+            backgroundAudio: new Audio(this._getAudioUrl('aquatic.wav')),
+            sharkAudio: new Audio(this._getAudioUrl('Suspense_Horror_Movie.wav')),
+            successAudio: new Audio(this._getAudioUrl('success.wav')),
+            endSuccessAudio: new Audio(this._getAudioUrl('end_success.mp3')),
+            unmountedCheck: false
         }
     },
     methods: {
@@ -168,24 +178,24 @@ export default {
         _getUrl(_fileName) {
             return `${require(`../../assets/images/talk/${this.imageUrl}/game/${_fileName}`)}`;
         },
+        _getAudioUrl(_fileName) {
+            return `${require(`../../assets/audio/talk/${_fileName}`)}`;
+        },
         _reset() {
-            const _backgroundAudio = document.getElementById('background-audio');
-            const _endSuccessAudio = document.getElementById('end-success-audio');
-            _endSuccessAudio.pause();
-            _endSuccessAudio.currentTime = 0;
-            _backgroundAudio.play();
+            this.endSuccessAudio.pause();
+            this.endSuccessAudio.currentTime = 0;
+            this.backgroundAudio.currentTime = 0;
+            this.backgroundAudio.play();
             this.layer = false;
             this.end = false;
             this.answerArray = [];
         },
         _ok() {
-            const _backgroundAudio = document.getElementById('background-audio');
-            const _successAudio = document.getElementById('success-audio');
-
-            _successAudio.pause();
-            _successAudio.currentTime = 0;
-            _backgroundAudio.play();
-
+            this.successAudio.pause();
+            this.successAudio.currentTime = 0;
+            this.backgroundAudio.currentTime = 0;
+            this.backgroundAudio.play();
+            this.fishEl.classList.remove('not_fish');
             this.layer = false;
         },
         _play(_fishName) {
@@ -193,17 +203,11 @@ export default {
 
             const _randomNumber = Math.floor((Math.random() * 99) + 1);
             let _res = '';
-            
-            for (let i = 0; i < this.pbt.length; i++) {
-                if(this.pbt[i] >= _randomNumber){
-                    _res = this.currentIndex;
-                    continue;
-                    //return _res;
-                } else if (this.pbt[this.pbt.length - 1] < _randomNumber) {
-                    _res = 'not';
-                    continue;
-                    //return _res;
-                }
+
+            if (_randomNumber <= 40) {
+                _res = 'not';
+            } else {
+                _res = this.currentIndex;
             }
             
             if (_res !== 'not') {
@@ -213,15 +217,15 @@ export default {
                 this.answer = true;
                 this.imgSrc = this._getUrl(`${_res}-${_random}.png`);
             } else {
-                let _firstRandom = 0;
+                let _firstRandom = Math.floor((Math.random() * this.gameLangthData.length) + 1);
                 let _lastRandom = 0;
-
+                
                 for (let _i = 0; _i < 2; _i++) {
-                    _firstRandom = Math.floor((Math.random() * this.gameLangthData.length) + 1);
-                    if (_firstRandom === this.currentIndex) {
-                        _i--;
-                    } else {
+                    if (_firstRandom !== Number(this.currentIndex)) {
                         continue;
+                    } else {
+                        _firstRandom = Math.floor((Math.random() * this.gameLangthData.length) + 1);
+                        _i--;
                     }
                 }
 
@@ -234,12 +238,7 @@ export default {
             this.fishEl = document.getElementsByClassName(_fishName)[0];
             this.layer = true;
         },
-        _resultEvent(_answer) {
-            const _backgroundAudio = document.getElementById('background-audio');
-            const _sharkAudio = document.getElementById('shark-audio');
-            const _successAudio = document.getElementById('success-audio');
-            const _endSuccessAudio = document.getElementById('end-success-audio');
-
+        _resultEvent(_answer) {            
             if (this.answer === _answer) {
                 if (this.answer) {
                     // fish animation
@@ -247,17 +246,17 @@ export default {
                     this.fishSrc = this.fishEl.getElementsByTagName('img')[0].getAttribute('src');
                     this.fishEl.classList.add('not_fish');
                     setTimeout(() => {
-                        this.fishEl.classList.remove('not_fish')
+                        this.fishEl.classList.remove('not_fish');
                     }, 1000);
                     
                     if (this.answerArray.length < 6) this.answerArray.push(this.fishSrc);
                     if (this.answerArray.length >= 6) {
-                        _backgroundAudio.pause();
-                        _endSuccessAudio.play();
+                        this.backgroundAudio.pause();
+                        this.endSuccessAudio.play();
                         this.end = true;
                     } else {
-                        _backgroundAudio.pause();
-                        _successAudio.play();
+                        this.backgroundAudio.pause();
+                        this.successAudio.play();
                     }
                     
                 } else {
@@ -269,9 +268,9 @@ export default {
                 const _fish = document.getElementsByClassName('fish');
                 const _sharkWrap = document.getElementsByClassName('shark-wrap')[0];
                 
-                _backgroundAudio.pause();
-                _sharkAudio.currentTime = 2;
-                _sharkAudio.play();
+                this.backgroundAudio.pause();
+                this.sharkAudio.currentTime = 2;
+                this.sharkAudio.play();
                 
                 _sharkWrap.classList.add('show');
 
@@ -284,9 +283,10 @@ export default {
                         _el.classList.remove('run-fish');
                         _sharkWrap.classList.remove('show');
                     });
-
-                    _backgroundAudio.play();
-                    _sharkAudio.pause();
+                    
+                    this.backgroundAudio.currentTime = 0;
+                    this.backgroundAudio.play();
+                    this.sharkAudio.pause();
                 }, 3000);
             }
         }

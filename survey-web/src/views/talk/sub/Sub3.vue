@@ -93,13 +93,8 @@ export default {
         Game,
         Sentence
     },
-    mounted() {
-        if (this.$cookie.getCookie('talk-code') !== 'code-set-2023-slp') router.push('/');
-        const _talkWrap = document.getElementsByClassName('sub-talk')[0];
-        const _inner = document.getElementsByClassName('sub-inner')[0];
-        const _innerHeight = _inner.offsetHeight;
-
-        // if (window.innerWidth < 1024) _talkWrap.style.height = `${_innerHeight + 63}px`;
+    beforeMount() {
+        if (this.$cookie.getCookie('talk-token') === null) router.push('/');
     },
     data() {
         return {
@@ -107,13 +102,13 @@ export default {
             pageData: '1',
             currentIndex: 1,
             sentData: {
-                1: 12,
-                2: 9,
+                1: 8,
+                2: 8,
                 3: 5,
-                4: 9,
-                5: 11,
-                6: 13,
-                7: 12
+                4: 5,
+                5: 17,
+                6: 12,
+                7: 10
             },
             talkData: {
                 '1': {

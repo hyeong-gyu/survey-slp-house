@@ -59,7 +59,7 @@
                             <img src="../assets/images/slphouse_main4.png" class="card-img-top" alt="">
                         </figure>
                         <div class="card-body">
-                            <p class="card-text">coming soon</p>
+                            <p class="card-text">WEB기반 어휘학습 프로그램</p>
                         </div>
                     </button>
                 </div>
@@ -166,5 +166,11 @@
 
     .btn-survey-enter:hover {
         box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 1024px) {
+        .row .col {
+            padding: calc(var(--bs-gutter-x) *.5);
+        }
     }
 </style>

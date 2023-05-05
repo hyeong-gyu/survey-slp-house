@@ -41,7 +41,7 @@
                     <div class="sub-talk-inner">
                         <Story v-if="page === 'story'" :videoUrl="'sub5'" :videoTitle="'무서운 꿈'" />
                         <Vocabulary v-if="page === 'vocabulary'" :selectData="selectData" ref="vocabSlide" :videoUrl="'sub5'" />
-                        <Game v-if="page === 'game'" :selectData="selectData" :gameLangthData="[1,2,3,5]" :currentIndex="currentIndex" :imageUrl="'sub5'" ref="sentChildGame" />
+                        <Game v-if="page === 'game'" :selectData="selectData" :gameLangthData="[1,2,3,4]" :currentIndex="currentIndex" :imageUrl="'sub5'" ref="sentChildGame" />
                         <Sentence v-if="page === 'sentence'" :selectData="selectData" :sentData="sentData" :currentIndex="currentIndex" :imageUrl="'sub5'" ref="sentChild" />
                     </div>
                 </div>
@@ -84,13 +84,8 @@ export default {
         Game,
         Sentence
     },
-    mounted() {
-        if (this.$cookie.getCookie('talk-code') !== 'code-set-2023-slp') router.push('/');
-        const _talkWrap = document.getElementsByClassName('sub-talk')[0];
-        const _inner = document.getElementsByClassName('sub-inner')[0];
-        const _innerHeight = _inner.offsetHeight;
-
-        // if (window.innerWidth < 1024) _talkWrap.style.height = `${_innerHeight + 63}px`;
+    beforeMount() {
+        if (this.$cookie.getCookie('talk-token') === null) router.push('/');
     },
     data() {
         return {
@@ -98,10 +93,10 @@ export default {
             pageData: '1',
             currentIndex: 1,
             sentData: {
-                1: 8,
-                2: 10,
-                3: 13,
-                4: 13
+                1: 6,
+                2: 6,
+                3: 9,
+                4: 9
             },
             talkData: {
                 '1': {

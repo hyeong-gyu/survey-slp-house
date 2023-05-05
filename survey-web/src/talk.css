@@ -1049,6 +1049,20 @@
     border-radius: 20px;
 }
 
+.sub-inner::-webkit-scrollbar {
+    width: 4px;  /* 스크롤바의 너비 */
+}
+
+.sub-inner::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #709dff; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.sub-inner::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
 @media (max-width: 1440px) {
     .main-talk .talk-menu-wrap {
         padding: 6.9444vw 0;
@@ -1282,17 +1296,26 @@
 }
 
 @media (max-width: 1024px) {
+    .sub-inner {
+        padding: 2.1666vw 0;
+    }
+
     .game-wrap {
-        height: 35.666vw;
+        height: 32.666vw;
     }
 
     .game-layer {
-        width: 29.25vw;
-        height: 29.25vw;
+        width: 26.25vw;
+        height: 26.25vw;
     }
 
     .game-layer .front figure {
-        width: 21.2222vw;
+        width: 18.8888vw;
+    }
+
+    .fish {
+        width: 9.4444vw;
+        height: 9.444vw;
     }
 
     .sub-contents .sub-aside ul button img {
@@ -1300,11 +1323,11 @@
     }
 
     .talk-box {
-        height: 38.4444vw;
+        height: 35.4444vw;
     }
 
     .carousel__slide video {
-        width: 35.6666vw;
+        width: 32.6666vw;
     }
 
     .talk-text-box {
@@ -1316,7 +1339,8 @@
     }
 
     .talk-b-side {
-        height: 45.1111vw;
+        top: 2.1666vw;
+        height: 42.1111vw;
     }
 
     .talk-b-side ul {
@@ -1324,7 +1348,7 @@
     }
 
     .talk-b-side ul li {
-        margin-top: 1.5555vw;
+        margin-top: 1.2222vw;
     }
 }
 

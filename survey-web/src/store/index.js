@@ -5,6 +5,7 @@ import CryptoJS from 'crypto-js';
 import icbToken from '../assets/token/icbToken.json';
 import conveToken from '../assets/token/conveToken.json';
 import genToken from '../assets/token/genToken.json';
+import talkToken from '../assets/token/talkToken.json'
 
 const store = createStore({
     //데이터 저장 공간
@@ -17,6 +18,7 @@ const store = createStore({
             icbTokenData: icbToken,
             conveTokenData: conveToken,
             genTokenData: genToken,
+            talkTokenData: talkToken,
             validCheck: true,
             icb: {
                 name: null,
@@ -95,27 +97,13 @@ const store = createStore({
                     _tokenInpData = state.genCode;
                     break;
 
+                case 'talk':
+                    _tokenData = state.talkTokenData.token;
+                    _tokenInpData = state.talkCode;
+                    break;
+
                 default:
                     break;
-            }
-
-            if (state.surveyType === 'talk') {
-                if (state.talkCode === null || state.talkCode.toLowerCase() !== 'master-talk-slp2023') {
-                    state.validCheck = false;
-                } else {
-                    state.validCheck = true;
-                    const _modalBack = document.querySelector('.modal-backdrop');
-                    if (_modalBack) {
-                        _modalBack.remove();
-                        document.getElementsByTagName('body')[0].classList.remove('modal-open');
-                        document.getElementsByTagName('body')[0].removeAttribute('style');
-                        window.scrollTo(0,0);
-                    }
-                    VueCookieNext.setCookie('talk-code', 'code-set-2023-slp');
-                    router.push('/talk/main');
-                }
-
-                return;
             }
             
             const _tokenValid = _tokenData.filter((_token) => {
@@ -127,7 +115,7 @@ const store = createStore({
                 let _tokenString = _bytes.toString(CryptoJS.enc.Utf8);
                 return _tokenString === _tokenInpData;
             });
-
+            
             // var testA = CryptoJS.AES.decrypt('U2FsdGVkX19+36cIjkomhnb+kTSa12taeNrbOcnBWTg=', 'SLP-HOUSE-LIVE');
             // console.log(testA.toString(CryptoJS.enc.Utf8));
             
@@ -136,6 +124,7 @@ const store = createStore({
                 const _modalBack = document.querySelector('.modal-backdrop');
                 if (_modalBack) _modalBack.remove();
 
+                document.getElementsByTagName('body')[0].removeAttribute('style');
                 document.getElementsByTagName('body')[0].classList.remove('modal-open');
                 if (state.surveyType === 'icb') {
                     VueCookieNext.setCookie('token', `${_tokenValid}`);
@@ -153,6 +142,12 @@ const store = createStore({
                     VueCookieNext.setCookie('gen-token', `${_tokenValid}`);
                     VueCookieNext.setCookie('type', `${state.surveyType}`);
                     router.push('/gen/main');
+                }
+
+                if (state.surveyType === 'talk') {
+                    VueCookieNext.setCookie('talk-token', `${_tokenValid}`);
+                    VueCookieNext.setCookie('type', `${state.surveyType}`);
+                    router.push('/talk/main');
                 }
                 
             } else {

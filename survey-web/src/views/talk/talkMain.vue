@@ -275,8 +275,8 @@ import { router } from '../../router';
 
 export default {
     name: "talkMain",
-    mounted() {
-        if (this.$cookie.getCookie('talk-code') !== 'code-set-2023-slp') router.push('/');
+    beforeMount() {
+        if (this.$cookie.getCookie('talk-token') === null) router.push('/');
     },
     computed: {},
     methods: {

@@ -3,7 +3,7 @@
         <div class="sent-wrap">
             <div class="sent-card-wrap col2">
                 <div class="sent-card" v-for="imgs in selectImgData" :key="imgs">
-                    <img :src="imgs" style="width:100%" />
+                    <img :src="imgs" style="width:100%; -webkit-touch-callout:none" oncontextmenu='return false' />
                 </div>
             </div>
             <div class="sent-card-control">
@@ -77,7 +77,6 @@ export default {
         _random(_n = this.currentIndex) {
             //reset
             this.selectImgData = [];
-            console.log('_n : ', _n);
             const _sentLength = this.sentData[_n];
             const _random = Math.floor(Math.random() * _sentLength) + 1;
             
@@ -204,12 +203,19 @@ export default {
 
     @media (max-width: 1024px) {
         .sent-card-wrap {
-            height: 30.5vw;
-            margin: 0 auto -0.3056vw;
+            justify-content: center;
+            height: 26.5vw;
+            margin: 0 auto 1.8944vw;
         }
 
         .sent-card-wrap .sent-card {
+            flex-grow: unset;
             margin: 1.6944vw;
+        }
+
+        .sent-card-wrap.col2 .sent-card {
+            flex-basis: 38%;
+            margin: 2.6944vw 2.6944vw 0;
         }
     }
 </style>

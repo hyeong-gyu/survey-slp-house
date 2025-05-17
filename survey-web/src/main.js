@@ -10,11 +10,12 @@ import HighchartMore from 'highcharts/highcharts-more';
 import Highcharts from 'highcharts';
 import HighchartSolidGauge from 'highcharts/modules/solid-gauge';
 import { VueCookieNext } from 'vue-cookie-next';
+import vueVimeoPlayer from 'vue-vimeo-player'
 
 const app = createApp(App);
 app.use(router);
 app.use(store);
-
+app.use(vueVimeoPlayer)
 app.use(VueCookieNext);
 
 HighchartMore(Highcharts);

@@ -265,6 +265,48 @@
                         </div>
                     </router-link>
                 </li>
+                <li class="menu-list">
+                    <router-link to="/talk/sub7" class="menu-link blue" @mouseover.prevent="_hover" @mouseout.prevent="_hoverOut">
+                        <figure>
+                            <img src="../../assets/images/talk/sub7.png" alt="">
+                        </figure>
+                        <em>이가 썩었어요</em>
+                        <div class="sub-menu">
+                            <ul>
+                                <li>
+                                    <router-link to="/talk/sub7?list=1">
+                                        뽑다
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub7?list=2">
+                                        참다
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub7?list=3">
+                                        깨다
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub7?list=4">
+                                        터지다
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub7?list=5">
+                                        들다​
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/talk/sub7?list=6">
+                                        붓다
+                                    </router-link>
+                                </li>
+                            </ul>
+                        </div>
+                    </router-link>
+                </li>
             </ul>
         </div>
     </div>

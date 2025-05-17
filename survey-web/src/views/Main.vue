@@ -64,6 +64,18 @@
                     </button>
                 </div>
             </div>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <button class="btn-survey-enter" data-bs-toggle="modal" data-bs-target="#staticBackdrop" @click="codeType('episode')">
+                        <figure>
+                            <img src="../assets/images/slphouse_main5.png" class="card-img-top" alt="">
+                        </figure>
+                        <div class="card-body">
+                            <p class="card-text">우리 아이 화용언어기술을 일반화 할 수 있는 프로그램​</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -86,6 +98,7 @@
                                 <input v-if="surveyType === 'conve'" type="password" maxlength="6" id="survey-code" class="form-control" aria-describedby="passwordHelpInline" @input="codeInput($event.target.value)" @keydown.enter.prevent="codeValidation" autocomplete="on" required>
                                 <input v-if="surveyType === 'gen'" type="password" maxlength="12" id="survey-code" class="form-control" aria-describedby="passwordHelpInline" @input="codeInput($event.target.value)" @keydown.enter.prevent="codeValidation" autocomplete="on" required>
                                 <input v-if="surveyType === 'talk'" type="password" id="survey-code" class="form-control" aria-describedby="passwordHelpInline" @input="codeInput($event.target.value)" @keydown.enter.prevent="codeValidation" autocomplete="on" required>
+                                <input v-if="surveyType === 'episode'" type="password" id="survey-code" class="form-control" aria-describedby="passwordHelpInline" @input="codeInput($event.target.value)" @keydown.enter.prevent="codeValidation" autocomplete="on" required>
                                 <div class="invalid-tooltip" :class="{'on': !validCheck}">
                                     Please provide a {{ surveyType.toUpperCase() }} Code.
                                 </div>
@@ -150,6 +163,16 @@
 
     .col .card .btn-survey-enter figure {
         height: 380px;    
+    }
+
+    .title-type .card .btn-survey-enter figure {
+        height: 300px;
+    }
+
+    .title-type .card .btn-survey-enter .card-body strong {
+        display: block;
+        margin-top: -50px;
+        margin-bottom: 10px;
     }
 
     .on {

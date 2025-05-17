@@ -6,6 +6,11 @@
     font-style: normal;
 }
 
+.carousel__next--disabled,
+.carousel__prev--disabled {
+    opacity: 0 !important;
+}
+
 .main-talk *,
 .sub-talk * {
     font-family: "Jalnan" !important;
@@ -18,6 +23,11 @@
     background: url('./assets/images/talk_bg.svg') no-repeat center;
     background-size: cover;
     font-family: 'Roboto', sans-serif;
+}
+
+.main-talk.episode {
+    background: url('./assets/images/episode-bg.png') no-repeat center center;
+    background-size: cover;
 }
 
 .main-talk ul li {
@@ -41,8 +51,19 @@
     margin: 0 auto;
 }
 
+.main-talk.episode .talk-menu-wrap .menu-list-wrap {
+    width: auto;
+    justify-content: flex-start;
+    margin: 0 30px;
+    gap: 40px;
+}
+
 .main-talk .talk-menu-wrap .menu-list-wrap .menu-list {
     width: 22%;
+}
+
+.main-talk.episode .talk-menu-wrap .menu-list-wrap .menu-list {
+    width: 22.8%;
 }
 
 .main-talk .talk-menu-wrap .menu-list-wrap .menu-link {
@@ -56,6 +77,23 @@
     text-align: center;
     text-decoration: none;
     color: #fff;
+}
+
+.main-talk.episode .talk-menu-wrap .menu-list-wrap .menu-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: 50px;
+}
+
+.main-talk.episode .talk-menu-wrap .menu-list-wrap .menu-link {
+    background-color: #6A60A9 !important;
+}
+
+.main-talk.episode .talk-menu-wrap .menu-list-wrap .menu-link:hover {
+    background-color: #362d64 !important;
+    box-shadow: 0 0.5em 0.5em -0.4em #1b087d !important;
 }
 
 .main-talk .talk-menu-wrap .menu-list-wrap .menu-link.green {
@@ -173,6 +211,10 @@
     background-size: cover;
 }
 
+.sub-talk.episode {
+    background: url('./assets/images/episode-bg.png') no-repeat bottom;
+}
+
 .sub-inner {
     overflow-x: hidden;
     position: relative;
@@ -271,6 +313,40 @@
     height: 640px;
     background-color: #BDD2DF;
     border-radius: 30px;
+}
+
+.episode .talk-box {
+    display: block;
+    gap: inherit;
+    background-color: #6A60A9;
+}
+
+.episode .talk-box .sub-video-box {
+    display: none;
+}
+
+.episode .talk-box .sub-video-box.on {
+    display: block;
+}
+
+.episode .talk-box .video {
+    width: 720px;
+    padding: 20px 0;
+    margin: 0 auto;
+}
+
+.episode .talk-box .video [data-vimeo-initialized] {
+    position:relative;
+    padding:83.33% 0 0 0;
+}
+
+.episode .talk-box .video iframe {
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 20px;
 }
 
 .slide-img-box {
@@ -1063,6 +1139,13 @@
     background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
 }
 
+.btn-back-main {
+    z-index: 100;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
 @media (max-width: 1440px) {
     .main-talk .talk-menu-wrap {
         padding: 6.9444vw 0;
@@ -1071,6 +1154,10 @@
     .main-talk .talk-menu-wrap .menu-list-wrap {
         width: 100vw;
         gap: 4.1666vw;
+    }
+
+    .main-talk.episode .talk-menu-wrap .menu-list-wrap {
+        gap: 2.7777vw;
     }
 
     .main-talk .talk-menu-wrap .menu-list-wrap .menu-link {
@@ -1127,6 +1214,15 @@
         gap: 1.3888vw;
         width: 68.75vw;
         height: 44.4444vw;
+    }
+
+    .episode .talk-box .video {
+        width: 50vw;
+        padding: 1.3888vw 0;
+    }
+
+    .episode .talk-box .video [data-vimeo-initialized] {
+        padding: 42vw 0 0 0
     }
 
     .slide-img-box {
@@ -1295,6 +1391,12 @@
     }
 }
 
+@media (max-width: 1120px) {
+    .main-talk.episode .talk-menu-wrap .menu-list-wrap .menu-list {
+        width: 22%;
+    }
+}
+
 @media (max-width: 1024px) {
     .sub-inner {
         padding: 2.1666vw 0;
@@ -1349,6 +1451,15 @@
 
     .talk-b-side ul li {
         margin-top: 1.2222vw;
+    }
+
+    .episode .talk-box .video {
+        width: 38.5vw;
+        padding: 1.4888vw 0;
+    }
+
+    .episode .talk-box .video [data-vimeo-initialized] {
+        padding: 32.5vw 0 0 0
     }
 }
 

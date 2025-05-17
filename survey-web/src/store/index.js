@@ -6,6 +6,7 @@ import icbToken from '../assets/token/icbToken.json';
 import conveToken from '../assets/token/conveToken.json';
 import genToken from '../assets/token/genToken.json';
 import talkToken from '../assets/token/talkToken.json'
+import episodeToken from '../assets/token/episodeToken.json';
 
 const store = createStore({
     //데이터 저장 공간
@@ -15,10 +16,12 @@ const store = createStore({
             surveyType: null,
             icbCode: null,
             conveCode: null,
+            episodeCode: null,
             icbTokenData: icbToken,
             conveTokenData: conveToken,
             genTokenData: genToken,
             talkTokenData: talkToken,
+            episodeTokenData: episodeToken,
             validCheck: true,
             icb: {
                 name: null,
@@ -72,6 +75,10 @@ const store = createStore({
                     state.talkCode = code;
                     break;
 
+                case 'episode':
+                    state.episodeCode = code;
+                    break;
+
                 default:
                     break;
             }
@@ -102,6 +109,11 @@ const store = createStore({
                     _tokenInpData = state.talkCode;
                     break;
 
+                case 'episode':
+                    _tokenData = state.episodeTokenData.token;
+                    _tokenInpData = state.episodeCode;
+                    break;
+
                 default:
                     break;
             }
@@ -110,7 +122,7 @@ const store = createStore({
                 // console.log(CryptoJS.AES.encrypt(_token, 'SLP-HOUSE-LIVE').toString());
                 // var testA = CryptoJS.AES.decrypt(_token, 'SLP-HOUSE-LIVE');
                 // console.log(testA.toString(CryptoJS.enc.Utf8));
-
+                
                 let _bytes = CryptoJS.AES.decrypt(_token, 'SLP-HOUSE-LIVE');
                 let _tokenString = _bytes.toString(CryptoJS.enc.Utf8);
                 return _tokenString === _tokenInpData;
@@ -148,6 +160,13 @@ const store = createStore({
                     VueCookieNext.setCookie('talk-token', `${_tokenValid}`);
                     VueCookieNext.setCookie('type', `${state.surveyType}`);
                     router.push('/talk/main');
+                }
+
+                if (state.surveyType === 'episode') {
+                    console.log('check')
+                    VueCookieNext.setCookie('episode-token', `${_tokenValid}`);
+                    VueCookieNext.setCookie('type', `${state.surveyType}`);
+                    router.push('/episode/main');
                 }
                 
             } else {
